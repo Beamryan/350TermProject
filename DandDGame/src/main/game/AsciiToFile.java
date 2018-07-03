@@ -41,6 +41,9 @@ public class AsciiToFile {
             spaceCode = 1;
             monsterCode = c - 47;
           }
+        if(c == 126){
+            spaceCode = 1 << 4;
+          }
         if(c == 10){
           spaceCode = -1;
         }
