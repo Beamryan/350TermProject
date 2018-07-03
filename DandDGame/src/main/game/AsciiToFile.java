@@ -1,5 +1,4 @@
 package main.game;
-
 import java.io.*;
 
 public class AsciiToFile {
