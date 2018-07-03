@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="net.sf.eclipsecs.ui.stats.views.GraphStatsView">
+		<section name="detailView">
+		</section>
+	</section>
 	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#SuppressionCommentFilter">
 		<item value="false" key="maximized"/>
 		<item value="621" key="width"/>
@@ -7,6 +11,31 @@
 		<item value="101" key="y"/>
 		<item value="false" key="minimized"/>
 		<item value="384" key="height"/>
+	</section>
+	<section name="net.sf.eclipsecs.ui.stats.views.MarkerStatsView">
+		<section name="masterView">
+			<item value="1" key="sortColumn"/>
+			<item value="-1" key="sortDirection"/>
+			<item value="74" key="colWidth2"/>
+			<item value="-1" key="selectedRow"/>
+			<item value="20" key="colWidth0"/>
+			<item value="400" key="colWidth1"/>
+		</section>
+		<section name="detailView">
+		</section>
+	</section>
+	<section name="net.sf.eclipsecs.ui.config.ResolvablePropertiesDialog">
+		<item value="0" key="sortColumn"/>
+		<item value="1" key="sortDirection"/>
+		<item value="false" key="maximized"/>
+		<item value="650" key="width"/>
+		<item value="177" key="x"/>
+		<item value="57" key="y"/>
+		<item value="-1" key="selectedRow"/>
+		<item value="280" key="colWidth0"/>
+		<item value="false" key="minimized"/>
+		<item value="279" key="colWidth1"/>
+		<item value="500" key="height"/>
 	</section>
 	<section name="net.sf.eclipsecs.ui.config.CheckConfigurationConfigureDialog">
 		<item value="false" key="maximized"/>
