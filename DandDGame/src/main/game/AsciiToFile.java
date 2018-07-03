@@ -14,25 +14,34 @@ public class AsciiToFile {
       int c;
       int spaceCode = 0;
       int itemCode = 0;
+      
+//      In map creation from asciiMap.txt:
+//	  	  ',' (44) are spaces
+//    	  '!' (33) are trees
+//    	  '#' (35) are rocks
+//    	  letters correspond to a specific item 
+      
       while ((c = in.read()) != -1){
-        if(c == 32){
+        if(c == 44){
           spaceCode = 1;
         }
-        if(c == 116){
+        if(c == 33){
           spaceCode = 1 << 1;
         }
-        if(c == 114){
+        if(c == 35){
           spaceCode = 1 << 2;
         }
-        if(c == 105){
+        if(c > 64 && c < 123){
           spaceCode = 1 << 3;
+          itemCode = c - 64; //makes item inventory go from 1-58
         }
         if(c == 10){
           spaceCode = -1;
         }
         if(spaceCode != -1){
-          String output = "" + spaceCode;
-          out.write(spaceCode + "\n");
+          String output = spaceCode + " " + itemCode;
+          out.write(output + "\n");
+          itemCode = 0;
         }
       }
     }
