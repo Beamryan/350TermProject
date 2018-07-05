@@ -63,22 +63,59 @@ public class Partition {
     } 
   }
   
-  public void printPartition(){
+  public void printPartition(int playerX, int playerY){
     int i,j;
     for(i=0 ; i<25 ; i++){
       for(j=0 ; j<25 ; j++){
-    	if(tiles[i][j].type == 1) System.out.print(" ");
-    	else if(tiles[i][j].type == 2) System.out.print("T");
-    	else if(tiles[i][j].type == 4) System.out.print("r");
-    	else if(tiles[i][j].type == 16) System.out.print("~");
-    	else System.out.print(tiles[i][j].type);
+    	if(i == playerY && j == playerX) System.out.print("P");
+    	else{
+	    	if(tiles[i][j].type == 1) System.out.print(" ");
+	    	else if(tiles[i][j].type == 2) System.out.print("T");
+	    	else if(tiles[i][j].type == 4) System.out.print("r");
+	    	else if(tiles[i][j].type == 16) System.out.print("~");
+	    	else System.out.print(tiles[i][j].type);
+    	}
       }
       System.out.println();
     }
   }
   
   public static void main(String args[]) throws IOException {
-	 Partition foo = new Partition(3,25,25,2,2);
-	 foo.printPartition();
+	 Partition foo = new Partition(0,25,25,2,2);
+	 int playerX = 5;
+	 int playerY = 1;
+	 
+	 // test basic movement in ascii
+	 Scanner dir = new Scanner(System.in);
+	 char choice = 0;
+	 foo.printPartition(playerX, playerY);
+	 while(choice != -1){
+		 choice = dir.next().charAt(0);
+		 
+		 if(choice == 's'){
+			 if(foo.tiles[playerX][playerY+1].type != 2){
+				 playerY += 1;
+			 }		 
+		 }
+		 if(choice == 'a'){
+			 if(foo.tiles[playerX-1][playerY].type != 2){
+				 playerX -= 1;
+			 }		 
+		 }
+		 if(choice == 'w'){
+			 if(foo.tiles[playerX][playerY-1].type != 2){
+				 playerY -= 1;
+			 }		 
+		 }
+		 if(choice == 'd'){
+			 if(foo.tiles[playerX+1][playerY].type != 2){
+				 playerX += 1;
+			 }		 
+		 }
+		 
+		 System.out.print((char)8);// clears screen
+		 foo.printPartition(playerX, playerY);
+	 }
+	 dir.close();
   }
 }
