@@ -7,53 +7,59 @@ public class Partition {
   int width;
   Cell[][] tiles = new Cell[height][width];
   
-  
-  public Partition(int partitionNum, int height, int width) throws IOException {
+//  partition num is left->right top->bottom. Starts at 0
+//  height/width are dim of one partition
+//  xDim/ydim is how many partitions long each dimension of the map is
+  public Partition(int partitionNum, int height, int width, int xDim, int yDim) throws IOException {
     this.height = height;
     this.width = width;
     tiles = new Cell[height][width];
-    Scanner in;
+    Scanner in = new Scanner(new File("output.txt"));
     
     try{
-      in = new Scanner(new File("output.txt"));
-      int tileCount = 0;
-      int x = 0;
-      int y = 0;
-     // for a 2x2 map
-      int xStart = width*(partitionNum%2);
-      int yStart = height*(partitionNum/2);
+      int tileCount = 0; // how many tiles have been read into partition
+      int x = 0;	//x coordinate in entire map
+      int y = 0;	//y coordinate in entire map
+      int xTile = 0;	// x coordinate in current partition
+      int yTile = 0;	// y coordinate in current partition
+      int xStart = width*(partitionNum%xDim);	// starting positions for valid x values
+      int yStart = height*(partitionNum/yDim); 	// starting positions for valid y values
       int type;
       int itemID;
       int monsterID;
-      int xTile = 0;
-      int yTile = 0;
-      
+
       while(tileCount < width*(height)){
+    	  // cell values from input file get read in
         type = in.nextInt();
         itemID = in.nextInt();
         monsterID = in.nextInt();
         
         Cell tile = new Cell(type, itemID, monsterID);
         
+//        the valid ranges on the map for a tile is the start,
+//        and the start + the dimension of the partition
         if(x >= xStart && x < xStart + width){
           if(y >= yStart && y < yStart + height){
             tiles[yTile][xTile] = tile;
             tileCount++;
             xTile++;
+            // if a full row has been placed, increment row and restart x pos
             if(xTile == width){
             	xTile = 0;
             	yTile++;
             }
           }  		  
         }
+//        if a row of the map has been read, restart x and increment y
         x++;
-        if(x == 2*width){
+        if(x == xDim*width){
           y++;
           x = 0;
         }
       }
     }
     finally {
+    	in.close();
     } 
   }
   
@@ -72,7 +78,7 @@ public class Partition {
   }
   
   public static void main(String args[]) throws IOException {
-	 Partition foo = new Partition(3,25,25);
+	 Partition foo = new Partition(3,25,25,2,2);
 	 foo.printPartition();
   }
 }

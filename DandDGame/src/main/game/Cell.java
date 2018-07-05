@@ -5,7 +5,7 @@ public class Cell {
 	int itemID;
 	int monsterID;
 	
-	Cell(int type, int itemID, int monster){
+	Cell(int type, int itemID, int monsterID){
 		this.type = type;
 		this.itemID = itemID;
 		this.monsterID = monsterID;
