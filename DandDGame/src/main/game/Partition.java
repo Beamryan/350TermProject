@@ -7,6 +7,7 @@ public class Partition {
   int width;
   Cell[][] tiles = new Cell[height][width];
   
+  
 //  partition num is left->right top->bottom. Starts at 0
 //  height/width are dim of one partition
 //  xDim/ydim is how many partitions long each dimension of the map is
@@ -31,10 +32,29 @@ public class Partition {
       while(tileCount < width*(height)){
     	  // cell values from input file get read in
         type = in.nextInt();
+        SpaceType spaceType = SpaceType.EmptySpace;
+        switch(type)
+        {
+        case 1:
+        	spaceType = SpaceType.EmptySpace;
+        	break;
+        case 2:
+        	spaceType = SpaceType.Tree;
+        	break;
+        case 4:
+        	spaceType = SpaceType.Rock;
+        	break;
+        case 16:
+        	spaceType = SpaceType.Item;
+        	break;
+        default:
+        		break;
+        }
         itemID = in.nextInt();
         monsterID = in.nextInt();
         
-        Cell tile = new Cell(type, itemID, monsterID);
+        
+        Cell tile = new Cell(spaceType, itemID, monsterID);
         
 //        the valid ranges on the map for a tile is the start,
 //        and the start + the dimension of the partition
@@ -69,10 +89,10 @@ public class Partition {
       for(j=0 ; j<25 ; j++){
     	if(i == playerY && j == playerX) System.out.print("P");
     	else{
-	    	if(tiles[i][j].type == 1) System.out.print(" ");
-	    	else if(tiles[i][j].type == 2) System.out.print("T");
-	    	else if(tiles[i][j].type == 4) System.out.print("r");
-	    	else if(tiles[i][j].type == 16) System.out.print("~");
+	    	if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
+	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
+	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("r");
+	    	else if(tiles[i][j].type == SpaceType.Item) System.out.print("~");
 	    	else System.out.print(tiles[i][j].type);
     	}
       }
@@ -93,22 +113,22 @@ public class Partition {
 		 choice = dir.next().charAt(0);
 		 
 		 if(choice == 's'){
-			 if(foo.tiles[playerX][playerY+1].type != 2){
+			 if((foo.tiles[playerX][playerY+1].type != SpaceType.Tree) || (foo.tiles[playerX][playerY+1].type != SpaceType.Rock)){
 				 playerY += 1;
 			 }		 
 		 }
 		 if(choice == 'a'){
-			 if(foo.tiles[playerX-1][playerY].type != 2){
+			 if((foo.tiles[playerX-1][playerY].type != SpaceType.Tree) || (foo.tiles[playerX-1][playerY].type != SpaceType.Rock)){
 				 playerX -= 1;
 			 }		 
 		 }
 		 if(choice == 'w'){
-			 if(foo.tiles[playerX][playerY-1].type != 2){
+			 if((foo.tiles[playerX][playerY-1].type != SpaceType.Tree) || (foo.tiles[playerX][playerY-1].type != SpaceType.Rock)){
 				 playerY -= 1;
 			 }		 
 		 }
 		 if(choice == 'd'){
-			 if(foo.tiles[playerX+1][playerY].type != 2){
+			 if((foo.tiles[playerX+1][playerY].type != SpaceType.Tree) || (foo.tiles[playerX+1][playerY].type != SpaceType.Rock)){
 				 playerX += 1;
 			 }		 
 		 }
