@@ -80,6 +80,7 @@ public class Partition {
     }
   }
   
+  
   public static void main(String args[]) throws IOException {
 	 Partition foo = new Partition(0,25,25,2,2);
 	 int playerX = 5;
