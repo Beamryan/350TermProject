@@ -80,6 +80,16 @@ public class Partition {
     }
   }
   
+  public boolean isValidTile(Cell tile){
+	  boolean isValid = true;
+	  
+	  if(tile.type == 2) isValid = false;
+	  if(tile.type == 4) isValid = false;
+	  if(tile.type == 16) isValid = false; 
+	  //TODO item for water traversal
+	  
+	  return isValid;	  
+  }
   
   public static void main(String args[]) throws IOException {
 	 Partition foo = new Partition(0,25,25,2,2);
@@ -93,23 +103,24 @@ public class Partition {
 	 while(choice != -1){
 		 choice = dir.next().charAt(0);
 		 
+		 
 		 if(choice == 's'){
-			 if(foo.tiles[playerX][playerY+1].type != 2){
+			 if(foo.isValidTile(foo.tiles[playerX][playerY+1])){
 				 playerY += 1;
 			 }		 
 		 }
 		 if(choice == 'a'){
-			 if(foo.tiles[playerX-1][playerY].type != 2){
+			 if(foo.isValidTile(foo.tiles[playerX-1][playerY])){
 				 playerX -= 1;
 			 }		 
 		 }
 		 if(choice == 'w'){
-			 if(foo.tiles[playerX][playerY-1].type != 2){
+			 if(foo.isValidTile(foo.tiles[playerX][playerY-1])){
 				 playerY -= 1;
 			 }		 
 		 }
 		 if(choice == 'd'){
-			 if(foo.tiles[playerX+1][playerY].type != 2){
+			 if(foo.isValidTile(foo.tiles[playerX+1][playerY])){
 				 playerX += 1;
 			 }		 
 		 }
