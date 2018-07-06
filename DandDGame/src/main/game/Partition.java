@@ -104,28 +104,28 @@ public class Partition {
 		 choice = dir.next().charAt(0);
 		 
 		 
-		 if(choice == 's'){
-			 if(foo.isValidTile(foo.tiles[playerX][playerY+1])){
-				 playerY += 1;
-			 }		 
-		 }
-		 if(choice == 'a'){
-			 if(foo.isValidTile(foo.tiles[playerX-1][playerY])){
-				 playerX -= 1;
-			 }		 
-		 }
 		 if(choice == 'w'){
-			 if(foo.isValidTile(foo.tiles[playerX][playerY-1])){
+			 if(foo.isValidTile(foo.tiles[playerY-1][playerX])){
 				 playerY -= 1;
 			 }		 
 		 }
+		 if(choice == 'a'){
+			 if(foo.isValidTile(foo.tiles[playerY][playerX-1])){
+				 playerX -= 1;
+			 }		 
+		 }
+		 if(choice == 's'){
+			 if(foo.isValidTile(foo.tiles[playerY+1][playerX])){
+				 playerY += 1;
+			 }		 
+		 }
 		 if(choice == 'd'){
-			 if(foo.isValidTile(foo.tiles[playerX+1][playerY])){
+			 if(foo.isValidTile(foo.tiles[playerY][playerX+1])){
 				 playerX += 1;
 			 }		 
 		 }
 		 
-		 System.out.print((char)8);// clears screen
+		 Runtime.getRuntime().exec("clear");
 		 foo.printPartition(playerX, playerY);
 	 }
 	 dir.close();
