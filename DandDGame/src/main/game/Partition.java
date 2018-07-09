@@ -7,6 +7,7 @@ public class Partition {
   int width;
   Cell[][] tiles = new Cell[height][width];
   
+  
 //  partition num is left->right top->bottom. Starts at 0
 //  height/width are dim of one partition
 //  xDim/ydim is how many partitions long each dimension of the map is
@@ -31,10 +32,29 @@ public class Partition {
       while(tileCount < width*(height)){
     	  // cell values from input file get read in
         type = in.nextInt();
+        SpaceType spaceType = SpaceType.EmptySpace;
+        switch(type)
+        {
+        case 1:
+        	spaceType = SpaceType.EmptySpace;
+        	break;
+        case 2:
+        	spaceType = SpaceType.Tree;
+        	break;
+        case 4:
+        	spaceType = SpaceType.Rock;
+        	break;
+        case 16:
+        	spaceType = SpaceType.Water;
+        	break;
+        default:
+        		break;
+        }
         itemID = in.nextInt();
         monsterID = in.nextInt();
         
-        Cell tile = new Cell(type, itemID, monsterID);
+        
+        Cell tile = new Cell(spaceType, itemID, monsterID);
         
 //        the valid ranges on the map for a tile is the start,
 //        and the start + the dimension of the partition
@@ -69,10 +89,10 @@ public class Partition {
       for(j=0 ; j<25 ; j++){
     	if(i == playerY && j == playerX) System.out.print("P");
     	else{
-	    	if(tiles[i][j].type == 1) System.out.print(" ");
-	    	else if(tiles[i][j].type == 2) System.out.print("T");
-	    	else if(tiles[i][j].type == 4) System.out.print("r");
-	    	else if(tiles[i][j].type == 16) System.out.print("~");
+	    	if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
+	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
+	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("r");
+	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("~");
 	    	else System.out.print(tiles[i][j].type);
     	}
       }
@@ -83,9 +103,9 @@ public class Partition {
   public boolean isValidTile(Cell tile){
 	  boolean isValid = true;
 	  
-	  if(tile.type == 2) isValid = false;
-	  if(tile.type == 4) isValid = false;
-	  if(tile.type == 16) isValid = false; 
+	  if(tile.type == SpaceType.Tree) isValid = false;
+	  if(tile.type == SpaceType.Rock) isValid = false;
+	  if(tile.type == SpaceType.Water) isValid = false; 
 	  //TODO item for water traversal
 	  
 	  return isValid;	  
