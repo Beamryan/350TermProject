@@ -30,34 +30,27 @@ public class AsciiToFile {
     	if(c == 88) { //cleared
     		spaceCode = 1;
     	}
-    	
-        if(c == 44){ //space
+    	else if(c == 44){ //space
           spaceCode = 1 << 1;
         }
-        
-        if(c == 33){ //tree
+    	else if(c == 33){ //tree
           spaceCode = 1 << 2;
         }
-        
-        if(c == 35){ //rock
+    	else if(c == 35){ //rock
           spaceCode = 1 << 3;
-        }
-        
-        if(c > 64 && c < 123){ //item
+        }    
+    	else if(c > 64 && c < 123){ //item
           spaceCode = 1 << 1;
           itemCode = c - 64; //makes item inventory go from 1-58
-        }
-        
-        if(c > 47 && c < 65 ){ //monster
+        } 
+    	else if(c > 47 && c < 65 ){ //monster
             spaceCode = 1 << 1;
             monsterCode = c - 47;
         }
-        
-        if(c == 126){ //water
+    	else if(c == 126){ //water
             spaceCode = 1 << 5;
         }
-        
-        if(c == 10){
+    	else if(c == 10){
           spaceCode = -1;
         }
 
