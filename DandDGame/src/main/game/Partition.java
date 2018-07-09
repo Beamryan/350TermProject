@@ -45,7 +45,7 @@ public class Partition {
         	spaceType = SpaceType.Rock;
         	break;
         case 16:
-        	spaceType = SpaceType.Item;
+        	spaceType = SpaceType.Water;
         	break;
         default:
         		break;
@@ -92,7 +92,7 @@ public class Partition {
 	    	if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
 	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
 	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("r");
-	    	else if(tiles[i][j].type == SpaceType.Item) System.out.print("~");
+	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("~");
 	    	else System.out.print(tiles[i][j].type);
     	}
       }
@@ -105,7 +105,7 @@ public class Partition {
 	  
 	  if(tile.type == SpaceType.Tree) isValid = false;
 	  if(tile.type == SpaceType.Rock) isValid = false;
-//	  if(tile.type == 16) isValid = false; 
+	  if(tile.type == SpaceType.Water) isValid = false; 
 	  //TODO item for water traversal
 	  
 	  return isValid;	  
