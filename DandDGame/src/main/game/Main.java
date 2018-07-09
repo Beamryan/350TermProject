@@ -1,5 +1,7 @@
 package main.game;
 
+import java.io.IOException;
+
 /**
  * 
  * @author jakecousino
@@ -17,10 +19,10 @@ public final class Main {
 	/**
 	 * 
 	 * @param args arguments for main method.
+	 * @throws IOException 
 	 */
-	public static void main(final String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(final String[] args) throws IOException {
+		AsciiToFile.main(null);
 	}
 
 }

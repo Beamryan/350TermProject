@@ -50,8 +50,9 @@ public class AsciiToFile {
     	else if(c == 126){ //water
             spaceCode = 1 << 5;
         }
-    	else if(c == 10){
+    	else if(c == 10){ //new line
           spaceCode = -1;
+          out.write("New Line ----------- New Line \n");
         }
 
         if(spaceCode != -1){
