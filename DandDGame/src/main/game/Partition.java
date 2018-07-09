@@ -103,9 +103,9 @@ public class Partition {
   public boolean isValidTile(Cell tile){
 	  boolean isValid = true;
 	  
-	  if(tile.type == 2) isValid = false;
-	  if(tile.type == 4) isValid = false;
-	  if(tile.type == 16) isValid = false; 
+	  if(tile.type == SpaceType.Tree) isValid = false;
+	  if(tile.type == SpaceType.Rock) isValid = false;
+//	  if(tile.type == 16) isValid = false; 
 	  //TODO item for water traversal
 	  
 	  return isValid;	  
@@ -125,26 +125,22 @@ public class Partition {
 		 
 		 
 		 if(choice == 's'){
-			 if((foo.tiles[playerX][playerY+1].type != SpaceType.Tree) || (foo.tiles[playerX][playerY+1].type != SpaceType.Rock)){
-
+			 if(foo.isValidTile(foo.tiles[playerX][playerY+1])){
 				 playerY += 1;
 			 }		 
 		 }
 		 if(choice == 'a'){
-			 if((foo.tiles[playerX-1][playerY].type != SpaceType.Tree) || (foo.tiles[playerX-1][playerY].type != SpaceType.Rock)){
-
+			 if(foo.isValidTile(foo.tiles[playerX-1][playerY])){
 				 playerX -= 1;
 			 }		 
 		 }
 		 if(choice == 'w'){
-			 if((foo.tiles[playerX][playerY-1].type != SpaceType.Tree) || (foo.tiles[playerX][playerY-1].type != SpaceType.Rock)){
-
+			 if(foo.isValidTile(foo.tiles[playerX][playerY-1])){
 				 playerY -= 1;
 			 }		 
 		 }
 		 if(choice == 'd'){
-			 if((foo.tiles[playerX+1][playerY].type != SpaceType.Tree) || (foo.tiles[playerX+1][playerY].type != SpaceType.Rock)){
-
+			 if(foo.isValidTile(foo.tiles[playerX+1][playerY])){
 				 playerX += 1;
 			 }		 
 		 }

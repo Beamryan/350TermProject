@@ -2,7 +2,7 @@ package main.game;
 
 public class Cell {
 	SpaceType type;
-	Direction[] availableDirections; 
+//	Direction[] availableDirections; 
 	//int type;
 	int itemID;
 	int monsterID;
