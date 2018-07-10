@@ -7,11 +7,7 @@ public class Partition {
   int width;
   Cell[][] tiles = new Cell[height][width];
   
-  
-//  partition num is left->right top->bottom. Starts at 0
-//  height/width are dim of one partition
-//  xDim/ydim is how many partitions long each dimension of the map is
-  public Partition(int partitionNum, int height, int width, int xDim, int yDim) throws IOException {
+  public Partition(int height, int width) throws IOException {
     this.height = height;
     this.width = width;
     tiles = new Cell[height][width];
@@ -21,60 +17,52 @@ public class Partition {
       int tileCount = 0; // how many tiles have been read into partition
       int x = 0;	//x coordinate in entire map
       int y = 0;	//y coordinate in entire map
-      int xTile = 0;	// x coordinate in current partition
-      int yTile = 0;	// y coordinate in current partition
-      int xStart = width*(partitionNum%xDim);	// starting positions for valid x values
-      int yStart = height*(partitionNum/yDim); 	// starting positions for valid y values
       int type;
       int itemID;
       int monsterID;
 
-      while(tileCount < width*(height)){
-    	  // cell values from input file get read in
+      while(tileCount < (width*height)){
         type = in.nextInt();
         SpaceType spaceType = SpaceType.EmptySpace;
-        switch(type)
-        {
+        switch(type) {
         case 1:
+    		spaceType = SpaceType.Cleared;
+    		break;
+        case 2:
         	spaceType = SpaceType.EmptySpace;
         	break;
-        case 2:
-        	spaceType = SpaceType.Tree;
-        	break;
         case 4:
-        	spaceType = SpaceType.Rock;
-        	break;
-        case 16:
-        	spaceType = SpaceType.Water;
-        	break;
-        default:
-        		break;
+    		spaceType = SpaceType.Tree;
+    		break;
+    	case 8:
+    		spaceType = SpaceType.Rock;
+    		break;
+    	case 16:
+    		spaceType = SpaceType.Water;
+    		break;
+    	default:
+    		break;
         }
         itemID = in.nextInt();
         monsterID = in.nextInt();
+        in.nextLine();
         
         
         Cell tile = new Cell(spaceType, itemID, monsterID);
         
 //        the valid ranges on the map for a tile is the start,
 //        and the start + the dimension of the partition
-        if(x >= xStart && x < xStart + width){
-          if(y >= yStart && y < yStart + height){
-            tiles[yTile][xTile] = tile;
+        if(x >= 0 && x < width){
+          if(y >= 0 && y < height){
+            tiles[y][x] = tile;
             tileCount++;
-            xTile++;
+            x++;
             // if a full row has been placed, increment row and restart x pos
-            if(xTile == width){
-            	xTile = 0;
-            	yTile++;
+            if(x == width){
+            	x = 0;
+            	y++;
             }
           }  		  
-        }
-//        if a row of the map has been read, restart x and increment y
-        x++;
-        if(x == xDim*width){
-          y++;
-          x = 0;
         }
       }
     }
@@ -85,14 +73,15 @@ public class Partition {
   
   public void printPartition(int playerX, int playerY){
     int i,j;
-    for(i=0 ; i<25 ; i++){
-      for(j=0 ; j<25 ; j++){
+    for(i=0 ; i<height ; i++){
+      for(j=0 ; j<width ; j++){
     	if(i == playerY && j == playerX) System.out.print("P");
     	else{
-	    	if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
+    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print("X");
+    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print("O");
 	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
-	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("r");
-	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("~");
+	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("R");
+	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("W");
 	    	else System.out.print(tiles[i][j].type);
     	}
       }
@@ -112,8 +101,8 @@ public class Partition {
   }
   
   public static void main(String args[]) throws IOException {
-	 Partition foo = new Partition(0,25,25,2,2);
-	 int playerX = 5;
+	 Partition foo = new Partition(50,50);
+	 int playerX = 2;
 	 int playerY = 1;
 	 
 	 // test basic movement in ascii

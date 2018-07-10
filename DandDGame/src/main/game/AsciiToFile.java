@@ -12,7 +12,6 @@ public class AsciiToFile {
       out = new FileWriter("output.txt");
       
       int c;
-      int count = 1;
       int spaceCode = 0;
       int itemCode = 0;
       int monsterCode = 0;
@@ -39,6 +38,9 @@ public class AsciiToFile {
     	else if(c == 35){ //rock
           spaceCode = 1 << 3;
         }    
+    	else if(c == 126){ //water
+            spaceCode = 1 << 4;
+        }
     	else if(c > 64 && c < 123){ //item
           spaceCode = 1 << 1;
           itemCode = c - 64; //makes item inventory go from 1-58
@@ -47,18 +49,13 @@ public class AsciiToFile {
             spaceCode = 1 << 1;
             monsterCode = c - 47;
         }
-    	else if(c == 126){ //water
-            spaceCode = 1 << 5;
-        }
     	else if(c == 10){ //new line
           spaceCode = -1;
-          out.write("New Line ----------- New Line \n");
         }
 
         if(spaceCode != -1){
           String output = spaceCode + " " + itemCode + " " + monsterCode;
-          out.write("space " + count + ": " + output + "\n");
-          count++;
+          out.write(output + "\n");
           itemCode = 0;
           monsterCode = 0;
         }

@@ -22,7 +22,7 @@ public final class Main {
 	 * @throws IOException 
 	 */
 	public static void main(final String[] args) throws IOException {
-		AsciiToFile.main(null);
+		Partition.main(null);
 	}
 
 }
