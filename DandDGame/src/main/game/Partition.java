@@ -100,6 +100,18 @@ public class Partition {
 	  return isValid;	  
   }
   
+  public boolean tileHasItem(Cell tile){
+	  
+	  if(tile.itemID != 0) return true;	  
+	  return false;
+  }
+  
+  public boolean tileHasMonster(Cell tile){
+	  
+	  if(tile.monsterID != 0) return true;	  
+	  return false;
+  }
+  
   public static void main(String args[]) throws IOException {
 	 Partition foo = new Partition(50,50);
 	 int playerX = 2;
@@ -133,6 +145,8 @@ public class Partition {
 				 playerX += 1;
 			 }		 
 		 }
+		 boolean hasItem = foo.tileHasItem(foo.tiles[playerY][playerX]);
+		 boolean hasMonster = foo.tileHasMonster(foo.tiles[playerY][playerX]);
 		 
 		 Runtime.getRuntime().exec("clear");
 		 foo.printPartition(playerX, playerY);
