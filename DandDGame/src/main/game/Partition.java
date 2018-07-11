@@ -138,21 +138,25 @@ public class Partition {
 		 if(choice == 'w'){
 			 if(foo.isValidTile(foo.tiles[playerY-1][playerX])){
 				 playerY -= 1;
+				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
 			 }		 
 		 }
 		 if(choice == 'a'){
 			 if(foo.isValidTile(foo.tiles[playerY][playerX-1])){
 				 playerX -= 1;
+				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
 			 }		 
 		 }
 		 if(choice == 's'){
 			 if(foo.isValidTile(foo.tiles[playerY+1][playerX])){
 				 playerY += 1;
+				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
 			 }		 
 		 }
 		 if(choice == 'd'){
 			 if(foo.isValidTile(foo.tiles[playerY][playerX+1])){
 				 playerX += 1;
+				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
 			 }		 
 		 }
 		 
