@@ -112,6 +112,16 @@ public class Partition {
 	  return false;
   }
   
+  public int getItemID(Cell tile)
+  {
+	  return tile.itemID;
+  }
+  
+  public int getMonsterID(Cell tile)
+  {
+	  return tile.monsterID;
+  }
+  
   public static void main(String args[]) throws IOException {
 	 Partition foo = new Partition(50,50);
 	 int playerX = 2;
@@ -145,8 +155,16 @@ public class Partition {
 				 playerX += 1;
 			 }		 
 		 }
-		 boolean hasItem = foo.tileHasItem(foo.tiles[playerY][playerX]);
-		 boolean hasMonster = foo.tileHasMonster(foo.tiles[playerY][playerX]);
+		 
+		 int itemID, monsterID;
+		 if(foo.tileHasItem(foo.tiles[playerY][playerX]))
+		 {
+			 itemID = foo.getItemID(foo.tiles[playerY][playerX]);
+		 }
+		 if(foo.tileHasMonster(foo.tiles[playerY][playerX]))
+		 {
+			 monsterID = foo.getItemID(foo.tiles[playerY][playerX]);
+		 }
 		 
 		 Runtime.getRuntime().exec("clear");
 		 foo.printPartition(playerX, playerY);
