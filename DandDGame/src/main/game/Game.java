@@ -1,7 +1,7 @@
 package main.game;
 import java.io.*;
 
-public class game {
+public class Game {
 	
 	int defaultHeight = 50;
 	int defaultWidth = 50;
@@ -10,11 +10,11 @@ public class game {
 	
 	Partition partition;
 
-	public game() throws IOException {
+	public Game() throws IOException {
 		partition = new Partition(defaultHeight, defaultWidth);
 	}
 	
-	public game(int height, int width) throws IOException{ 
+	public Game(int height, int width) throws IOException{ 
 		defaultHeight = height;
 		defaultWidth = width;
 		partition = new Partition(defaultHeight, defaultWidth);
