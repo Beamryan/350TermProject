@@ -100,24 +100,24 @@ public class Partition {
 	  return isValid;	  
   }
   
-  public boolean tileHasItem(Cell tile){
+  public boolean tileHasItem(int playerLocationY, int playerLocationX){
 	  
-	  if(tile.itemID != 0) return true;	  
+	  if(tiles[playerLocationY][playerLocationX].itemID != 0) return true;	  
 	  return false;
   }
   
-  public boolean tileHasMonster(Cell tile){
+  public boolean tileHasMonster(int playerLocationY, int playerLocationX){
 	  
-	  if(tile.monsterID != 0) return true;	  
+	  if(tiles[playerLocationY][playerLocationX].monsterID != 0) return true;	  
 	  return false;
   }
   
-  public int getItemID(Cell tile){
-	  return tile.itemID;
+  public int getItemID(int playerLocationY, int playerLocationX){
+	  return tiles[playerLocationY][playerLocationX].itemID;
   }
   
-  public int getMonsterID(Cell tile){
-	  return tile.monsterID;
+  public int getMonsterID(int playerLocationY, int playerLocationX){
+	  return tiles[playerLocationY][playerLocationX].monsterID;
   }
   
   /**
@@ -190,42 +190,26 @@ public class Partition {
 		 
 		 
 		 if(choice == 'w'){
-			 playerY = foo.moveNorth(playerY, playerX);
-//			 if(foo.isValidTile(foo.tiles[playerY-1][playerX])){
-//				 playerY -= 1;
-//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-//			 }		 
+			 playerY = foo.moveNorth(playerY, playerX);	 
 		 }
 		 if(choice == 'a'){
-			 playerX = foo.moveWest(playerY, playerX);
-//			 if(foo.isValidTile(foo.tiles[playerY][playerX-1])){
-//				 playerX -= 1;
-//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-//			 }		 
+			 playerX = foo.moveWest(playerY, playerX);	 
 		 }
 		 if(choice == 's'){
-			 playerY = foo.moveSouth(playerY, playerX);
-//			 if(foo.isValidTile(foo.tiles[playerY+1][playerX])){
-//				 playerY += 1;
-//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-//			 }		 
+			 playerY = foo.moveSouth(playerY, playerX);	 
 		 }
 		 if(choice == 'd'){
-			 playerX = foo.moveEast(playerY, playerX);
-//			 if(foo.isValidTile(foo.tiles[playerY][playerX+1])){
-//				 playerX += 1;
-//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-//			 }		 
+			 playerX = foo.moveEast(playerY, playerX);	 
 		 }
 		 
 		 int itemID, monsterID;
-		 if(foo.tileHasItem(foo.tiles[playerY][playerX]))
+		 if(foo.tileHasItem(playerY, playerX))
 		 {
-			 itemID = foo.getItemID(foo.tiles[playerY][playerX]);
+			 itemID = foo.getItemID(playerY, playerX);
 		 }
-		 if(foo.tileHasMonster(foo.tiles[playerY][playerX]))
+		 if(foo.tileHasMonster(playerY, playerX))
 		 {
-			 monsterID = foo.getItemID(foo.tiles[playerY][playerX]);
+			 monsterID = foo.getItemID(playerY, playerX);
 		 }
 		 
 		 Runtime.getRuntime().exec("clear");
