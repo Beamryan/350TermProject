@@ -89,6 +89,11 @@ public class Partition {
     }
   }
   
+  /**
+   * Checks if the SpaceType is a traversable type
+   * @param tile current tile.
+   * @return true if the space is able to be traveled to, false if the SpaceType is Tree, Rock, or Water
+   */
   public boolean isValidTile(Cell tile){
 	  boolean isValid = true;
 	  
@@ -100,22 +105,46 @@ public class Partition {
 	  return isValid;	  
   }
   
+  /**
+   * Check if the itemID of the current cell has a value. 
+   * @param playerLocationY Current player location in the Y direction
+   * @param playerLocationX Current player location in the X direction
+   * @return Returns true if the cells itemID is nonzero, false if the itemID is zero. 
+   */
   public boolean tileHasItem(int playerLocationY, int playerLocationX){
 	  
 	  if(tiles[playerLocationY][playerLocationX].itemID != 0) return true;	  
 	  return false;
   }
   
+  /**
+   * Check if the monsterID of the current cell has a value. 
+   * @param playerLocationY Current player location in the Y direction
+   * @param playerLocationX Current player location in the X direction
+   * @return Returns true if the cells monsterID is nonzero, false if the monsterID is zero. 
+   */
   public boolean tileHasMonster(int playerLocationY, int playerLocationX){
 	  
 	  if(tiles[playerLocationY][playerLocationX].monsterID != 0) return true;	  
 	  return false;
   }
   
+  /**
+   * Gets the itemID of the current cell.
+   * @param playerLocationY Current player location in the Y direction
+   * @param playerLocationX Current player location in the X direction
+   * @return Returns the itemID of the current cell.
+   */
   public int getItemID(int playerLocationY, int playerLocationX){
 	  return tiles[playerLocationY][playerLocationX].itemID;
   }
   
+  /**
+   * Gets the monsterID of the current cell.
+   * @param playerLocationY Current player location in the Y direction
+   * @param playerLocationX Current player location in the X direction
+   * @return Returns the monsterID of the current cell.
+   */
   public int getMonsterID(int playerLocationY, int playerLocationX){
 	  return tiles[playerLocationY][playerLocationX].monsterID;
   }
