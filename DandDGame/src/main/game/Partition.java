@@ -112,14 +112,68 @@ public class Partition {
 	  return false;
   }
   
-  public int getItemID(Cell tile)
-  {
+  public int getItemID(Cell tile){
 	  return tile.itemID;
   }
   
-  public int getMonsterID(Cell tile)
-  {
+  public int getMonsterID(Cell tile){
 	  return tile.monsterID;
+  }
+  
+  /**
+   * Method to move the player north on the map.
+   * @param playerLocationY Current location Y
+   * @param playerLocationX Current location X
+   * @return new playerLocationY if valid, old playerLocationY if not valid.
+   */
+  public int moveNorth(int playerLocationY, int playerLocationX) { 
+	  if(isValidTile(tiles[playerLocationY - 1][playerLocationX])) { 
+		  tiles[playerLocationY - 1][playerLocationX].type = SpaceType.Cleared;
+		  return playerLocationY - 1;
+	  }
+	  return playerLocationY;
+  }
+  
+  /**
+   * Method to move the player east on the map.
+   * @param playerLocationY Current location Y
+   * @param playerLocationX Current location X
+   * @return new playerLocationX if valid, old playerLocationX if not valid.
+   */
+  public int moveEast(int playerLocationY, int playerLocationX) { 
+	  if(isValidTile(tiles[playerLocationY][playerLocationX + 1])) { 
+		  tiles[playerLocationY][playerLocationX + 1].type = SpaceType.Cleared;
+		  return playerLocationX + 1;
+	  }
+	  return playerLocationX;
+  }
+  
+  /**
+   * Method to move the player south on the map.
+   * @param playerLocationY Current location Y
+   * @param playerLocationX Current location X
+   * @return new playerLocationY if valid, old playerLocationY if not valid.
+   */
+  public int moveSouth(int playerLocationY, int playerLocationX) { 
+	  if(isValidTile(tiles[playerLocationY + 1][playerLocationX])) { 
+		  tiles[playerLocationY + 1][playerLocationX].type = SpaceType.Cleared;
+		  return playerLocationY + 1;
+	  }
+	  return playerLocationY;
+  }
+  
+  /**
+   * Method to move the player west on the map.
+   * @param playerLocationY Current location Y
+   * @param playerLocationX Current location X
+   * @return new playerLocationX if valid, old playerLocationX if not valid.
+   */
+  public int moveWest(int playerLocationY, int playerLocationX) { 
+	  if(isValidTile(tiles[playerLocationY][playerLocationX - 1])) { 
+		  tiles[playerLocationY][playerLocationX - 1].type = SpaceType.Cleared;
+		  return playerLocationX - 1;
+	  }
+	  return playerLocationX;
   }
   
   public static void main(String args[]) throws IOException {
@@ -136,28 +190,32 @@ public class Partition {
 		 
 		 
 		 if(choice == 'w'){
-			 if(foo.isValidTile(foo.tiles[playerY-1][playerX])){
-				 playerY -= 1;
-				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-			 }		 
+			 playerY = foo.moveNorth(playerY, playerX);
+//			 if(foo.isValidTile(foo.tiles[playerY-1][playerX])){
+//				 playerY -= 1;
+//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
+//			 }		 
 		 }
 		 if(choice == 'a'){
-			 if(foo.isValidTile(foo.tiles[playerY][playerX-1])){
-				 playerX -= 1;
-				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-			 }		 
+			 playerX = foo.moveWest(playerY, playerX);
+//			 if(foo.isValidTile(foo.tiles[playerY][playerX-1])){
+//				 playerX -= 1;
+//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
+//			 }		 
 		 }
 		 if(choice == 's'){
-			 if(foo.isValidTile(foo.tiles[playerY+1][playerX])){
-				 playerY += 1;
-				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-			 }		 
+			 playerY = foo.moveSouth(playerY, playerX);
+//			 if(foo.isValidTile(foo.tiles[playerY+1][playerX])){
+//				 playerY += 1;
+//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
+//			 }		 
 		 }
 		 if(choice == 'd'){
-			 if(foo.isValidTile(foo.tiles[playerY][playerX+1])){
-				 playerX += 1;
-				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
-			 }		 
+			 playerX = foo.moveEast(playerY, playerX);
+//			 if(foo.isValidTile(foo.tiles[playerY][playerX+1])){
+//				 playerX += 1;
+//				 foo.tiles[playerY][playerX].type = SpaceType.Cleared;
+//			 }		 
 		 }
 		 
 		 int itemID, monsterID;
