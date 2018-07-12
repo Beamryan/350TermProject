@@ -3,21 +3,21 @@ import java.io.*;
 
 public class Game {
 	
-	int defaultHeight = 50;
-	int defaultWidth = 50;
+	int defaultHeight = 25;
+	int defaultWidth = 25;
 	int playerLocationX = 2;
 	int playerLocationY = 1;
 	
 	Partition partition;
 
 	public Game() throws IOException {
-		partition = new Partition(defaultHeight, defaultWidth);
+		partition = new Partition(defaultHeight, defaultWidth,1,2,2);
 	}
 	
 	public Game(int height, int width) throws IOException{ 
 		defaultHeight = height;
 		defaultWidth = width;
-		partition = new Partition(defaultHeight, defaultWidth);
+		partition = new Partition(defaultHeight, defaultWidth,1,2,2);
 	}
 	
 	/**

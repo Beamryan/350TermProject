@@ -7,7 +7,7 @@ public class Partition {
   int width;
   Cell[][] tiles = new Cell[height][width];
   
-  public Partition(int height, int width) throws IOException {
+  public Partition(int height, int width, int partitionNum, int xDim, int yDim) throws IOException {
     this.height = height;
     this.width = width;
     tiles = new Cell[height][width];
@@ -20,6 +20,10 @@ public class Partition {
       int type;
       int itemID;
       int monsterID;
+      int xTile = 0;	// x coordinate in current partition
+      int yTile = 0;	// y coordinate in current partition
+      int xStart = width*(partitionNum%xDim);	// starting positions for valid x values
+      int yStart = height*(partitionNum/yDim); // starting positions for valid y values
 
       while(tileCount < (width*height)){
         type = in.nextInt();
@@ -52,20 +56,26 @@ public class Partition {
         
 //        the valid ranges on the map for a tile is the start,
 //        and the start + the dimension of the partition
-        if(x >= 0 && x < width){
-          if(y >= 0 && y < height){
-            tiles[y][x] = tile;
-            tileCount++;
-            x++;
-            // if a full row has been placed, increment row and restart x pos
-            if(x == width){
-            	x = 0;
-            	y++;
-            }
-          }  		  
+        if(x >= xStart && x < xStart + width){
+            if(y >= yStart && y < yStart + height){
+              tiles[yTile][xTile] = tile;
+              tileCount++;
+              xTile++;
+              // if a full row has been placed, increment row and restart x pos
+              if(xTile == width){
+              	xTile = 0;
+              	yTile++;
+              }
+            }  		  
+          }
+//          if a row of the map has been read, restart x and increment y
+          x++;
+          if(x == xDim*width){
+            y++;
+            x = 0;
+          }
         }
-      }
-    }
+  }
     finally {
     	in.close();
     } 
@@ -206,7 +216,7 @@ public class Partition {
   }
   
   public static void main(String args[]) throws IOException {
-	 Partition foo = new Partition(50,50);
+	 Partition foo = new Partition(25,25,0,2,2);
 	 int playerX = 2;
 	 int playerY = 1;
 	 
