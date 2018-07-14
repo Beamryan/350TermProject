@@ -6,6 +6,7 @@ public class Partition {
   int height;
   int width;
   Cell[][] tiles = new Cell[height][width];
+  Warrior player = new Warrior();
   
   public Partition(int height, int width, int partitionNum, int xDim, int yDim) throws IOException {
     this.height = height;
@@ -87,12 +88,13 @@ public class Partition {
       for(j=0 ; j<width ; j++){
     	if(i == playerY && j == playerX) System.out.print("P");
     	else{
-    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print("X");
-    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print("O");
+    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print(" ");
+    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
 	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
 	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("R");
 	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("W");
 	    	else System.out.print(tiles[i][j].type);
+    		
     	}
       }
       System.out.println();
@@ -121,8 +123,7 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells itemID is nonzero, false if the itemID is zero. 
    */
-  public boolean tileHasItem(int playerLocationY, int playerLocationX){
-	  
+  public boolean tileHasItem(int playerLocationY, int playerLocationX){	  
 	  if(tiles[playerLocationY][playerLocationX].itemID != 0) return true;	  
 	  return false;
   }
@@ -133,10 +134,13 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells monsterID is nonzero, false if the monsterID is zero. 
    */
-  public boolean tileHasMonster(int playerLocationY, int playerLocationX){
-	  
-	  if(tiles[playerLocationY][playerLocationX].monsterID != 0) return true;	  
-	  return false;
+  public boolean tileHasMonster(int playerLocationY, int playerLocationX){	  
+	  if(tiles[playerLocationY][playerLocationX].monsterID != 0){
+		  return true;
+	  }
+	  else{
+		  return false;
+	  }
   }
   
   /**
@@ -215,6 +219,8 @@ public class Partition {
 	  return playerLocationX;
   }
   
+  
+  
   public static void main(String args[]) throws IOException {
 	 Partition foo = new Partition(25,25,0,2,2);
 	 int playerX = 2;
@@ -242,13 +248,29 @@ public class Partition {
 		 }
 		 
 		 int itemID, monsterID;
+		 
 		 if(foo.tileHasItem(playerY, playerX))
 		 {
 			 itemID = foo.getItemID(playerY, playerX);
 		 }
 		 if(foo.tileHasMonster(playerY, playerX))
-		 {
-			 monsterID = foo.getItemID(playerY, playerX);
+		 {	
+			 monsterID = foo.getMonsterID(playerY, playerX);
+			 Battle battle = new Battle(foo.player,monsterID);
+			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win
+			 if(xpGain > 0){
+				 System.out.println("Player wins! Gain " + xpGain + " xp");
+				 foo.tiles[playerY][playerX].monsterID = 0;
+			 }
+			 else if(xpGain == -1){
+				 System.out.println("Player ran");
+				 foo.tiles[playerY][playerX].monsterID = 0;
+			 }
+			 else{
+				 System.out.println("Player loses! Back to start");
+				 playerX = 2;
+				 playerY = 1;				 
+			 }
 		 }
 		 
 		 Runtime.getRuntime().exec("clear");

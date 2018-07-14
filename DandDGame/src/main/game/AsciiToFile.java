@@ -2,7 +2,8 @@ package main.game;
 import java.io.*;
 
 public class AsciiToFile {
-  public static void main(String args[]) throws IOException {
+	
+  void run() throws IOException {
     
     FileInputStream in = null;
     Writer out = null;
@@ -69,5 +70,10 @@ public class AsciiToFile {
         out.close();
       }
     }
+  }
+  
+  public static void main(String[] args) throws IOException{
+	  AsciiToFile run = new AsciiToFile();
+	  run.run();
   }
 }

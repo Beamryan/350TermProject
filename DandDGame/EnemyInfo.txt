@@ -1,2 +1,17 @@
-1 Test 10 5 15 20
-2 Test2 10 5 15 20
+1 hollow 10 5 15 20 130
+2 skeleton 10 5 15 20 150
+3 like-like 10 5 15 20 190
+4 splicer 10 5 15 20 210
+5 kupa-trupa 10 5 15 20 270
+6 hollow-knight 10 5 15 20 270
+7 Test 10 5 15 20 280
+8 Test2 10 5 15 290 
+9 Test 10 5 15 20 310 
+10 Test2 10 5 15 20 330
+11 Test 10 5 15 20 400
+12 Test2 10 5 15 20 410
+13 Test2 10 5 15 20 450
+14 Test 10 5 15 20 460
+15 Pyramidal-Head 10 5 15 20 200
+16 Small-Daddy 10 5 15 20 200
+17 FinalBoss 10 5 15 20 200

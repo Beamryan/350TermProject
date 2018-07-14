@@ -7,6 +7,7 @@ public class Warrior {
 	public int speed = 5;
 	public int stamina = 15;
 	public int focus = 20;
+	public int health = 150;
 	
 	public int invenorySize = 20;
 	public int[] inventory = new int[invenorySize];
