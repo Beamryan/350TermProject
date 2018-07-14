@@ -223,9 +223,14 @@ public class Partition {
   
   
   public static void main(String args[]) throws IOException {
-	 Partition foo = new Partition(25,25,0,2,2);
+	 int currentPartition = 0;
+	 Partition foo = new Partition(25,25,currentPartition,2,2);	 
 	 int playerX = 2;
 	 int playerY = 1;
+	 int xDim = 2;
+	 int yDim = 2;
+	 int width = 25;
+	 int length = 25;
 	 
 	 // test basic movement in ascii
 	 Scanner dir = new Scanner(System.in);
@@ -236,16 +241,36 @@ public class Partition {
 		 
 		 
 		 if(choice == 'w'){
+			 if(playerY == 0){
+				 currentPartition -= xDim;
+				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 playerY = 24;
+			 }
 			 playerY = foo.moveNorth(playerY, playerX);	 
 		 }
 		 if(choice == 'a'){
-			 playerX = foo.moveWest(playerY, playerX);	 
+			 if(playerX == 0){
+				 currentPartition--;
+				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 playerX = 24;
+			 }
+			 else playerX = foo.moveWest(playerY, playerX);	 
 		 }
 		 if(choice == 's'){
-			 playerY = foo.moveSouth(playerY, playerX);	 
+			 if(playerY == 24){
+				 currentPartition += xDim;
+				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 playerY = 0;
+			 }
+			 else playerY = foo.moveSouth(playerY, playerX);	 
 		 }
 		 if(choice == 'd'){
-			 playerX = foo.moveEast(playerY, playerX);	 
+			 if(playerX == 24){
+				 currentPartition++;
+				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 playerX = 0;
+			 }
+			 else playerX = foo.moveEast(playerY, playerX);	 
 		 }
 		 
 		 int itemID, monsterID;
