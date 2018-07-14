@@ -53,12 +53,13 @@ public class Battle {
 		
 		// test weapon scaling...
 		double playerScale = 1.5;
-		double enemyScale = 0.7;
+		double enemyScale = 1.5;
 		
 		Scanner choiceSC = new Scanner(System.in);
 		Random rand = new Random();
 		int runFlag = 0;
 		
+		System.out.println("\n\n" + enemyName + " encountered!\n");
 		
 //		Each turn is as follows:
 //			both players make a shield or attack choice
@@ -69,10 +70,10 @@ public class Battle {
 //			strength goes down by a tenth each attack
 //			TODO focus for regen?			
 		while(playerHealth>0 && enemyHealth>0 && runFlag == 0){
-			System.out.println("Player health: " + playerHealth);
-			System.out.println("Enemy health: " + enemyHealth);
+			System.out.println("\nPlayer health: " + playerHealth);
+			System.out.println(enemyName + " health: " + enemyHealth);
 			System.out.println("What would you like to do?");
-			System.out.println("A to attack, S to shield, R to run");
+			System.out.println("A to attack, S to shield, R to run\n");
 			
 			choice = choiceSC.next().charAt(0);			
 			int enemyChoice = (int)Math.round( Math.random() );
@@ -116,11 +117,17 @@ public class Battle {
 				if(enemyStrength > enemyStrengthFloor) enemyStrength -= (int)degradation;	
 			}
 			
-			//player chooses to shield, halve incoming damage
-			if(choice == 's') enemyDamage *= .5;
+			//player chooses to shield, decreases incoming damage
+			if(choice == 's'){
+				enemyDamage *= .15;
+				playerStrength *= 1.25;
+			}
 			
-			//enemy chooses to shield, halve incoming damage
-			if(enemyChoice == 1) playerDamage *= .5;
+			//enemy chooses to shield, decreases incoming damage
+			if(enemyChoice == 1){
+				playerDamage *= .15;
+				enemyStrength *= 1.25;
+			}
 			
 			enemyHealth -= (int)playerDamage;
 			playerHealth -= (int)enemyDamage;
@@ -151,15 +158,7 @@ public class Battle {
 	public static void main(String args[]) throws IOException {
 		Warrior warrior = new Warrior();
 		Battle testBattle = new Battle(warrior, 1);
-		System.out.println("Player strength: " + testBattle.playerStrength);
-		System.out.println("Player speed: " + testBattle.playerSpeed);
-		System.out.println("Player stamina: " + testBattle.playerStamina);
-		System.out.println("Player focus: " + testBattle.playerFocus);
-		System.out.println("\nEnemy name: " + testBattle.enemyName);
-		System.out.println("Enemy strength: " + testBattle.enemyStrength);
-		System.out.println("Enemy speed: " + testBattle.enemySpeed);
-		System.out.println("Enemy stamina: " + testBattle.enemyStamina);
-		System.out.println("Enemy focus: " + testBattle.enemyFocus);
+		
 	}
 
 	

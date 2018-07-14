@@ -1,5 +1,6 @@
 package main.game;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Warrior {
 
@@ -8,6 +9,12 @@ public class Warrior {
 	public int stamina = 15;
 	public int focus = 20;
 	public int health = 150;
+	
+	public int xp = 10;
+	public int level = 1;
+	public int xpToNextLevel = level*15;
+	
+	public int waterTravelFlag;
 	
 	public int invenorySize = 20;
 	public int[] inventory = new int[invenorySize];
@@ -25,6 +32,42 @@ public class Warrior {
 			return true;
 		}
 		return false;
+	}
+	
+	public void levelUp(){
+		Scanner choiceSC = new Scanner(System.in);
+		char choice;
+		double increment;
+		
+		System.out.println("\nNew level achieved! What stat would you like to level?");
+		System.out.println("1 for strength, 2 for stamina, 3 for health");
+		System.out.println("Current stats: " + strength + " " + stamina + " " + health);
+		
+		choice = choiceSC.next().charAt(0);
+		
+		if(choice == '1'){
+			increment = (double)level*.05 + 2;
+			strength += increment;
+		}
+		
+		if(choice == '2'){
+			increment = (double)level*.05 + 2;
+			stamina += increment;
+		}
+		
+		if(choice == '3'){
+			increment = (double)level*.025 + 10;
+			health += increment;
+		}
+		
+		System.out.println("New stats: " + strength + " " + stamina + " " + health);
+		System.out.println("Enter any input to continue");
+		
+		choice = choiceSC.next().charAt(0);
+		
+		xp -= xpToNextLevel;
+		level++;
+			
 	}
 	
 	private int getNextEmptyInvntorySlot()
@@ -46,4 +89,6 @@ public class Warrior {
 		return false;
 	
 	}
+	
+	
 }

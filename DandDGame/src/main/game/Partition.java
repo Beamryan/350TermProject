@@ -260,6 +260,12 @@ public class Partition {
 			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win
 			 if(xpGain > 0){
 				 System.out.println("Player wins! Gain " + xpGain + " xp");
+				 foo.player.xp += xpGain;
+				 
+				 if(foo.player.xp >= foo.player.xpToNextLevel)
+					 foo.player.levelUp();
+				 
+				 // Clear monster tile in partition
 				 foo.tiles[playerY][playerX].monsterID = 0;
 			 }
 			 else if(xpGain == -1){
@@ -275,6 +281,8 @@ public class Partition {
 		 
 		 Runtime.getRuntime().exec("clear");
 		 foo.printPartition(playerX, playerY);
+		 System.out.println("Level " + foo.player.level);
+		 System.out.println("Xp " + foo.player.xp);
 	 }
 	 dir.close();
   }

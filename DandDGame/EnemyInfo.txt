@@ -1,9 +1,9 @@
-1 hollow 10 5 15 20 130
-2 skeleton 10 5 15 20 150
-3 like-like 10 5 15 20 190
-4 splicer 10 5 15 20 210
-5 kupa-trupa 10 5 15 20 270
-6 hollow-knight 10 5 15 20 270
+1 Hollow 10 5 15 20 130
+2 Skeleton 10 5 15 20 150
+3 Like-like 10 5 15 20 190
+4 Splicer 10 5 15 20 210
+5 Kupa-trupa 10 5 15 20 270
+6 Hollow-knight 10 5 15 20 270
 7 Test 10 5 15 20 280
 8 Test2 10 5 15 290 
 9 Test 10 5 15 20 310 
