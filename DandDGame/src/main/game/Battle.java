@@ -80,8 +80,8 @@ public class Battle {
 			enemyDamage = 0;
 			playerDamage = 0;
 			
-			int playerDodgeSeed = rand.nextInt(playerStamina) + 0;
-			int enemyDodgeSeed = rand.nextInt(enemyStamina) + 0;
+			int playerDodgeSeed = rand.nextInt(playerSpeed) + 0;
+			int enemyDodgeSeed = rand.nextInt(enemySpeed) + 0;
 			
 		
 			System.out.println("Player chose " + choice);
@@ -120,17 +120,29 @@ public class Battle {
 			//player chooses to shield, decreases incoming damage
 			if(choice == 's'){
 				enemyDamage *= .15;
-				playerStrength *= 1.25;
+				playerStrength *= 1.2;
+				playerSpeed *= 1.15;
 			}
 			
 			//enemy chooses to shield, decreases incoming damage
 			if(enemyChoice == 1){
 				playerDamage *= .15;
-				enemyStrength *= 1.25;
+				enemyStrength *= 1.2;
+				enemySpeed *= 1.15;
 			}
 			
-			enemyHealth -= (int)playerDamage;
-			playerHealth -= (int)enemyDamage;
+			if(playerDodgeSeed>=enemyDodgeSeed){
+				enemyHealth -= (int)playerDamage;
+			}
+			else if(choice == 'a') System.out.println("Enemy dodged!");
+			
+			
+			if(playerDodgeSeed<=enemyDodgeSeed){
+				playerHealth -= (int)enemyDamage;
+			}
+			else if(enemyChoice == 0) System.out.println("Player dodged!");
+
+
 			
 			if(enemyHealth<1){
 				playerWins = true;
@@ -162,10 +174,4 @@ public class Battle {
 	}
 
 	
-	
-	
-	
-	
-	
-
 }

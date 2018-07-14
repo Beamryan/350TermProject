@@ -178,7 +178,8 @@ public class Partition {
   }
   
   /**
-   * Method to move the player east on the map.
+   * Method to move the player east on the map.s
+   *
    * @param playerLocationY Current location Y
    * @param playerLocationX Current location X
    * @return new playerLocationX if valid, old playerLocationX if not valid.
@@ -259,7 +260,7 @@ public class Partition {
 			 Battle battle = new Battle(foo.player,monsterID);
 			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win
 			 if(xpGain > 0){
-				 System.out.println("Player wins! Gain " + xpGain + " xp");
+				 System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
 				 foo.player.xp += xpGain;
 				 
 				 if(foo.player.xp >= foo.player.xpToNextLevel)
@@ -273,7 +274,7 @@ public class Partition {
 				 foo.tiles[playerY][playerX].monsterID = 0;
 			 }
 			 else{
-				 System.out.println("Player loses! Back to start");
+				 System.out.println("Player loses! Back to start\n\n");
 				 playerX = 2;
 				 playerY = 1;				 
 			 }
