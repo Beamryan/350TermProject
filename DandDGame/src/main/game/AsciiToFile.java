@@ -43,11 +43,11 @@ public class AsciiToFile {
         }
     	else if(c > 64 && c < 123){ //item
           spaceCode = 1 << 1;
-          itemCode = c - 64; //makes item inventory go from 1-58
+          itemCode = c - 64; //makes item inventory go from 1-57
         } 
     	else if(c > 47 && c < 65 ){ //monster
             spaceCode = 1 << 1;
-            monsterCode = c - 47;
+            monsterCode = c - 47; // monster values range 1 - 16
         }
     	else if(c == 10){ //new line
           spaceCode = -1;
