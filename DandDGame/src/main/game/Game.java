@@ -7,17 +7,18 @@ public class Game {
 	int defaultWidth = 20;
 	int playerLocationX = 1;
 	int playerLocationY = 1;
+	Warrior player = new Warrior();
 	
 	Partition partition;
 
 	public Game() throws IOException {
-		partition = new Partition(defaultHeight, defaultWidth,1,2,2);
+		//partition = new Partition(defaultHeight, defaultWidth,1,2,2,player);
 	}
 	
 	public Game(int height, int width) throws IOException{ 
 		defaultHeight = height;
 		defaultWidth = width;
-		partition = new Partition(defaultHeight, defaultWidth,1,2,2);
+		//partition = new Partition(defaultHeight, defaultWidth,1,2,2,player);
 	}
 	
 	/**
