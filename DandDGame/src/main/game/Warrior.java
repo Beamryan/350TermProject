@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Warrior {
 
-	public int strength = 10;
+	public int strength = 30;
 	public int speed = 10;
 	public int stamina = 15;
 	public int focus = 20;
