@@ -41,7 +41,8 @@ public class Inventory {
 	
 	public boolean addItemToInventory(int itemID)
 	{
-		if(!isInventoryFull())
+		if(itemID == 19) inventory[19] = 1;
+		else if(!isInventoryFull())
 		{
 			inventory[getNextEmptyInvntorySlot()] = itemID;
 			return true;
@@ -71,7 +72,7 @@ public class Inventory {
 	
 	private int getNextEmptyInvntorySlot()
 	{
-		for(int i = 0; i < invenorySize; i++)
+		for(int i = 0; i < invenorySize-2; i++)
 		{
 			if(inventory[i] == 0)
 			{

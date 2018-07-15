@@ -75,29 +75,20 @@ public class Battle {
 			System.out.println("\nPlayer health: " + playerHealth);
 			System.out.println(enemyName + " health: " + enemyHealth);
 			System.out.println("What would you like to do?");
-			System.out.println("A to attack, S to shield, R to run\n");
+			System.out.println("A to attack, S to shield, D to rest, or F to flee\n");
 			
 			choice = choiceSC.next().charAt(0);			
-			int enemyChoice = (int)Math.round( Math.random() );
+			//int enemyChoice = (int)Math.round( Math.random() );
+			int enemyChoice = (rand.nextInt(3));
 			enemyDamage = 0;
 			playerDamage = 0;
 			
 			int playerDodgeSeed = rand.nextInt(playerSpeed) + 0;
 			int enemyDodgeSeed = rand.nextInt(enemySpeed) + 0;
-			
-		
-			System.out.println("Player chose " + choice);
-			
-			//info for user
-			if(enemyChoice == 0){
-				System.out.println(enemyName + " chose attack");
-			}
-			else{
-				System.out.println(enemyName + " chose shield");
-			}
+						
 			
 			//player chooses to run
-			if(choice == 'r'){
+			if(choice == 'f'){
 				if(playerDodgeSeed>enemyDodgeSeed)
 					runFlag = 1;
 			}
@@ -108,7 +99,8 @@ public class Battle {
 				playerDamage = (double)playerStrength*playerScale;
 				double degradation = (double)playerStrength *.15;
 				
-				if(playerStrength > playerStrengthFloor) playerStrength -= (int)degradation;			
+				if(playerStrength > playerStrengthFloor) playerStrength -= (int)degradation;
+				System.out.println("Player chose attack");
 			}
 			
 			//enemy chooses to attack
@@ -116,21 +108,37 @@ public class Battle {
 				enemyDamage = (double)enemyStrength*enemyScale;
 				double degradation = (double)enemyStrength *.15;
 				
-				if(enemyStrength > enemyStrengthFloor) enemyStrength -= (int)degradation;	
+				if(enemyStrength > enemyStrengthFloor) enemyStrength -= (int)degradation;
+				System.out.println(enemyName + " chose attack");
 			}
 			
 			//player chooses to shield, decreases incoming damage
 			if(choice == 's'){
-				enemyDamage *= .15;
-				playerStrength *= 1.2;
+				enemyDamage *= .3;
 				playerSpeed *= 1.15;
+				System.out.println("Player chose shield");
 			}
-			
+						
 			//enemy chooses to shield, decreases incoming damage
 			if(enemyChoice == 1){
-				playerDamage *= .15;
-				enemyStrength *= 1.2;
+				playerDamage *= .3;
 				enemySpeed *= 1.15;
+				System.out.println(enemyName + " chose shield");
+			}
+			
+			if(choice == 'd'){
+				enemyDamage *= .6;
+				playerStrength *= 1.2;
+				playerHealth *= 1.02;
+				System.out.println("Player chose rest");
+			}
+			
+			//enemy chooses to rest, decreases incoming damage
+			if(enemyChoice == 2){
+				playerDamage *= .6;
+				enemyStrength *= 1.2;
+				enemyHealth *= 1.02;
+				System.out.println(enemyName + " chose rest");
 			}
 			
 			if(playerDodgeSeed>=enemyDodgeSeed){

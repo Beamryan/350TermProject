@@ -8,9 +8,10 @@ public class Partition {
   Cell[][] tiles = new Cell[height][width];
   Warrior player = new Warrior();
   
-  public Partition(int height, int width, int partitionNum, int xDim, int yDim) throws IOException {
+  public Partition(int height, int width, int partitionNum, int xDim, int yDim, Warrior player) throws IOException {
     this.height = height;
     this.width = width;
+    this.player = player;
     tiles = new Cell[height][width];
     Scanner in = new Scanner(new File("output.txt"));
     
@@ -112,7 +113,10 @@ public class Partition {
 	  if(tile.type == SpaceType.Tree) isValid = false;
 	  if(tile.type == SpaceType.Rock) isValid = false;
 	  if(tile.type == SpaceType.Water) isValid = false; 
-	  //TODO item for water traversal
+
+	  if(player.inventory.inventory[19] == 1){
+		  if(tile.type == SpaceType.Water) isValid = true; 
+	  }
 	  
 	  return isValid;	  
   }
@@ -226,21 +230,23 @@ public class Partition {
 	  System.out.println("You will struggle to find the proper tools to defend yourself from the ");
 	  System.out.println("monster hiding, waiting for you to fall into their traps! Collect hidden items by ");
 	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
-	  System.out.println("Start exploring!");
+	  System.out.println("Press e for item management, and r for battle rules");
+	  System.out.println("Start exploring!\n\n");
 }
   
   
   
   public static void main(String args[]) throws IOException {
 	 int currentPartition = 0;
-	 int playerX = 2;
+	 int playerX = 5;
 	 int playerY = 1;
 	 int xDim = 5;
 	 int yDim = 5;
 	 int width = 10;
 	 int length = 10;
+	 Warrior player = new Warrior();
 	 
-	 Partition foo = new Partition(width,length,currentPartition,xDim,yDim);
+	 Partition foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 	 
 	 
 	 // test basic movement in ascii
@@ -255,7 +261,7 @@ public class Partition {
 		 if(choice == 'w'){
 			 if(playerY == 0){
 				 currentPartition -= xDim;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 				 playerY = length -1;
 			 }
 			 playerY = foo.moveNorth(playerY, playerX);	 
@@ -263,7 +269,7 @@ public class Partition {
 		 if(choice == 'a'){
 			 if(playerX == 0){
 				 currentPartition--;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 				 playerX = width -1;
 			 }
 			 else playerX = foo.moveWest(playerY, playerX);	 
@@ -271,7 +277,7 @@ public class Partition {
 		 if(choice == 's'){
 			 if(playerY == length-1){
 				 currentPartition += xDim;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 				 playerY = 0;
 			 }
 			 else playerY = foo.moveSouth(playerY, playerX);	 
@@ -279,7 +285,7 @@ public class Partition {
 		 if(choice == 'd'){
 			 if(playerX == width-1){
 				 currentPartition++;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim);
+				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 				 playerX = 0;
 			 }
 			 else playerX = foo.moveEast(playerY, playerX);	 
@@ -294,9 +300,20 @@ public class Partition {
 				 foo.player.inventory.setItemToCurrent(choice);
 				 foo.player.scaling = foo.player.inventory.getScaling();
 			 }
-}
+		 }
+		 if(choice == 'r'){
+			 System.out.println("There are four choices in combat: attack, shield, rest and flee.");
+			 System.out.println("Attack will scale with your strength stat and your weapon. Every attack ");
+			 System.out.println("will degrade your strength for the battle by a small amount - but watch ");
+			 System.out.println("out - it adds up quickly!\n");
+			 System.out.println("Shield will be used to regain/create speed. Speed is used to determine ");
+			 System.out.println("evasiveness and flee capability. Don't overlook this stat - the ability to");
+			 System.out.println("flee provides much needed relief.");
+			 System.out.println("Rest will regain strength and health slightly, and will also reduce ");
+			 System.out.println("incoming damage.");
+		 }
 		 
-		 System.out.println("\n\n");
+		 
 		 
 		 int itemID, monsterID;
 		 
@@ -329,6 +346,7 @@ public class Partition {
 			 }
 			 else{
 				 System.out.println("Player loses! Back to start\n\n");
+				 currentPartition = 0;
 				 playerX = 2;
 				 playerY = 1;				 
 			 }

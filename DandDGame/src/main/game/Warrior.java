@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Warrior {
 
-	public int strength = 30;
+	public int strength = 20;
 	public int speed = 10;
 	public int stamina = 15;
 	public int focus = 20;
@@ -14,12 +14,9 @@ public class Warrior {
 	public int xp = 10;
 	public int level = 1;
 	public int xpToNextLevel = level*15;
-	
-	
-	
+		
 	public Inventory inventory = new Inventory();	
-//	public int invenorySize = 20;
-//	public int[] inventory = new int[invenorySize];
+
 	
 
 	
