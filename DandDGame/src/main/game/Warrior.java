@@ -16,23 +16,11 @@ public class Warrior {
 	
 	public int waterTravelFlag;
 	
-	public int invenorySize = 20;
-	public int[] inventory = new int[invenorySize];
+	public Inventory inventory = new Inventory();	
+//	public int invenorySize = 20;
+//	public int[] inventory = new int[invenorySize];
 	
-	public void showInventory()
-	{
-		//TODO: Implemented descriptions for itemIDs. 
-	}
-	
-	public boolean addItemToInventory(int itemID)
-	{
-		if(!isInventoryFull())
-		{
-			inventory[getNextEmptyInvntorySlot()] = itemID;
-			return true;
-		}
-		return false;
-	}
+
 	
 	public void levelUp(){
 		Scanner choiceSC = new Scanner(System.in);
@@ -75,25 +63,7 @@ public class Warrior {
 			
 	}
 	
-	private int getNextEmptyInvntorySlot()
-	{
-		for(int i = 0; i < invenorySize; i++)
-		{
-			if(inventory[i] == 0)
-			{
-				return i;
-			}
-		}
-		return invenorySize;
-	}
-	
-	private boolean isInventoryFull()
-	{
-		int inventorySpace = getNextEmptyInvntorySlot();
-		if(inventorySpace == invenorySize) return true;
-		return false;
-	
-	}
+
 	
 	
 }

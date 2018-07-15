@@ -272,12 +272,27 @@ public class Partition {
 			 }
 			 else playerX = foo.moveEast(playerY, playerX);	 
 		 }
+		 if(choice == 'e'){
+			 foo.player.inventory.showInventory();
+			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
+			 choice = dir.next().charAt(0);
+			 if(choice != 'e')
+			 {
+				 choice -= 48; // correct slot number for ascii values
+				 foo.player.inventory.setItemToCurrent(choice);
+			 }
+		 }
 		 
 		 int itemID, monsterID;
 		 
 		 if(foo.tileHasItem(playerY, playerX))
 		 {
+			 System.out.println("You found an item! Press 'e' to see inventory.");
 			 itemID = foo.getItemID(playerY, playerX);
+			 foo.player.inventory.addItemToInventory(itemID);
+			 System.out.println("ItemID: " + itemID);
+			 
+			 foo.tiles[playerY][playerX].itemID = 0;
 		 }
 		 if(foo.tileHasMonster(playerY, playerX))
 		 {	
