@@ -3,7 +3,7 @@
 3 Splicer 5 15 15 20 100
 4 Hollow-knight 12 9 15 20 350
 5 Plasmid-Sick-Splicer 8 18 15 20 125
-6 
-
-5 Pyramidal-Head 122 8 15 20 400
-6 FinalBoss 20 5 15 20 500
+6 Enemy6 25 25 15 20 390
+7 Enemy7 30 22 15 20 420
+8 Pyramidal-Head 85 8 15 20 400
+9 FinalBoss 45 45 15 20 500

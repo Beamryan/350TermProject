@@ -170,7 +170,8 @@ public class Battle {
 		}
 			
 		if(playerWins){
-			return xp*5;
+			double xpGain =  Math.pow((double)xp,.7);
+			return (int)xpGain*3;
 		}
 		else{
 			return 0;

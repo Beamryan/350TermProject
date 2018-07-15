@@ -52,7 +52,7 @@ public class Inventory {
 		{
 			inventory[getNextEmptyInvntorySlot()] = itemID;
 			System.out.println("Got item: " + getItemName(itemID));
-			System.out.println("Press I to equip");
+			System.out.println("Press e to equip");
 			return true;
 		}
 		return false;

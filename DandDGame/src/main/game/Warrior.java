@@ -13,7 +13,7 @@ public class Warrior {
 	
 	public int xp = 10;
 	public int level = 1;
-	public int xpToNextLevel = level*15;
+	public int xpToNextLevel = 15;
 		
 	public Inventory inventory = new Inventory();	
 
@@ -51,6 +51,8 @@ public class Warrior {
 			xp -= xpToNextLevel;
 			level++;
 		}
+		
+		xpToNextLevel += level*3;
 		
 		System.out.println("New stats: " + strength + " " + speed + " " + health);
 		System.out.println("Enter any input to continue");

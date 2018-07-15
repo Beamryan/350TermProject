@@ -1,6 +1,19 @@
-Potato 1
-Wooden-Stick 1.9
-Wooden-Stick-With-Nail 2.1
-Stone-Shovel 2.2
-Iron-Shovel 2.4
-Stone-Sword 3
+1 Potato 1
+2 Wooden-Stick 1.9
+3 Wooden-Stick-With-Nail 2.1
+4 Stone-Shovel 2.2
+5 Iron-Shovel 2.4
+6 Stone-Sword 3
+7 Iron-Sword 3.3
+8 Knight-Sword 3.5
+9 The-Best-Sword 4
+10
+11
+12
+13
+14
+15
+16
+17 Zweihander 7
+
+

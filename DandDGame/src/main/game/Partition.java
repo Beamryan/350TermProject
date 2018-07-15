@@ -72,7 +72,7 @@ public class Partition {
               }
             }  		  
           }
-//          if a row of the map has been read, restart x and increment y
+//          if a row of the map has been read, restart x and increment 
           x++;
           if(x == xDim*width){
             y++;
