@@ -3,9 +3,9 @@ import java.io.*;
 
 public class Game {
 	
-	int defaultHeight = 25;
-	int defaultWidth = 25;
-	int playerLocationX = 2;
+	int defaultHeight = 20;
+	int defaultWidth = 20;
+	int playerLocationX = 1;
 	int playerLocationY = 1;
 	
 	Partition partition;

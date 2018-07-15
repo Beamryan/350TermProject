@@ -9,7 +9,7 @@ public class AsciiToFile {
     Writer out = null;
     
     try {
-      in = new FileInputStream("asciiMap.txt");
+      in = new FileInputStream("GameMap.txt");
       out = new FileWriter("output.txt");
       
       int c;
@@ -50,7 +50,7 @@ public class AsciiToFile {
             spaceCode = 1 << 1;
             monsterCode = c - 47; // monster values range 1 - 16
         }
-    	else if(c == 10){ //new line
+    	else if(c == 13){ //new line
           spaceCode = -1;
         }
 
