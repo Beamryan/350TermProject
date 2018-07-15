@@ -16,9 +16,9 @@ public class Warrior {
 	
 	public int waterTravelFlag;
 	
-//	public Inventory inventory = new Inventory();	
-	public int invenorySize = 20;
-	public int[] inventory = new int[invenorySize];
+	public Inventory inventory = new Inventory();	
+//	public int invenorySize = 20;
+//	public int[] inventory = new int[invenorySize];
 	
 
 	

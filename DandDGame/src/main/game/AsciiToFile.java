@@ -9,7 +9,7 @@ public class AsciiToFile {
     Writer out = null;
     
     try {
-      in = new FileInputStream("GameMap.txt");
+      in = new FileInputStream("asciiMap.txt");
       out = new FileWriter("output.txt");
       
       int c;

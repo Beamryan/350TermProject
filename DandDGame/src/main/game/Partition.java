@@ -89,7 +89,7 @@ public class Partition {
     	if(i == playerY && j == playerX) System.out.print("P");
     	else{
     		if(tiles[i][j].type == SpaceType.Cleared) System.out.print(" ");
-    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(" ");
+    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(".");
 	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
 	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("R");
 	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("W");
@@ -220,6 +220,15 @@ public class Partition {
 	  return playerLocationX;
   }
   
+  public void welcomeMessage()
+  {
+	  System.out.println("Welcome to the strange world of being an engineering student!");
+	  System.out.println("You will struggle to find the proper tools to defend yourself from the ");
+	  System.out.println("monster hiding, waiting for you to fall into their traps! Collect hidden items by ");
+	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
+	  System.out.println("Start exploring!");
+}
+  
   
   
   public static void main(String args[]) throws IOException {
@@ -231,12 +240,13 @@ public class Partition {
 	 int width = 10;
 	 int length = 10;
 	 
-	 Partition foo = new Partition(width,length,currentPartition,xDim,yDim);
+	 Partition foo = new Partition(length,width,currentPartition,xDim,yDim);
 	 
 	 
 	 // test basic movement in ascii
 	 Scanner dir = new Scanner(System.in);
 	 char choice = 0;
+	 foo.welcomeMessage();
 	 foo.printPartition(playerX, playerY);
 	 while(choice != -1){
 		 choice = dir.next().charAt(0);
@@ -282,8 +292,10 @@ public class Partition {
 		 if(foo.tileHasItem(playerY, playerX))
 		 {
 			 itemID = foo.getItemID(playerY, playerX);
-			 foo.player.inventory[itemID] = 1;
-			 System.out.println("Got item " + itemID);
+			 foo.player.inventory.addItemToInventory(itemID);
+			 System.out.println("ItemID: " + itemID);
+			 
+			 foo.tiles[playerY][playerX].itemID = 0;
 		 }
 		 if(foo.tileHasMonster(playerY, playerX))
 		 {	
