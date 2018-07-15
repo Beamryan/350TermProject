@@ -220,7 +220,14 @@ public class Partition {
 	  return playerLocationX;
   }
   
-  
+  public void welcomeMessage()
+  {
+	  System.out.println("Welcome to the strange world of being an engineering student!");
+	  System.out.println("You will struggle to find the proper tools to defend yourself from the ");
+	  System.out.println("monster hiding, waiting for you to fall into their traps! Collect hidden items by ");
+	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
+	  System.out.println("Start exploring!");
+  }
   
   public static void main(String args[]) throws IOException {
 	 int currentPartition = 0;
@@ -231,10 +238,13 @@ public class Partition {
 	 int yDim = 2;
 	 int width = 25;
 	 int length = 25;
+	 boolean visitedPartition1 = false, visitedPartition2 = false, visitedPartition3 = false;
 	 
 	 // test basic movement in ascii
 	 Scanner dir = new Scanner(System.in);
 	 char choice = 0;
+	 
+	 foo.welcomeMessage();
 	 foo.printPartition(playerX, playerY);
 	 while(choice != -1){
 		 choice = dir.next().charAt(0);
@@ -324,6 +334,25 @@ public class Partition {
 		 foo.printPartition(playerX, playerY);
 		 System.out.println("Level " + foo.player.level);
 		 System.out.println("Xp " + foo.player.xp);
+
+		 if(currentPartition == 1 && !visitedPartition1)
+		 {
+			 System.out.println("Whats this? A new part of the building? Probably too scary for you!");
+			 visitedPartition1 = true;
+		 }
+		 if(currentPartition == 2 && !visitedPartition2)
+		 {
+			 System.out.println("Whats this? A new part of the building? Probably too scary for you!");
+			 visitedPartition2 = true;
+		 }
+		 if(currentPartition == 3 && !visitedPartition3)
+		 {
+			 System.out.println("Whats this? A new part of the building? Probably too scary for you!");
+			  visitedPartition3 = true;
+		 }
+		 
+		 
+		 
 	 }
 	 dir.close();
   }
