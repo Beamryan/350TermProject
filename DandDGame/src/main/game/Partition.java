@@ -292,6 +292,7 @@ public class Partition {
 			 {
 				 choice -= 48; // correct slot number for ascii values
 				 foo.player.inventory.setItemToCurrent(choice);
+				 foo.player.scaling = foo.player.inventory.getScaling();
 			 }
 }
 		 

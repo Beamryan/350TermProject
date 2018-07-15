@@ -8,6 +8,7 @@ public class Battle {
 	int enemyStrength, enemySpeed, enemyStamina, enemyFocus, enemyHealth;
 	int enemyID;
 	String enemyName;
+	double playerScale;
 	
 	public Battle(Warrior warrior, int enemyID) throws IOException {
 		this.playerStrength = warrior.strength;
@@ -15,6 +16,7 @@ public class Battle {
 		this.playerStamina = warrior.stamina;
 		this.playerFocus = warrior.focus;
 		this.playerHealth = warrior.health;
+		this.playerScale = warrior.scaling;
 		
 		this.enemyID = enemyID;
 		
@@ -44,6 +46,7 @@ public class Battle {
 	
 	int startBattle(){
 		// TODO need stuff for weapons and scaling
+		
 		int xp = this.enemyID;
 		boolean playerWins = true;
 		char choice = 0;
@@ -52,7 +55,6 @@ public class Battle {
 		int enemyStrengthFloor = enemyStrength/2;
 		
 		// test weapon scaling...
-		double playerScale = 1.5;
 		double enemyScale = 1.5;
 		
 		Scanner choiceSC = new Scanner(System.in);

@@ -1,9 +1,15 @@
 package main.game;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Inventory {
 
 	public int invenorySize = 20;
 	public int[] inventory;
+	double currentScaling;
+	
 	
 	public Inventory()
 	{
@@ -29,6 +35,7 @@ public class Inventory {
 		int oldCurrentItem = inventory[0];
 		inventory[0] = inventory[itemIndex];
 		inventory[itemIndex] = 0;
+		
 		addItemToInventory(oldCurrentItem);
 	}
 	
@@ -42,6 +49,26 @@ public class Inventory {
 		return false;
 	}
 	
+	public double getScaling() throws IOException {
+		Scanner itemSC = new Scanner(new File("ItemInfo.txt"));
+		double scaling = 0;
+		String name;
+		
+		try{
+			while(itemSC.nextInt() != inventory[0]){ // cycle thru lines til enemy id is seen
+				itemSC.nextLine();
+			}
+			name = itemSC.next();
+			scaling = itemSC.nextDouble();
+
+		}
+		finally{
+			itemSC.close();			
+		}
+		System.out.println("Scale is " + scaling);
+		return scaling;
+	}
+	
 	private int getNextEmptyInvntorySlot()
 	{
 		for(int i = 0; i < invenorySize; i++)
@@ -53,6 +80,7 @@ public class Inventory {
 		}
 		return invenorySize;
 	}
+	
 	
 	private boolean isInventoryFull()
 	{
@@ -74,19 +102,19 @@ public class Inventory {
 				itemName = "Potato";
 				break;
 			case 2:
-				itemName = "Stone Shovel";
+				itemName = "Stone-Shovel";
 				break;
 			case 3:
-				itemName = "Wooden Stick";
+				itemName = "Wooden-Stick";
 				break;
 			case 4:
-				itemName = "Wooden Stick With Nail";
+				itemName = "Wooden-Stick-With-Nail";
 				break;
 			case 5:
-				itemName = "Iron Shovel";
+				itemName = "Iron-Shovel";
 				break;
 			case 6:
-				itemName = "Stone Sword";
+				itemName = "Stone-Sword";
 				break;
 			case 7:
 				itemName = "";

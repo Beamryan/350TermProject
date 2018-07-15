@@ -9,12 +9,13 @@ public class Warrior {
 	public int stamina = 15;
 	public int focus = 20;
 	public int health = 150;
+	public double scaling = 0;
 	
 	public int xp = 10;
 	public int level = 1;
 	public int xpToNextLevel = level*15;
 	
-	public int waterTravelFlag;
+	
 	
 	public Inventory inventory = new Inventory();	
 //	public int invenorySize = 20;

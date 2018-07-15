@@ -1,0 +1,6 @@
+Potato 1
+Wooden-Stick 1.9
+Wooden-Stick-With-Nail 2.1
+Stone-Shovel 2.2
+Iron-Shovel 2.4
+Stone-Sword 3
