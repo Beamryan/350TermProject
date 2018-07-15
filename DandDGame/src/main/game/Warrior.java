@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Warrior {
 
-	public int strength = 20;
+	public int strength = 15;
 	public int speed = 10;
 	public int stamina = 15;
 	public int focus = 20;
@@ -32,21 +32,21 @@ public class Warrior {
 		choice = choiceSC.next().charAt(0);
 		
 		if(choice == '1'){
-			increment = (double)level*1.25 + 2;
+			increment = (double)level*1.05 + 1;
 			strength += increment;
 			xp -= xpToNextLevel; // these should be in here in case user enters invalid option
 			level++;
 		}
 		
 		if(choice == '2'){
-			increment = (double)level*1.05 + 2;
+			increment = (double)level*1.05 + 1;
 			speed += increment;
 			xp -= xpToNextLevel;
 			level++;
 		}
 		
 		if(choice == '3'){
-			increment = (double)level*2.0 + 10;
+			increment = (double)level*1.2 + 10;
 			health += increment;
 			xp -= xpToNextLevel;
 			level++;

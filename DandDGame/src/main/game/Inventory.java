@@ -24,6 +24,7 @@ public class Inventory {
 	public void showInventory()
 	{
 		int inventorySize = getNextEmptyInvntorySlot();
+		//Added -2 so that quest item isnt shown
 		for(int i = 0; i < inventorySize; i++)
 		{
 			System.out.println("Inventory Slot " + i +": " + getItemName(inventory[i]));
@@ -41,10 +42,17 @@ public class Inventory {
 	
 	public boolean addItemToInventory(int itemID)
 	{
-		if(itemID == 19) inventory[19] = 1;
+		// special item for quest to travel on water
+		if(itemID == 19){
+			inventory[19] = 1;
+			System.out.println("Got quest item: Pool Floaty");
+			System.out.println("You can now travel on water!");
+		}
 		else if(!isInventoryFull())
 		{
 			inventory[getNextEmptyInvntorySlot()] = itemID;
+			System.out.println("Got item: " + getItemName(itemID));
+			System.out.println("Press I to equip");
 			return true;
 		}
 		return false;
@@ -56,6 +64,7 @@ public class Inventory {
 		String name;
 		
 		try{
+			//Cycle through item info until the right itemID is found
 			while(itemSC.nextInt() != inventory[0]){ // cycle thru lines til enemy id is seen
 				itemSC.nextLine();
 			}
@@ -66,7 +75,7 @@ public class Inventory {
 		finally{
 			itemSC.close();			
 		}
-		System.out.println("Scale is " + scaling);
+		System.out.println("Weapon scaling is " + scaling);
 		return scaling;
 	}
 	

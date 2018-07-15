@@ -8,6 +8,8 @@ public class Partition {
   Cell[][] tiles = new Cell[height][width];
   Warrior player = new Warrior();
   
+  // player needs to be in constructor so that inventory isnt
+  // overwritten when traveling to a different partition
   public Partition(int height, int width, int partitionNum, int xDim, int yDim, Warrior player) throws IOException {
     this.height = height;
     this.width = width;
@@ -87,13 +89,13 @@ public class Partition {
     int i,j;
     for(i=0 ; i<height ; i++){
       for(j=0 ; j<width ; j++){
-    	if(i == playerY && j == playerX) System.out.print("P");
+    	if(i == playerY && j == playerX) System.out.print("👶🏼");
     	else{
-    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print(" ");
-    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print(".");
-	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("T");
-	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("R");
-	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("W");
+    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print("🏻");
+    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print("🏻‍");
+	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("🌲");
+	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("⛰️");
+	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("🌊");
 	    	else System.out.print(tiles[i][j].type);
     		
     	}
@@ -259,6 +261,7 @@ public class Partition {
 		 
 		 
 		 if(choice == 'w'){
+			 //Following block is for if player goes to a new partition
 			 if(playerY == 0){
 				 currentPartition -= xDim;
 				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
@@ -290,6 +293,8 @@ public class Partition {
 			 }
 			 else playerX = foo.moveEast(playerY, playerX);	 
 		 }
+		 
+		 // item directions and management
 		 if(choice == 'e'){
 			 foo.player.inventory.showInventory();
 			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
@@ -301,6 +306,8 @@ public class Partition {
 				 foo.player.scaling = foo.player.inventory.getScaling();
 			 }
 		 }
+		 
+		 // fighting directions
 		 if(choice == 'r'){
 			 System.out.println("There are four choices in combat: attack, shield, rest and flee.");
 			 System.out.println("Attack will scale with your strength stat and your weapon. Every attack ");
@@ -312,38 +319,44 @@ public class Partition {
 			 System.out.println("Rest will regain strength and health slightly, and will also reduce ");
 			 System.out.println("incoming damage.");
 		 }
-		 
-		 
-		 
+		 	 
 		 int itemID, monsterID;
 		 
+		 //If tile has item...
 		 if(foo.tileHasItem(playerY, playerX))
 		 {
 			 itemID = foo.getItemID(playerY, playerX);
 			 foo.player.inventory.addItemToInventory(itemID);
-			 System.out.println("ItemID: " + itemID);
 			 
+			 // remove item from tile
 			 foo.tiles[playerY][playerX].itemID = 0;
 		 }
+		 
 		 if(foo.tileHasMonster(playerY, playerX))
 		 {	
 			 monsterID = foo.getMonsterID(playerY, playerX);
 			 Battle battle = new Battle(foo.player,monsterID);
-			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win
+			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+			 
+			 // win
 			 if(xpGain > 0){
 				 System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
-				 foo.player.xp += xpGain;
+				 foo.player.xp += xpGain; // award xp
 				 
-				 if(foo.player.xp >= foo.player.xpToNextLevel)
+				 if(foo.player.xp >= foo.player.xpToNextLevel) // check to see if level up reaced
 					 foo.player.levelUp();
 				 
 				 // Clear monster tile in partition
 				 foo.tiles[playerY][playerX].monsterID = 0;
 			 }
+			 
+			 // flee
 			 else if(xpGain == -1){
 				 System.out.println("Player ran");
 				 foo.tiles[playerY][playerX].monsterID = 0;
 			 }
+			 
+			 // loss
 			 else{
 				 System.out.println("Player loses! Back to start\n\n");
 				 currentPartition = 0;

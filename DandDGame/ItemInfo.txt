@@ -4,3 +4,16 @@
 4 Stone-Shovel 2.2
 5 Iron-Shovel 2.4
 6 Stone-Sword 3
+7 Iron-Sword 3.3
+8 Knight-Sword 3.5
+9 The-Best-Sword 4
+10
+11
+12
+13
+14
+15
+16
+17
+
+
