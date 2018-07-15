@@ -361,7 +361,8 @@ public class Partition {
 				 System.out.println("Player loses! Back to start\n\n");
 				 currentPartition = 0;
 				 playerX = 2;
-				 playerY = 1;				 
+				 playerY = 1;	
+				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
 			 }
 		 }
 		 
