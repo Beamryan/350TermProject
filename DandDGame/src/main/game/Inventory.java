@@ -51,8 +51,6 @@ public class Inventory {
 		else if(!isInventoryFull())
 		{
 			inventory[getNextEmptyInvntorySlot()] = itemID;
-			System.out.println("Got item: " + getItemName(itemID));
-			System.out.println("Press e to equip");
 			return true;
 		}
 		return false;
@@ -81,7 +79,7 @@ public class Inventory {
 	
 	private int getNextEmptyInvntorySlot()
 	{
-		for(int i = 0; i < invenorySize-2; i++)
+		for(int i = 0; i < invenorySize; i++)
 		{
 			if(inventory[i] == 0)
 			{
@@ -100,7 +98,7 @@ public class Inventory {
 	
 	}
 	
-	private String getItemName(int itemID)
+	public String getItemName(int itemID)
 	{
 		String itemName = null;
 		switch(itemID)
@@ -127,34 +125,37 @@ public class Inventory {
 				itemName = "Stone-Sword";
 				break;
 			case 7:
-				itemName = "";
+				itemName = "Iron-Sword";
 				break;
 			case 8:
-				itemName = "";
+				itemName = "Knight-Sword";
 				break;
 			case 9:
-				itemName = "";
+				itemName = "GreatSword";
 				break;
 			case 10:
-				itemName = "";
+				itemName = "BattleAxe";
 				break;
 			case 11:
-				itemName = "";
+				itemName = "War-Hammer";
 				break;
 			case 12:
-				itemName = "";
+				itemName = "BFS";
 				break;
 			case 13:
-				itemName = "";
+				itemName = "GreatAxe";
 				break;
 			case 14:
-				itemName = "";
+				itemName = "Zweihander";
 				break;
 			case 15:
-				itemName = "";
+				itemName = "Ultra-GreatSword";
 				break;
 			case 16:
-				itemName = "";
+				itemName = "Master-GreatSword";
+				break;
+			case 17:
+				itemName = "Wooden-Ruler";
 				break;
 		}
 		return itemName;

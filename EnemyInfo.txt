@@ -6,4 +6,4 @@
 6 Enemy6 25 25 15 20 390
 7 Enemy7 30 22 15 20 420
 8 Pyramidal-Head 85 8 15 20 400
-9 FinalBoss 45 45 15 20 500
+9 FinalBoss? 45 45 15 20 500

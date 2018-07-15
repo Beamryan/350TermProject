@@ -327,7 +327,8 @@ public class Partition {
 		 {
 			 itemID = foo.getItemID(playerY, playerX);
 			 foo.player.inventory.addItemToInventory(itemID);
-			 
+			System.out.println("Got item: " + foo.player.inventory.getItemName(itemID));
+			System.out.println("Press e to equip");
 			 // remove item from tile
 			 foo.tiles[playerY][playerX].itemID = 0;
 		 }
