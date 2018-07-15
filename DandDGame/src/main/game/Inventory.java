@@ -10,6 +10,11 @@ public class Inventory {
 		inventory = new int[invenorySize];
 	}
 	
+	public int getCurrentItem()
+	{
+		return inventory[0];
+	}
+	
 	public void showInventory()
 	{
 		int inventorySize = getNextEmptyInvntorySlot();
