@@ -240,7 +240,7 @@ public class Partition {
 	 int width = 10;
 	 int length = 10;
 	 
-	 Partition foo = new Partition(length,width,currentPartition,xDim,yDim);
+	 Partition foo = new Partition(width,length,currentPartition,xDim,yDim);
 	 
 	 
 	 // test basic movement in ascii
@@ -284,6 +284,16 @@ public class Partition {
 			 }
 			 else playerX = foo.moveEast(playerY, playerX);	 
 		 }
+		 if(choice == 'e'){
+			 foo.player.inventory.showInventory();
+			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
+			 choice = dir.next().charAt(0);
+			 if(choice != 'e')
+			 {
+				 choice -= 48; // correct slot number for ascii values
+				 foo.player.inventory.setItemToCurrent(choice);
+			 }
+}
 		 
 		 System.out.println("\n\n");
 		 

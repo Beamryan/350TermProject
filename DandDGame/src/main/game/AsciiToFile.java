@@ -48,9 +48,9 @@ public class AsciiToFile {
         } 
     	else if(c > 47 && c < 65 ){ //monster
             spaceCode = 1 << 1;
-            monsterCode = c - 48; // monster values range 1 (49 on ascii) to 6
+            monsterCode = c - 47; // monster values range 1 - 16
         }
-    	else if(c == 13){ //new line
+    	else if(c == 10){ //new line
           spaceCode = -1;
         }
 
