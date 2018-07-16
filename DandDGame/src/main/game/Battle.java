@@ -3,18 +3,39 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * Class to handle battles between player and monsters.
+ */
 public class Battle {
-	int playerStrength, playerSpeed, playerStamina, playerFocus, playerHealth;
-	int enemyStrength, enemySpeed, enemyStamina, enemyFocus, enemyHealth;
-	int enemyID;
-	String enemyName;
-	double playerScale;
 	
+	/**
+	 * player stats.
+	 */
+	int playerStrength, playerSpeed, playerHealth;
+	
+	/**
+	 * enemy monster stats.
+	 */
+	int enemyStrength, enemySpeed, enemyHealth;
+	
+	/** enemy monster id. */
+	int enemyID;
+	
+	/** enemy monster name. */
+	String enemyName;
+	
+	/** player scaling value. */
+	double playerScale;
+
+	
+	/**
+	 * @param warrior
+	 * @param enemyID
+	 * @throws IOException
+	 */	
 	public Battle(Warrior warrior, int enemyID) throws IOException {
 		this.playerStrength = warrior.strength;
 		this.playerSpeed = warrior.speed;
-		this.playerStamina = warrior.stamina;
-		this.playerFocus = warrior.focus;
 		this.playerHealth = warrior.health;
 		this.playerScale = warrior.scaling;
 		
@@ -23,8 +44,7 @@ public class Battle {
 		Scanner in = new Scanner(new File("EnemyInfo.txt"));
 		
 		// This will read from enemy file, 
-		// and put attributes into needed data types
-		
+		// and put attributes into needed data types		
 		try{
 			while(in.nextInt() != enemyID){ // cycle thru lines til enemy id is seen
 				in.nextLine();
@@ -32,8 +52,6 @@ public class Battle {
 			this.enemyName = in.next();
 			this.enemyStrength = in.nextInt();
 			this.enemySpeed = in.nextInt();
-			this.enemyStamina = in.nextInt();
-			this.enemyFocus = in.nextInt();
 			this.enemyHealth = in.nextInt();
 		}
 		finally{
@@ -43,10 +61,10 @@ public class Battle {
 	}
 	
 	
-	
-	int startBattle(){
-		// TODO need stuff for weapons and scaling
-		
+	/**
+	 * @return integer
+	 */
+	int startBattle(){		
 		int xp = this.enemyID;
 		boolean playerWins = true;
 		char choice = 0;
@@ -93,8 +111,7 @@ public class Battle {
 					runFlag = 1;
 			}
 			
-			//TODO strength degeneration after attack
-			//player chooses to attack
+
 			if(choice == 'a'){
 				playerDamage = (double)playerStrength*playerScale;
 				double degradation = (double)playerStrength *.15;

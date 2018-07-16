@@ -3,13 +3,28 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Partition {
+  /** partition height. */
   int height;
+  
+  /** partition width.  */
   int width;
+  
+  /** partition tiles. */
   Cell[][] tiles = new Cell[height][width];
+  
+  /** warrior character. */
   Warrior player = new Warrior();
   
-  // player needs to be in constructor so that inventory isnt
-  // overwritten when traveling to a different partition
+
+	/**
+	 * @param height Tile height of the partition
+	 * @param width	Tile width of the partition
+	 * @param partitionNum How many partitions in the map
+	 * @param xDim  How many partitions wide the map is
+	 * @param yDim How many partitions tall the map is
+	 * @param player Player character - needed to carry inventory between partitions
+	 * @throws IOException
+	 */
   public Partition(int height, int width, int partitionNum, int xDim, int yDim, Warrior player) throws IOException {
     this.height = height;
     this.width = width;
@@ -85,6 +100,10 @@ public class Partition {
     } 
   }
   
+  /**
+	 * @param playerX
+	 * @param playerY
+	 */
   public void printPartition(int playerX, int playerY){
     int i,j;
     for(i=0 ; i<height ; i++){
@@ -297,15 +316,18 @@ public class Partition {
 		 // item directions and management
 		 if(choice == 'e'){
 			 foo.player.inventory.showInventory();
-			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
+			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit any button to close inventory.");
 			 choice = dir.next().charAt(0);
 			 if(choice != 'e')
 			 {
 				 choice -= 48; // correct slot number for ascii values
-				 foo.player.inventory.setItemToCurrent(choice);
-				 foo.player.scaling = foo.player.inventory.getScaling();
+				 if(choice >= 0 && choice <=foo.player.inventory.getInventorySize())
+					 {
+					 foo.player.inventory.setItemToCurrent(choice);
+					 foo.player.scaling = foo.player.inventory.getScaling();
+					 }
 			 }
-		 }
+}
 		 
 		 // fighting directions
 		 if(choice == 'r'){
