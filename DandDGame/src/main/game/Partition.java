@@ -109,18 +109,18 @@ public class Partition {
 		for (i = 0; i < height; i++) {
 			for (j = 0; j < width; j++) {
 				if (i == playerY && j == playerX) {
-					System.out.print("P");
+					System.out.print("👶🏼");
 				} else {
 					if (tiles[i][j].type == SpaceType.Cleared) {
-						System.out.print("X");
+						System.out.print("🏻‍");
 					} else if (tiles[i][j].type == SpaceType.EmptySpace) {
-						System.out.print("O");
+						System.out.print("🏻‍");
 					} else if (tiles[i][j].type == SpaceType.Tree) {
-						System.out.print("T");
+						System.out.print("🌲");
 					} else if (tiles[i][j].type == SpaceType.Rock) {
-						System.out.print("R");
+						System.out.print("⛰️");
 					} else if (tiles[i][j].type == SpaceType.Water) {
-						System.out.print("W");
+						System.out.print("🌊");
 					} else {
 						System.out.print(tiles[i][j].type);
 					}
@@ -369,8 +369,6 @@ public class Partition {
 			if (foo.tileHasItem(playerY, playerX)) {
 				itemID = foo.getItemID(playerY, playerX);
 				foo.player.inventory.addItemToInventory(itemID);
-				System.out.println("Got item: " + foo.player.inventory.getItemName(itemID));
-				System.out.println("Press e to equip");
 
 				// remove item from tile
 				foo.tiles[playerY][playerX].itemID = 0;
@@ -380,7 +378,7 @@ public class Partition {
 				monsterID = foo.getMonsterID(playerY, playerX);
 				Battle battle = new Battle(foo.player, monsterID);
 				int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
-
+	
 				// win
 				if (xpGain > 0) {
 					System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
