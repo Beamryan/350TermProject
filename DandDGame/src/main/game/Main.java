@@ -17,7 +17,7 @@ public final class Main {
 	/**
 	 * 
 	 * @param args arguments for main method.
-	 * @throws IOException 
+	 * @throws IOException exception thrown for running partition files
 	 */
 	public static void main(final String[] args) throws IOException {
 		Partition.main(null);
