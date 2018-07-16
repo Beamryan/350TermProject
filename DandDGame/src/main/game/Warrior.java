@@ -3,7 +3,7 @@ package main.game;
 import java.util.Scanner;
 
 /**
- * Class used to hold the warrior character
+ * Class used to hold the warrior character.
  */
 public class Warrior {
 

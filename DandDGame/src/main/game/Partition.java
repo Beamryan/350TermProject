@@ -2,22 +2,41 @@ package main.game;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Class used to hold the portion of the map visible to the player.
+ */
 public class Partition {
-  int height;
-  int width;
-  Cell[][] tiles = new Cell[height][width];
-  Warrior player = new Warrior();
+	
+	/** The height of the partition. */
+	int height;
+	
+	/** The width of the partition. */
+	int width;
+	
+	/** The cells holding map tiles. */
+	Cell[][] tiles = new Cell[height][width];
+	
+	/** The players character. */
+	Warrior player = new Warrior();
   
-  // player needs to be in constructor so that inventory isnt
-  // overwritten when traveling to a different partition
-  public Partition(int height, int width, int partitionNum, int xDim, int yDim, Warrior player) throws IOException {
+
+  /**
+ * @param height the height of the partition
+ * @param width the width of the partition
+ * @param partitionNum the partition sector
+ * @param xDim scale of partition to full map in x
+ * @param yDim scale of partition to full map in y
+ * @param player the players character
+ * @throws IOException exception caught for reading the output file
+ */
+public Partition(final int height, final int width, final int partitionNum, final int xDim, final int yDim, final Warrior player) throws IOException {
     this.height = height;
     this.width = width;
     this.player = player;
     tiles = new Cell[height][width];
     Scanner in = new Scanner(new File("output.txt"));
     
-    try{
+    try {
       int tileCount = 0; // how many tiles have been read into partition
       int x = 0;	//x coordinate in entire map
       int y = 0;	//y coordinate in entire map
@@ -26,13 +45,13 @@ public class Partition {
       int monsterID;
       int xTile = 0;	// x coordinate in current partition
       int yTile = 0;	// y coordinate in current partition
-      int xStart = width*(partitionNum%xDim);	// starting positions for valid x values
-      int yStart = height*(partitionNum/yDim); // starting positions for valid y values
+      int xStart = width * (partitionNum % xDim);	// starting positions for valid x values
+      int yStart = height * (partitionNum / yDim); // starting positions for valid y values
 
-      while(tileCount < (width*height)){
+      while (tileCount < (width * height)) {
         type = in.nextInt();
         SpaceType spaceType = SpaceType.EmptySpace;
-        switch(type) {
+        switch (type) {
         case 1:
     		spaceType = SpaceType.Cleared;
     		break;
@@ -60,13 +79,13 @@ public class Partition {
         
 //        the valid ranges on the map for a tile is the start,
 //        and the start + the dimension of the partition
-        if(x >= xStart && x < xStart + width){
-            if(y >= yStart && y < yStart + height){
+        if (x >= xStart && x < xStart + width) {
+            if (y >= yStart && y < yStart + height) {
               tiles[yTile][xTile] = tile;
               tileCount++;
               xTile++;
               // if a full row has been placed, increment row and restart x pos
-              if(xTile == width){
+              if (xTile == width) {
               	xTile = 0;
               	yTile++;
               }
@@ -74,29 +93,40 @@ public class Partition {
           }
 //          if a row of the map has been read, restart x and increment 
           x++;
-          if(x == xDim*width){
+          if (x == xDim * width) {
             y++;
             x = 0;
           }
         }
-  }
-    finally {
+  } finally {
     	in.close();
     } 
   }
   
-  public void printPartition(int playerX, int playerY){
-    int i,j;
-    for(i=0 ; i<height ; i++){
-      for(j=0 ; j<width ; j++){
-    	if(i == playerY && j == playerX) System.out.print("👶🏼");
-    	else{
-    		if(tiles[i][j].type == SpaceType.Cleared) System.out.print("🏻");
-    		else if(tiles[i][j].type == SpaceType.EmptySpace) System.out.print("🏻‍");
-	    	else if(tiles[i][j].type == SpaceType.Tree) System.out.print("🌲");
-	    	else if(tiles[i][j].type == SpaceType.Rock) System.out.print("⛰️");
-	    	else if(tiles[i][j].type == SpaceType.Water) System.out.print("🌊");
-	    	else System.out.print(tiles[i][j].type);
+  /**
+ * @param playerX the current position x of player
+ * @param playerY the current position y of player
+ */
+public void printPartition(final int playerX, final int playerY) {
+    int i, j;
+    for (i = 0; i < height; i++) {
+      for (j = 0; j < width; j++) {
+    	if (i == playerY && j == playerX) {
+    		System.out.print("👶🏼");
+    	} else {
+    		if (tiles[i][j].type == SpaceType.Cleared) {
+    			System.out.print("🏻");
+    		} else if (tiles[i][j].type == SpaceType.EmptySpace) {
+    			System.out.print("🏻‍");
+    		} else if (tiles[i][j].type == SpaceType.Tree) {
+    			System.out.print("🌲");
+    		} else if (tiles[i][j].type == SpaceType.Rock) {
+    			System.out.print("⛰️");
+    		} else if (tiles[i][j].type == SpaceType.Water) {
+    			System.out.print("🌊");
+    		} else {
+    			System.out.print(tiles[i][j].type);
+    		}
     		
     	}
       }
@@ -105,19 +135,28 @@ public class Partition {
   }
   
   /**
-   * Checks if the SpaceType is a traversable type
+   * Checks if the SpaceType is a moveable type.
    * @param tile current tile.
    * @return true if the space is able to be traveled to, false if the SpaceType is Tree, Rock, or Water
    */
-  public boolean isValidTile(Cell tile){
+  public boolean isValidTile(final Cell tile) {
+	 
 	  boolean isValid = true;
 	  
-	  if(tile.type == SpaceType.Tree) isValid = false;
-	  if(tile.type == SpaceType.Rock) isValid = false;
-	  if(tile.type == SpaceType.Water) isValid = false; 
+	  if (tile.type == SpaceType.Tree) {
+		  isValid = false;
+	  }
+	  if (tile.type == SpaceType.Rock) {
+		  isValid = false;
+	  }
+	  if (tile.type == SpaceType.Water) {
+		  isValid = false; 
+	  }
 
-	  if(player.inventory.inventory[19] == 1){
-		  if(tile.type == SpaceType.Water) isValid = true; 
+	  if (player.inventory.inventory[19] == 1) {
+		  if (tile.type == SpaceType.Water) {
+			  isValid = true; 
+		  }
 	  }
 	  
 	  return isValid;	  
@@ -129,8 +168,10 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells itemID is nonzero, false if the itemID is zero. 
    */
-  public boolean tileHasItem(int playerLocationY, int playerLocationX){	  
-	  if(tiles[playerLocationY][playerLocationX].itemID != 0) return true;	  
+  public boolean tileHasItem(final int playerLocationY, final int playerLocationX) {	  
+	  if (tiles[playerLocationY][playerLocationX].itemID != 0) {
+		  return true;	  
+	  }
 	  return false;
   }
   
@@ -140,13 +181,11 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells monsterID is nonzero, false if the monsterID is zero. 
    */
-  public boolean tileHasMonster(int playerLocationY, int playerLocationX){	  
-	  if(tiles[playerLocationY][playerLocationX].monsterID != 0){
+  public boolean tileHasMonster(final int playerLocationY, final int playerLocationX) {	  
+	  if (tiles[playerLocationY][playerLocationX].monsterID != 0) {
 		  return true;
 	  }
-	  else{
-		  return false;
-	  }
+	  return false;
   }
   
   /**
@@ -155,7 +194,7 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns the itemID of the current cell.
    */
-  public int getItemID(int playerLocationY, int playerLocationX){
+  public int getItemID(final int playerLocationY, final int playerLocationX) {
 	  return tiles[playerLocationY][playerLocationX].itemID;
   }
   
@@ -165,7 +204,7 @@ public class Partition {
    * @param playerLocationX Current player location in the X direction
    * @return Returns the monsterID of the current cell.
    */
-  public int getMonsterID(int playerLocationY, int playerLocationX){
+  public int getMonsterID(final int playerLocationY, final int playerLocationX) {
 	  return tiles[playerLocationY][playerLocationX].monsterID;
   }
   
@@ -175,8 +214,8 @@ public class Partition {
    * @param playerLocationX Current location X
    * @return new playerLocationY if valid, old playerLocationY if not valid.
    */
-  public int moveNorth(int playerLocationY, int playerLocationX) { 
-	  if(isValidTile(tiles[playerLocationY - 1][playerLocationX])) { 
+  public int moveNorth(final int playerLocationY, final int playerLocationX) { 
+	  if (isValidTile(tiles[playerLocationY - 1][playerLocationX])) { 
 		  tiles[playerLocationY - 1][playerLocationX].type = SpaceType.Cleared;
 		  return playerLocationY - 1;
 	  }
@@ -184,14 +223,14 @@ public class Partition {
   }
   
   /**
-   * Method to move the player east on the map.s
+   * Method to move the player east on the map.
    *
    * @param playerLocationY Current location Y
    * @param playerLocationX Current location X
    * @return new playerLocationX if valid, old playerLocationX if not valid.
    */
-  public int moveEast(int playerLocationY, int playerLocationX) { 
-	  if(isValidTile(tiles[playerLocationY][playerLocationX + 1])) { 
+  public int moveEast(final int playerLocationY, final int playerLocationX) { 
+	  if (isValidTile(tiles[playerLocationY][playerLocationX + 1])) { 
 		  tiles[playerLocationY][playerLocationX + 1].type = SpaceType.Cleared;
 		  return playerLocationX + 1;
 	  }
@@ -204,8 +243,8 @@ public class Partition {
    * @param playerLocationX Current location X
    * @return new playerLocationY if valid, old playerLocationY if not valid.
    */
-  public int moveSouth(int playerLocationY, int playerLocationX) { 
-	  if(isValidTile(tiles[playerLocationY + 1][playerLocationX])) { 
+  public int moveSouth(final int playerLocationY, final int playerLocationX) { 
+	  if (isValidTile(tiles[playerLocationY + 1][playerLocationX])) { 
 		  tiles[playerLocationY + 1][playerLocationX].type = SpaceType.Cleared;
 		  return playerLocationY + 1;
 	  }
@@ -218,16 +257,18 @@ public class Partition {
    * @param playerLocationX Current location X
    * @return new playerLocationX if valid, old playerLocationX if not valid.
    */
-  public int moveWest(int playerLocationY, int playerLocationX) { 
-	  if(isValidTile(tiles[playerLocationY][playerLocationX - 1])) { 
+  public int moveWest(final int playerLocationY, final int playerLocationX) { 
+	  if (isValidTile(tiles[playerLocationY][playerLocationX - 1])) { 
 		  tiles[playerLocationY][playerLocationX - 1].type = SpaceType.Cleared;
 		  return playerLocationX - 1;
 	  }
 	  return playerLocationX;
   }
   
-  public void welcomeMessage()
-  {
+  /**
+ * The welcome message for starting the game.
+ */
+public void welcomeMessage() {
 	  System.out.println("Welcome to the strange world of being an engineering student!");
 	  System.out.println("You will struggle to find the proper tools to defend yourself from the ");
 	  System.out.println("monster hiding, waiting for you to fall into their traps! Collect hidden items by ");
@@ -236,7 +277,11 @@ public class Partition {
 	  System.out.println("Start exploring!\n\n");
   }  
   
-  public static void main(String args[]) throws IOException {
+  /**
+ * @param args none
+ * @throws IOException throws exception for running partition files
+ */
+public static void main(final String[] args) throws IOException {
 	 int currentPartition = 0;
 	 int playerX = 5;
 	 int playerY = 1;
@@ -246,7 +291,7 @@ public class Partition {
 	 int length = 10;
 	 Warrior player = new Warrior();
 	 
-	 Partition foo = new Partition(width,length,currentPartition,xDim,yDim,player);
+	 Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player);
 	 
 	 
 	 // test basic movement in ascii
@@ -254,53 +299,54 @@ public class Partition {
 	 char choice = 0;
 	 foo.welcomeMessage();
 	 foo.printPartition(playerX, playerY);
-	 while(choice != -1){
+	 while (choice != -1) {
 		 choice = dir.next().charAt(0);
 		 
-		 if(choice == 'w'){
+		 if (choice == 'w') {
 			 //Following block is for if player goes to a new partition
-			 if(playerY == 0){
+			 if (playerY == 0) {
 				 currentPartition -= xDim;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
-				 playerY = length -1;
+				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
+				 playerY = length - 1;
 			 }
 			 playerY = foo.moveNorth(playerY, playerX);	 
 		 }
-		 if(choice == 'a'){
-			 if(playerX == 0){
+		 if (choice == 'a') {
+			 if (playerX == 0) {
 				 currentPartition--;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
-				 playerX = width -1;
+				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
+				 playerX = width - 1;
+			 } else {
+				 playerX = foo.moveWest(playerY, playerX);	 
 			 }
-			 else playerX = foo.moveWest(playerY, playerX);	 
 		 }
-		 if(choice == 's'){
-			 if(playerY == length-1){
+		 if (choice == 's') {
+			 if (playerY == length - 1) {
 				 currentPartition += xDim;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
+				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
 				 playerY = 0;
+			 } else {
+				 playerY = foo.moveSouth(playerY, playerX);	 
 			 }
-			 else playerY = foo.moveSouth(playerY, playerX);	 
 		 }
-		 if(choice == 'd'){
-			 if(playerX == width-1){
+		 if (choice == 'd') {
+			 if (playerX == width - 1) {
 				 currentPartition++;
-				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
+				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
 				 playerX = 0;
+			 } else {
+				 playerX = foo.moveEast(playerY, playerX);	 
 			 }
-			 else playerX = foo.moveEast(playerY, playerX);	 
 		 }
 		 
 		 // item directions and management
-		 if(choice == 'e'){
+		 if (choice == 'e') {
 			 foo.player.inventory.showInventory();
 			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit any button to close inventory.");
 			 choice = dir.next().charAt(0);
-			 if(choice != 'e')
-			 {
+			 if (choice != 'e') {
 				 choice -= 48; // correct slot number for ascii values
-				 if(choice >= 0 && choice <=foo.player.inventory.getInventorySize())
-					 {
+				 if (choice >= 0 && choice <= foo.player.inventory.getInventorySize()) {
 					 foo.player.inventory.setItemToCurrent(choice);
 					 foo.player.scaling = foo.player.inventory.getScaling();
 					 }
@@ -308,7 +354,7 @@ public class Partition {
 		 }
 		 
 		 // fighting directions
-		 if(choice == 'r'){
+		 if (choice == 'r') {
 			 System.out.println("There are four choices in combat: attack, shield, rest and flee.");
 			 System.out.println("Attack will scale with your strength stat and your weapon. Every attack ");
 			 System.out.println("will degrade your strength for the battle by a small amount - but watch ");
@@ -323,8 +369,7 @@ public class Partition {
 		 int itemID, monsterID;
 		 
 		 //If tile has item...
-		 if(foo.tileHasItem(playerY, playerX))
-		 {
+		 if (foo.tileHasItem(playerY, playerX)) {
 			 itemID = foo.getItemID(playerY, playerX);
 			 foo.player.inventory.addItemToInventory(itemID);
 			System.out.println("Got item: " + foo.player.inventory.getItemName(itemID));
@@ -333,37 +378,31 @@ public class Partition {
 			 foo.tiles[playerY][playerX].itemID = 0;
 		 }
 		 
-		 if(foo.tileHasMonster(playerY, playerX))
-		 {	
+		 if (foo.tileHasMonster(playerY, playerX)) {	
 			 monsterID = foo.getMonsterID(playerY, playerX);
-			 Battle battle = new Battle(foo.player,monsterID);
+			 Battle battle = new Battle(foo.player, monsterID);
 			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 			 
 			 // win
-			 if(xpGain > 0){
+			 if (xpGain > 0) {
 				 System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
 				 foo.player.xp += xpGain; // award xp
 				 
-				 if(foo.player.xp >= foo.player.xpToNextLevel) // check to see if level up reaced
+				 if (foo.player.xp >= foo.player.xpToNextLevel) {
 					 foo.player.levelUp();
+				 }
 				 
 				 // Clear monster tile in partition
 				 foo.tiles[playerY][playerX].monsterID = 0;
-			 }
-			 
-			 // flee
-			 else if(xpGain == -1){
+			 } else if (xpGain == -1) {
 				 System.out.println("Player ran");
 				 foo.tiles[playerY][playerX].monsterID = 0;
-			 }
-			 
-			 // loss
-			 else{
+			 } else {
 				 System.out.println("Player loses! Back to start\n\n");
 				 currentPartition = 0;
 				 playerX = 2;
 				 playerY = 1;	
-				 foo = new Partition(width,length,currentPartition,xDim,yDim,player);
+				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
 			 }
 		 }
 		 

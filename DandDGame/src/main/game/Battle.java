@@ -8,14 +8,10 @@ import java.util.Random;
  */
 public class Battle {
 	
-	/**
-	 * player stats.
-	 */
+	/** player stats. */
 	private int playerStrength, playerSpeed, playerHealth;
 	
-	/**
-	 * enemy monster stats.
-	 */
+	/** enemy monster stats. */
 	private int enemyStrength, enemySpeed, enemyHealth;
 	
 	/** enemy monster id. */
@@ -209,7 +205,5 @@ public class Battle {
 		Warrior warrior = new Warrior();
 		Battle testBattle = new Battle(warrior, 1);
 		
-	}
-
-	
+	}	
 }
