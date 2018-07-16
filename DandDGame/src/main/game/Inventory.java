@@ -1,33 +1,21 @@
 package main.game;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * Class to hold player inventory.
- */
 public class Inventory {
 
-	/** inventory size. */
-	public int invenorySize = 20;
-	
-	/** character inventory. */
+	public int inventorySize = 20;
 	public int[] inventory;
-	
-	/** current weapon scaline. */
 	double currentScaling;
 	
-	/**
-	 *  Inventory constructor.
-	 */
+	
 	public Inventory()
 	{
-		inventory = new int[invenorySize];
+		inventory = new int[inventorySize];
 	}
 	
-	/**
-	 * @return integer Item 0 is the held item
-	 */
 	public int getCurrentItem()
 	{
 		return inventory[0];
@@ -43,9 +31,6 @@ public class Inventory {
 		}
 	}
 	
-	/**
-	 * Method to show player inventory.
-	 */
 	public void setItemToCurrent(int itemIndex)
 	{
 		int oldCurrentItem = inventory[0];
@@ -55,10 +40,6 @@ public class Inventory {
 		addItemToInventory(oldCurrentItem);
 	}
 	
-	/**
-	 * @param itemID
-	 * @return boolean
-	 */
 	public boolean addItemToInventory(int itemID)
 	{
 		// special item for quest to travel on water
@@ -75,10 +56,6 @@ public class Inventory {
 		return false;
 	}
 	
-	/**
-	 * @return double
-	 * @throws IOException
-	 */
 	public double getScaling() throws IOException {
 		Scanner itemSC = new Scanner(new File("ItemInfo.txt"));
 		double scaling = 0;
@@ -100,40 +77,32 @@ public class Inventory {
 		return scaling;
 	}
 	
-	public int getInventorySize(){
-		return this.invenorySize;
-	}
-	
-	/**
-	 * @return integer
-	 */
 	private int getNextEmptyInvntorySlot()
 	{
-		for(int i = 0; i < invenorySize; i++)
+		for(int i = 0; i < inventorySize; i++)
 		{
 			if(inventory[i] == 0)
 			{
 				return i;
 			}
 		}
-		return invenorySize;
+		return inventorySize;
 	}
 	
-	/**
-	 * @return boolean
-	 */
+	
 	private boolean isInventoryFull()
 	{
 		int inventorySpace = getNextEmptyInvntorySlot();
-		if(inventorySpace == invenorySize) return true;
+		if(inventorySpace == inventorySize) return true;
 		return false;
 	
 	}
 	
-	/**
-	 * @param itemID
-	 * @return String
-	 */
+	public int getInventorySize()
+	{
+		return this.inventorySize;
+	}
+	
 	public String getItemName(int itemID)
 	{
 		String itemName = null;

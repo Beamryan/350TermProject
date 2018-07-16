@@ -3,28 +3,13 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Partition {
-  /** partition height. */
   int height;
-  
-  /** partition width.  */
   int width;
-  
-  /** partition tiles. */
   Cell[][] tiles = new Cell[height][width];
-  
-  /** warrior character. */
   Warrior player = new Warrior();
   
-
-	/**
-	 * @param height Tile height of the partition
-	 * @param width	Tile width of the partition
-	 * @param partitionNum How many partitions in the map
-	 * @param xDim  How many partitions wide the map is
-	 * @param yDim How many partitions tall the map is
-	 * @param player Player character - needed to carry inventory between partitions
-	 * @throws IOException
-	 */
+  // player needs to be in constructor so that inventory isnt
+  // overwritten when traveling to a different partition
   public Partition(int height, int width, int partitionNum, int xDim, int yDim, Warrior player) throws IOException {
     this.height = height;
     this.width = width;
@@ -100,10 +85,6 @@ public class Partition {
     } 
   }
   
-  /**
-	 * @param playerX
-	 * @param playerY
-	 */
   public void printPartition(int playerX, int playerY){
     int i,j;
     for(i=0 ; i<height ; i++){
@@ -253,9 +234,7 @@ public class Partition {
 	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
 	  System.out.println("Press e for item management, and r for battle rules");
 	  System.out.println("Start exploring!\n\n");
-}
-  
-  
+  }  
   
   public static void main(String args[]) throws IOException {
 	 int currentPartition = 0;
@@ -277,7 +256,6 @@ public class Partition {
 	 foo.printPartition(playerX, playerY);
 	 while(choice != -1){
 		 choice = dir.next().charAt(0);
-		 
 		 
 		 if(choice == 'w'){
 			 //Following block is for if player goes to a new partition
@@ -327,7 +305,7 @@ public class Partition {
 					 foo.player.scaling = foo.player.inventory.getScaling();
 					 }
 			 }
-}
+		 }
 		 
 		 // fighting directions
 		 if(choice == 'r'){
