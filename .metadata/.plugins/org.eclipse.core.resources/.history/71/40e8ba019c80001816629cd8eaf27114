@@ -1,0 +1,32 @@
+package main.game;
+
+public class SpaceNode {
+	
+	private Direction direction;
+	private SpaceType type;
+	private int spaceID;
+	
+	public Direction getDirection() {
+		return direction;
+	}
+	
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
+	public SpaceType getType() {
+		return type;
+	}
+	
+	public void setType(SpaceType type) {
+		this.type = type;
+	}
+	
+	public int getSpaceID() {
+		return spaceID;
+	}
+	
+	public void setSpaceID(int spaceID) {
+		this.spaceID = spaceID;
+	}
+}

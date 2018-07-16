@@ -1,0 +1,30 @@
+package main.game;
+import java.util.ArrayList;
+
+public class Warrior {
+
+	public int strength = 15;
+	public int speed = 5;
+	public int stamina = 15;
+	public int focus = 20;
+	public int[] inventory = new int[20];
+	
+	public void addItemToInventory(int itemID)
+	{
+		
+	}
+	
+	private int getNextEmptyInvntorySlot()
+	{
+		int nextEmpty = 0;
+		for(int i = 0; i < 20; i++)
+		{
+			if(inventory[i] == 0)
+			{
+				return i;
+			}
+		}
+		return 20;
+	}
+//	public ArrayList<Integer> inventory = new ArrayList<Integer>();
+}

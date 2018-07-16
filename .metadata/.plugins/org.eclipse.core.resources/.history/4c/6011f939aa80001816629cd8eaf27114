@@ -1,0 +1,9 @@
+package main.game;
+
+public class SpaceNode {
+	
+	public Direction direction;
+	public SpaceType type;
+	public int spaceID;
+	
+}

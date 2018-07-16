@@ -1,0 +1,58 @@
+package main.game;
+
+public class Inventory {
+
+	public int invenorySize = 20;
+	public int[] inventory = new int[invenorySize];
+	
+	public void showInventory()
+	{
+		int inventorySize = getNextEmptyInvntorySlot() - 1;
+		for(int i = 0; i < inventorySize; i++)
+		{
+			System.out.println("Inventory Slot " + i +": " + getItemName(inventory[i]));
+		}
+	}
+	
+	public boolean addItemToInventory(int itemID)
+	{
+		if(!isInventoryFull())
+		{
+			inventory[getNextEmptyInvntorySlot()] = itemID;
+			return true;
+		}
+		return false;
+	}
+	
+	private int getNextEmptyInvntorySlot()
+	{
+		for(int i = 0; i < invenorySize; i++)
+		{
+			if(inventory[i] == 0)
+			{
+				return i;
+			}
+		}
+		return invenorySize;
+	}
+	
+	private boolean isInventoryFull()
+	{
+		int inventorySpace = getNextEmptyInvntorySlot();
+		if(inventorySpace == invenorySize) return true;
+		return false;
+	
+	}
+	
+	private String getItemName(int itemID)
+	{
+		String itemName;
+		switch(itemID)
+		{
+			case 1:
+				itemName = "Iron Sword";
+				break;
+		}
+		return itemName;
+	}
+}
