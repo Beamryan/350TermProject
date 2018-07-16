@@ -338,12 +338,15 @@ public class Partition {
 			// item directions and management
 			if (choice == 'e') {
 				foo.player.inventory.showInventory();
-				System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
+				System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit any button again to close inventory.");
 				choice = dir.next().charAt(0);
 				if (choice != 'e') {
 					choice -= 48; // correct slot number for ascii values
-					foo.player.inventory.setItemToCurrent(choice);
-					foo.player.scaling = foo.player.inventory.getScaling();
+					if(choice >= 0 && choice <=foo.player.inventory.getInventorySize())
+					{
+						foo.player.inventory.setItemToCurrent(choice);
+						foo.player.scaling = foo.player.inventory.getScaling();
+					}
 				}
 			}
 
@@ -366,6 +369,8 @@ public class Partition {
 			if (foo.tileHasItem(playerY, playerX)) {
 				itemID = foo.getItemID(playerY, playerX);
 				foo.player.inventory.addItemToInventory(itemID);
+				System.out.println("Got item: " + foo.player.inventory.getItemName(itemID));
+				System.out.println("Press e to equip");
 
 				// remove item from tile
 				foo.tiles[playerY][playerX].itemID = 0;

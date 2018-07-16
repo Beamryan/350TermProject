@@ -1,19 +1,17 @@
 1 Potato 1
-2 Wooden-Stick 1.9
-3 Wooden-Stick-With-Nail 2.1
-4 Stone-Shovel 2.2
+2 Stone-Shovel 2.2
+3 Wooden-Stick 1.9
+4 Wooden-Stick-With-Nail 2.1
 5 Iron-Shovel 2.4
 6 Stone-Sword 3
 7 Iron-Sword 3.3
 8 Knight-Sword 3.5
-9 The-Best-Sword 4
-10
-11
-12
-13
-14
-15
-16
-17 Zweihander 7
-
-
+9 GreatSword 4
+10 BattleAxe 4
+11 War-Hammer 4
+12 BFS 4.1
+13 GreatAxe 4.3
+14 Zweihander 4.7
+15 Ultra-GreatSword 5.1 
+16 Master-GreatSword 6.5
+17 Wooden-Ruler 7
