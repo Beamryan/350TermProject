@@ -300,6 +300,7 @@ public static void main(final String[] args) throws IOException {
 	 foo.welcomeMessage();
 	 foo.printPartition(playerX, playerY);
 	 while (choice != -1) {
+		 dir = new Scanner(System.in);
 		 choice = dir.next().charAt(0);
 		 
 		 if (choice == 'w') {
@@ -400,7 +401,7 @@ public static void main(final String[] args) throws IOException {
 			 } else {
 				 System.out.println("Player loses! Back to start\n\n");
 				 currentPartition = 0;
-				 playerX = 2;
+				 playerX = 5;
 				 playerY = 1;	
 				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
 			 }

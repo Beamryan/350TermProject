@@ -26,7 +26,7 @@ public class Warrior {
 	public double scaling = 0;
 	
 	/** the current character experience. */
-	public int xp = 10;
+	public int xp = 14;
 	
 	/** the current character level. */
 	public int level = 1;
@@ -76,6 +76,6 @@ public class Warrior {
 		
 		System.out.println("New stats: " + strength + " " + speed + " " + health);
 
-		choiceSC.close();			
+					
 	}	
 }
