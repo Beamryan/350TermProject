@@ -1,5 +1,4 @@
 /**
- * @author jakecousino, ryanbeam, rachelhamilton
- *
+ * Game Package.
  */
 package main.game;

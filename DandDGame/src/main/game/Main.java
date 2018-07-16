@@ -8,7 +8,7 @@ import java.io.IOException;
 public final class Main {
 
 	/**
-	 * 
+	 * Main
 	 */
 	private Main() {
 		
