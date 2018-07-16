@@ -3,9 +3,7 @@ package main.game;
 import java.io.IOException;
 
 /**
- * 
- * @author jakecousino
- *
+ * Main Class to run the game through.
  */
 public final class Main {
 
@@ -17,12 +15,10 @@ public final class Main {
 	}
 	
 	/**
-	 * 
 	 * @param args arguments for main method.
 	 * @throws IOException 
 	 */
 	public static void main(final String[] args) throws IOException {
-		Partition.main(null);
+		Partition.main(args);
 	}
-
 }

@@ -4,35 +4,46 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to hold player inventory.
+ */
 public class Inventory {
 
+	/** inventory size. */
 	public int invenorySize = 20;
-	public int[] inventory;
-	double currentScaling;
 	
+	/** character inventory. */
+	public int[] inventory;	
 	
-	public Inventory()
-	{
+	/**
+	 *  Inventory constructor.
+	 */
+	public Inventory() {
 		inventory = new int[invenorySize];
 	}
 	
-	public int getCurrentItem()
-	{
+	/**
+	 * @return integer
+	 */
+	public int getCurrentItem() {
 		return inventory[0];
 	}
 	
-	public void showInventory()
-	{
+	/**
+	 * Method to show player inventory.
+	 */
+	public void showInventory() {
 		int inventorySize = getNextEmptyInvntorySlot();
 		//Added -2 so that quest item isnt shown
-		for(int i = 0; i < inventorySize; i++)
-		{
-			System.out.println("Inventory Slot " + i +": " + getItemName(inventory[i]));
+		for (int i = 0; i < inventorySize; i++) {
+			System.out.println("Inventory Slot " + i + ": " + getItemName(inventory[i]));
 		}
 	}
 	
-	public void setItemToCurrent(int itemIndex)
-	{
+	/**
+	 * @param itemIndex
+	 */
+	public void setItemToCurrent(final int itemIndex) {
 		int oldCurrentItem = inventory[0];
 		inventory[0] = inventory[itemIndex];
 		inventory[itemIndex] = 0;
@@ -40,16 +51,17 @@ public class Inventory {
 		addItemToInventory(oldCurrentItem);
 	}
 	
-	public boolean addItemToInventory(int itemID)
-	{
+	/**
+	 * @param itemID
+	 * @return boolean
+	 */
+	public boolean addItemToInventory(final int itemID) {
 		// special item for quest to travel on water
-		if(itemID == 19){
+		if (itemID == 19) {
 			inventory[19] = 1;
 			System.out.println("Got quest item: Pool Floaty");
 			System.out.println("You can now travel on water!");
-		}
-		else if(!isInventoryFull())
-		{
+		} else if (!isInventoryFull()) {
 			inventory[getNextEmptyInvntorySlot()] = itemID;
 			System.out.println("Got item: " + getItemName(itemID));
 			System.out.println("Press e to equip");
@@ -58,33 +70,36 @@ public class Inventory {
 		return false;
 	}
 	
+	/**
+	 * @return double
+	 * @throws IOException
+	 */
 	public double getScaling() throws IOException {
 		Scanner itemSC = new Scanner(new File("ItemInfo.txt"));
 		double scaling = 0;
 		String name;
 		
-		try{
+		try {
 			//Cycle through item info until the right itemID is found
-			while(itemSC.nextInt() != inventory[0]){ // cycle thru lines til enemy id is seen
+			while (itemSC.nextInt() != inventory[0]) { // cycle thru lines til enemy id is seen
 				itemSC.nextLine();
 			}
 			name = itemSC.next();
 			scaling = itemSC.nextDouble();
 
-		}
-		finally{
+		} finally {
 			itemSC.close();			
 		}
-		System.out.println("Weapon scaling is " + scaling);
+		System.out.println(name + " scaling is " + scaling);
 		return scaling;
 	}
 	
-	private int getNextEmptyInvntorySlot()
-	{
-		for(int i = 0; i < invenorySize-2; i++)
-		{
-			if(inventory[i] == 0)
-			{
+	/**
+	 * @return integer
+	 */
+	private int getNextEmptyInvntorySlot() {
+		for (int i = 0; i < invenorySize - 2; i++) {
+			if (inventory[i] == 0) {
 				return i;
 			}
 		}
@@ -92,19 +107,25 @@ public class Inventory {
 	}
 	
 	
-	private boolean isInventoryFull()
-	{
+	/**
+	 * @return boolean
+	 */
+	private boolean isInventoryFull() {
 		int inventorySpace = getNextEmptyInvntorySlot();
-		if(inventorySpace == invenorySize) return true;
+		if (inventorySpace == invenorySize) {
+			return true;
+		}
 		return false;
 	
 	}
 	
-	private String getItemName(int itemID)
-	{
+	/**
+	 * @param itemID
+	 * @return String
+	 */
+	private String getItemName(final int itemID) {
 		String itemName = null;
-		switch(itemID)
-		{
+		switch (itemID) {
 			case 0:
 				itemName = "Empty";
 				break;
@@ -154,6 +175,9 @@ public class Inventory {
 				itemName = "";
 				break;
 			case 16:
+				itemName = "";
+				break;
+			default:
 				itemName = "";
 				break;
 		}
