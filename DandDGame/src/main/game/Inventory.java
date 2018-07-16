@@ -98,6 +98,11 @@ public class Inventory {
 	
 	}
 	
+	public int getInventorySize()
+	{
+		return this.invenorySize;
+	}
+	
 	public String getItemName(int itemID)
 	{
 		String itemName = null;

@@ -234,9 +234,7 @@ public class Partition {
 	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
 	  System.out.println("Press e for item management, and r for battle rules");
 	  System.out.println("Start exploring!\n\n");
-}
-  
-  
+  }  
   
   public static void main(String args[]) throws IOException {
 	 int currentPartition = 0;
@@ -258,7 +256,6 @@ public class Partition {
 	 foo.printPartition(playerX, playerY);
 	 while(choice != -1){
 		 choice = dir.next().charAt(0);
-		 
 		 
 		 if(choice == 'w'){
 			 //Following block is for if player goes to a new partition
@@ -297,13 +294,16 @@ public class Partition {
 		 // item directions and management
 		 if(choice == 'e'){
 			 foo.player.inventory.showInventory();
-			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit e again to close inventory.");
+			 System.out.println("If you would like to select an item to hold, enter the slot number \nor else hit any button to close inventory.");
 			 choice = dir.next().charAt(0);
 			 if(choice != 'e')
 			 {
 				 choice -= 48; // correct slot number for ascii values
-				 foo.player.inventory.setItemToCurrent(choice);
-				 foo.player.scaling = foo.player.inventory.getScaling();
+				 if(choice >= 0 && choice <=foo.player.inventory.getInventorySize())
+					 {
+					 foo.player.inventory.setItemToCurrent(choice);
+					 foo.player.scaling = foo.player.inventory.getScaling();
+					 }
 			 }
 		 }
 		 
