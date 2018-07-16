@@ -63,8 +63,6 @@ public class Inventory {
 			System.out.println("You can now travel on water!");
 		} else if (!isInventoryFull()) {
 			inventory[getNextEmptyInvntorySlot()] = itemID;
-			System.out.println("Got item: " + getItemName(itemID));
-			System.out.println("Press e to equip");
 			return true;
 		}
 		return false;
@@ -90,7 +88,7 @@ public class Inventory {
 		} finally {
 			itemSC.close();			
 		}
-		System.out.println(name + " scaling is " + scaling);
+		System.out.println(name + " damage scaling is " + scaling);
 		return scaling;
 	}
 	
