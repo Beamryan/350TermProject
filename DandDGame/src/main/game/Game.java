@@ -1,24 +1,43 @@
 package main.game;
 import java.io.*;
 
+/**
+ * Game class used to attach gui to partition framework.
+ */
 public class Game {
 	
+	/** the default map height. */
 	int defaultHeight = 20;
+	
+	/** the default map width. */
 	int defaultWidth = 20;
+	
+	/** current player location in x. */
 	int playerLocationX = 1;
+	
+	/** current player location in y. */
 	int playerLocationY = 1;
+	
+	/** the player character. */
 	Warrior player = new Warrior();
 	
+	/** the partition used to hold current map. */
 	Partition partition;
 
+	/**
+	 * @throws IOException throws exception for creating partition from output file.
+	 */
 	public Game() throws IOException {
-		//partition = new Partition(defaultHeight, defaultWidth,1,2,2,player);
 	}
 	
-	public Game(int height, int width) throws IOException{ 
+	/**
+	 * @param height the height of the partition
+	 * @param width the width of the partition
+	 * @throws IOException throws exception for reading from the output file
+	 */
+	public Game(final int height, final int width) throws IOException { 
 		defaultHeight = height;
 		defaultWidth = width;
-		//partition = new Partition(defaultHeight, defaultWidth,1,2,2,player);
 	}
 	
 	/**

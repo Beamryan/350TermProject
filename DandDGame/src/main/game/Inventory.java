@@ -4,35 +4,50 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to hold inventory of the player.
+ */
 public class Inventory {
 
+	/** inventory size. */
 	public int inventorySize = 20;
+	
+	/** inventory of the player. */
 	public int[] inventory;
+	
+	/** current item scaling. */
 	double currentScaling;
 	
 	
-	public Inventory()
-	{
+	/**
+	 * inventory used to hold character items.
+	 */
+	public Inventory() {
 		inventory = new int[inventorySize];
 	}
 	
-	public int getCurrentItem()
-	{
+	/**
+	 * @return integer the current item
+	 */
+	public int getCurrentItem() {
 		return inventory[0];
 	}
 	
-	public void showInventory()
-	{
+	/**
+	 * Shows the character inventory.
+	 */
+	public void showInventory() {
 		int inventorySize = getNextEmptyInvntorySlot();
 		//Added -2 so that quest item isnt shown
-		for(int i = 0; i < inventorySize; i++)
-		{
-			System.out.println("Inventory Slot " + i +": " + getItemName(inventory[i]));
+		for (int i = 0; i < inventorySize; i++) {
+			System.out.println("Inventory Slot " + i + ": " + getItemName(inventory[i]));
 		}
 	}
 	
-	public void setItemToCurrent(int itemIndex)
-	{
+	/**
+	 * @param itemIndex the current item index
+	 */
+	public void setItemToCurrent(final int itemIndex) {
 		int oldCurrentItem = inventory[0];
 		inventory[0] = inventory[itemIndex];
 		inventory[itemIndex] = 0;
@@ -40,49 +55,53 @@ public class Inventory {
 		addItemToInventory(oldCurrentItem);
 	}
 	
-	public boolean addItemToInventory(int itemID)
-	{
+	/**
+	 * @param itemID the added item id
+	 * @return boolean
+	 */
+	public boolean addItemToInventory(final int itemID) {
 		// special item for quest to travel on water
-		if(itemID == 19){
+		if (itemID == 19) {
 			inventory[19] = 1;
 			System.out.println("Got quest item: Pool Floaty");
 			System.out.println("You can now travel on water!");
-		}
-		else if(!isInventoryFull())
-		{
+		} else if (!isInventoryFull()) {
 			inventory[getNextEmptyInvntorySlot()] = itemID;
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * @return double the scaling value
+	 * @throws IOException throws exception for reading item index
+	 */
 	public double getScaling() throws IOException {
 		Scanner itemSC = new Scanner(new File("ItemInfo.txt"));
 		double scaling = 0;
 		String name;
 		
-		try{
+		try {
 			//Cycle through item info until the right itemID is found
-			while(itemSC.nextInt() != inventory[0]){ // cycle thru lines til enemy id is seen
+			while (itemSC.nextInt() != inventory[0]) { // cycle thru lines til enemy id is seen
 				itemSC.nextLine();
 			}
 			name = itemSC.next();
 			scaling = itemSC.nextDouble();
 
-		}
-		finally{
+		} finally {
 			itemSC.close();			
 		}
-		System.out.println("Weapon scaling is " + scaling);
+		System.out.println(name + " scaling is " + scaling);
 		return scaling;
 	}
 	
-	private int getNextEmptyInvntorySlot()
-	{
-		for(int i = 0; i < inventorySize; i++)
-		{
-			if(inventory[i] == 0)
-			{
+	/**
+	 * @return integer the next open slot
+	 */
+	private int getNextEmptyInvntorySlot() {
+		for (int i = 0; i < inventorySize; i++) {
+			if (inventory[i] == 0) {
 				return i;
 			}
 		}
@@ -90,24 +109,32 @@ public class Inventory {
 	}
 	
 	
-	private boolean isInventoryFull()
-	{
+	/**
+	 * @return boolean is the inventory full
+	 */
+	private boolean isInventoryFull() {
 		int inventorySpace = getNextEmptyInvntorySlot();
-		if(inventorySpace == inventorySize) return true;
+		if (inventorySpace == inventorySize) {
+			return true;
+		}
 		return false;
 	
 	}
 	
-	public int getInventorySize()
-	{
+	/**
+	 * @return integer the inventory size
+	 */
+	public int getInventorySize() {
 		return this.inventorySize;
 	}
 	
-	public String getItemName(int itemID)
-	{
+	/**
+	 * @param itemID the item id
+	 * @return String the item name
+	 */
+	public String getItemName(final int itemID) {
 		String itemName = null;
-		switch(itemID)
-		{
+		switch (itemID) {
 			case 0:
 				itemName = "Empty";
 				break;
@@ -161,6 +188,9 @@ public class Inventory {
 				break;
 			case 17:
 				itemName = "Wooden-Ruler";
+				break;
+			default:
+				itemName = "";
 				break;
 		}
 		return itemName;

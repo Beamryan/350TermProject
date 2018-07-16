@@ -1,26 +1,46 @@
 package main.game;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
+/**
+ * Class used to hold the warrior character
+ */
 public class Warrior {
 
+	/** the character strength. */
 	public int strength = 15;
+	
+	/** the character speed. */
 	public int speed = 10;
+	
+	/** the character stamina. */
 	public int stamina = 15;
+	
+	/** the character focus. */
 	public int focus = 20;
+	
+	/** the character health. */
 	public int health = 150;
+	
+	/** the character scaling. */
 	public double scaling = 0;
 	
+	/** the current character experience. */
 	public int xp = 10;
+	
+	/** the current character level. */
 	public int level = 1;
+	
+	/** the current experience to next character level. */
 	public int xpToNextLevel = 15;
 		
+	/** the player character inventory. */
 	public Inventory inventory = new Inventory();	
-
 	
-
-	
-	public void levelUp(){
+	/**
+	 * Method used when character has leveled up.
+	 */
+	public void levelUp() {
 		Scanner choiceSC = new Scanner(System.in);
 		char choice;
 		double increment;
@@ -31,39 +51,31 @@ public class Warrior {
 		
 		choice = choiceSC.next().charAt(0);
 		
-		if(choice == '1'){
-			increment = (double)level*1.05 + 1;
+		if (choice == '1') {
+			increment = (double) level * 1.05 + 1;
 			strength += increment;
 			xp -= xpToNextLevel; // these should be in here in case user enters invalid option
 			level++;
 		}
 		
-		if(choice == '2'){
-			increment = (double)level*1.05 + 1;
+		if (choice == '2') {
+			increment = (double) level * 1.05 + 1;
 			speed += increment;
 			xp -= xpToNextLevel;
 			level++;
 		}
 		
-		if(choice == '3'){
-			increment = (double)level*1.2 + 10;
+		if (choice == '3') {
+			increment = (double) level * 1.2 + 10;
 			health += increment;
 			xp -= xpToNextLevel;
 			level++;
 		}
 		
-		xpToNextLevel += level*3;
+		xpToNextLevel += level * 3;
 		
 		System.out.println("New stats: " + strength + " " + speed + " " + health);
-		System.out.println("Enter any input to continue");
-		
-		choice = choiceSC.next().charAt(0);
-		
-		
-			
-	}
-	
 
-	
-	
+		choiceSC.close();			
+	}	
 }

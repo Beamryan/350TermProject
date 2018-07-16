@@ -11,12 +11,12 @@ public class Battle {
 	/**
 	 * player stats.
 	 */
-	int playerStrength, playerSpeed, playerHealth;
+	private int playerStrength, playerSpeed, playerHealth;
 	
 	/**
 	 * enemy monster stats.
 	 */
-	int enemyStrength, enemySpeed, enemyHealth;
+	private int enemyStrength, enemySpeed, enemyHealth;
 	
 	/** enemy monster id. */
 	int enemyID;
@@ -29,11 +29,11 @@ public class Battle {
 
 	
 	/**
-	 * @param warrior
-	 * @param enemyID
-	 * @throws IOException
+	 * @param warrior the player character
+	 * @param enemyID the enemy monster id
+	 * @throws IOException exception thrown for reading enemyinfo file
 	 */	
-	public Battle(Warrior warrior, int enemyID) throws IOException {
+	public Battle(final Warrior warrior, final int enemyID) throws IOException {
 		this.playerStrength = warrior.strength;
 		this.playerSpeed = warrior.speed;
 		this.playerHealth = warrior.health;
@@ -45,16 +45,15 @@ public class Battle {
 		
 		// This will read from enemy file, 
 		// and put attributes into needed data types		
-		try{
-			while(in.nextInt() != enemyID){ // cycle thru lines til enemy id is seen
+		try {
+			while (in.nextInt() != enemyID) { // cycle thru lines til enemy id is seen
 				in.nextLine();
 			}
 			this.enemyName = in.next();
 			this.enemyStrength = in.nextInt();
 			this.enemySpeed = in.nextInt();
 			this.enemyHealth = in.nextInt();
-		}
-		finally{
+		} finally {
 			in.close();
 		}
 		
@@ -64,13 +63,13 @@ public class Battle {
 	/**
 	 * @return integer
 	 */
-	int startBattle(){		
+	int startBattle() {		
 		int xp = this.enemyID;
 		boolean playerWins = true;
 		char choice = 0;
 		double playerDamage, enemyDamage;
-		int playerStrengthFloor = playerStrength/2;
-		int enemyStrengthFloor = enemyStrength/2;
+		int playerStrengthFloor = playerStrength / 2;
+		int enemyStrengthFloor = enemyStrength / 2;
 		
 		// test weapon scaling...
 		double enemyScale = 1.5;
@@ -89,7 +88,7 @@ public class Battle {
 //			if shield, damage taken is halved
 //			strength goes down by a tenth each attack
 //			TODO focus for regen?			
-		while(playerHealth>0 && enemyHealth>0 && runFlag == 0){
+		while (playerHealth > 0 && enemyHealth > 0 && runFlag == 0) {
 			System.out.println("\nPlayer health: " + playerHealth);
 			System.out.println(enemyName + " health: " + enemyHealth);
 			System.out.println("What would you like to do?");
@@ -106,44 +105,50 @@ public class Battle {
 						
 			
 			//player chooses to run
-			if(choice == 'f'){
-				if(playerDodgeSeed>enemyDodgeSeed)
+			if (choice == 'f') {
+				if (playerDodgeSeed > enemyDodgeSeed) {
 					runFlag = 1;
+				}
 			}
 			
 
-			if(choice == 'a'){
-				playerDamage = (double)playerStrength*playerScale;
-				double degradation = (double)playerStrength *.15;
+			if (choice == 'a') {
+				playerDamage = (double) playerStrength * playerScale;
+				double degradation = (double) playerStrength * .15;
 				
-				if(playerStrength > playerStrengthFloor) playerStrength -= (int)degradation;
+				if (playerStrength > playerStrengthFloor) {
+					playerStrength -= (int) degradation;
+				}
 				System.out.println("Player chose attack");
 			}
 			
 			//enemy chooses to attack
-			if(enemyChoice == 0){
-				enemyDamage = (double)enemyStrength*enemyScale;
-				double degradation = (double)enemyStrength *.15;
+			if (enemyChoice == 0) {
+				enemyDamage = (double) enemyStrength * enemyScale;
+				double degradation = (double) enemyStrength * .15;
 				
-				if(enemyStrength > enemyStrengthFloor) enemyStrength -= (int)degradation;
+				if (enemyStrength > enemyStrengthFloor) {
+					enemyStrength -= (int) degradation;
+				}
+				
 				System.out.println(enemyName + " chose attack");
 			}
 			
 			//player chooses to shield, decreases incoming damage
-			if(choice == 's'){
+			if (choice == 's') {
 				enemyDamage *= .3;
 				playerSpeed *= 1.15;
 				System.out.println("Player chose shield");
 			}
 						
 			//enemy chooses to shield, decreases incoming damage
-			if(enemyChoice == 1){
+			if (enemyChoice == 1) {
 				playerDamage *= .3;
 				enemySpeed *= 1.15;
 				System.out.println(enemyName + " chose shield");
 			}
 			
-			if(choice == 'd'){
+			if (choice == 'd') {
 				enemyDamage *= .6;
 				playerStrength *= 1.2;
 				playerHealth *= 1.02;
@@ -151,51 +156,56 @@ public class Battle {
 			}
 			
 			//enemy chooses to rest, decreases incoming damage
-			if(enemyChoice == 2){
+			if (enemyChoice == 2) {
 				playerDamage *= .6;
 				enemyStrength *= 1.2;
 				enemyHealth *= 1.02;
 				System.out.println(enemyName + " chose rest");
 			}
 			
-			if(playerDodgeSeed>=enemyDodgeSeed){
-				enemyHealth -= (int)playerDamage;
+			if (playerDodgeSeed >= enemyDodgeSeed) {
+				enemyHealth -= (int) playerDamage;
+			} else if (choice == 'a') {
+				System.out.println("Enemy dodged!");
+			}			
+			
+			if (playerDodgeSeed <= enemyDodgeSeed) {
+				playerHealth -= (int) enemyDamage;
+			} else if (enemyChoice == 0) {
+				System.out.println("Player dodged!");
 			}
-			else if(choice == 'a') System.out.println("Enemy dodged!");
 			
-			
-			if(playerDodgeSeed<=enemyDodgeSeed){
-				playerHealth -= (int)enemyDamage;
-			}
-			else if(enemyChoice == 0) System.out.println("Player dodged!");
-
-
-			
-			if(enemyHealth<1){
+			if (enemyHealth < 1) {
 				playerWins = true;
 			}
 			
 			// if both die at the same turn, player loses still
-			if(playerHealth<1){
+			if (playerHealth < 1) {
 				playerWins = false;
 			}
 				
 		}
 		
-		if(runFlag == 1){
+		if (runFlag == 1) {
+			choiceSC.close();
 			return -1;
 		}
 			
-		if(playerWins){
-			double xpGain =  Math.pow((double)xp,.7);
-			return (int)xpGain*3;
-		}
-		else{
+		if (playerWins) {
+			double xpGain =  Math.pow((double) xp, .7);
+			choiceSC.close();
+			return (int) xpGain * 3;
+		} else {
+			choiceSC.close();
 			return 0;
 		}
 	}
 	
-	public static void main(String args[]) throws IOException {
+	/**
+	 * @param args none
+	 * @throws IOException exception thrown during battle environment
+	 */
+	public static void main(final String[] args) throws IOException {
 		Warrior warrior = new Warrior();
 		Battle testBattle = new Battle(warrior, 1);
 		

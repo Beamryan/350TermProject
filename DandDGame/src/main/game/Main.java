@@ -3,9 +3,7 @@ package main.game;
 import java.io.IOException;
 
 /**
- * 
- * @author jakecousino
- *
+ * Main class to run the game through.
  */
 public final class Main {
 
