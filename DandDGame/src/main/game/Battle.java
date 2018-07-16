@@ -187,16 +187,16 @@ public class Battle {
 		}
 		
 		if (runFlag == 1) {
-			choiceSC.close();
+//			choiceSC.close();
 			return -1;
 		}
 			
 		if (playerWins) {
 			double xpGain =  Math.pow((double) xp, .7);
-			choiceSC.close();
+//			choiceSC.close();
 			return (int) xpGain * 3;
 		} else {
-			choiceSC.close();
+//			choiceSC.close();
 			return 0;
 		}
 	}
