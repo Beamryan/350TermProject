@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class Inventory {
 
-	public int invenorySize = 20;
+	public int inventorySize = 20;
 	public int[] inventory;
 	double currentScaling;
 	
 	
 	public Inventory()
 	{
-		inventory = new int[invenorySize];
+		inventory = new int[inventorySize];
 	}
 	
 	public int getCurrentItem()
@@ -79,28 +79,28 @@ public class Inventory {
 	
 	private int getNextEmptyInvntorySlot()
 	{
-		for(int i = 0; i < invenorySize; i++)
+		for(int i = 0; i < inventorySize; i++)
 		{
 			if(inventory[i] == 0)
 			{
 				return i;
 			}
 		}
-		return invenorySize;
+		return inventorySize;
 	}
 	
 	
 	private boolean isInventoryFull()
 	{
 		int inventorySpace = getNextEmptyInvntorySlot();
-		if(inventorySpace == invenorySize) return true;
+		if(inventorySpace == inventorySize) return true;
 		return false;
 	
 	}
 	
 	public int getInventorySize()
 	{
-		return this.invenorySize;
+		return this.inventorySize;
 	}
 	
 	public String getItemName(int itemID)
