@@ -29,7 +29,7 @@ public final class GameWindow {
 	public static void main (final String[] args) throws IOException {
 		
 		JFrame mainFrame = new JFrame();
-		mainFrame.setSize(2000, 1000);
+		mainFrame.setPreferredSize(new Dimension(2000, 1000));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(1500, 800));
