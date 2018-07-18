@@ -158,6 +158,7 @@ public final class GameWindow {
 		mainFrame.add(statPanel, BorderLayout.WEST);
 		mainFrame.add(buttonPanel, BorderLayout.EAST);	  
 		
+		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 		  
