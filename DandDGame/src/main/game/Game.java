@@ -39,7 +39,6 @@ public class Game {
 		defaultHeight = height;
 		defaultWidth = width;
 		GameWindow.main(null);
-		Partition.main(null);
 	}
 	
 	/**

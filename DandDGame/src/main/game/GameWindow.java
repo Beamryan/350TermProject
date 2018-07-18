@@ -3,6 +3,8 @@ package main.game;
 import java.io.IOException;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -25,62 +27,68 @@ public final class GameWindow {
 	public static void main (final String[] args) throws IOException {
 		
 		JFrame mainFrame = new JFrame();
-		mainFrame.setBackground(Color.WHITE);
-		mainFrame.setSize(800,800);
-		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout(800, 800));
+		mainFrame.setSize(2000, 1000);
 
 		JPanel gamePanel = new JPanel();
-		gamePanel.setLayout(new BorderLayout(500, 500));
-		  
+		gamePanel.setPreferredSize(new Dimension(1500, 800));
+		
 		JPanel textPanel = new JPanel();
-		textPanel.setLayout(new BorderLayout(500, 300));
+		textPanel.setPreferredSize(new Dimension(1500, 200));
 		  
 		JPanel statPanel = new JPanel();
-		statPanel.setLayout(new BorderLayout(150, 800));
+		statPanel.setPreferredSize(new Dimension(250, 1000));
 		  
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BorderLayout(150, 800));
+		buttonPanel.setPreferredSize(new Dimension(250, 1000));
 		
 		// Add action listeners
 		JButton upButton = new JButton("Up");
+		upButton.setPreferredSize(new Dimension(250, 100));
+		upButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton downButton = new JButton("Down");
+		downButton.setPreferredSize(new Dimension(250, 100));
+		downButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton leftButton = new JButton("Left");
+		leftButton.setPreferredSize(new Dimension(250, 100));
+		leftButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton rightButton = new JButton("Right");
+		rightButton.setPreferredSize(new Dimension(250, 100));
+		rightButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton inventoryButton = new JButton("Inventory");
+		inventoryButton.setPreferredSize(new Dimension(250, 100));
+		inventoryButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton attackButton = new JButton("Attack");
+		attackButton.setPreferredSize(new Dimension(250, 100));
+		attackButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton shieldButton = new JButton("Shield");
+		shieldButton.setPreferredSize(new Dimension(250, 100));
+		shieldButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		
 		JButton runButton = new JButton("Run");
+		runButton.setPreferredSize(new Dimension(250, 100));
+		runButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		
-		buttonPanel.add(upButton, BorderLayout.CENTER);
-		buttonPanel.add(downButton, BorderLayout.CENTER);
-		buttonPanel.add(leftButton, BorderLayout.CENTER);
-		buttonPanel.add(rightButton, BorderLayout.CENTER);
-		buttonPanel.add(inventoryButton, BorderLayout.CENTER);
-		buttonPanel.add(attackButton, BorderLayout.CENTER);
-		buttonPanel.add(shieldButton, BorderLayout.CENTER);
-		buttonPanel.add(runButton, BorderLayout.CENTER);
+		buttonPanel.add(upButton);
+		buttonPanel.add(downButton);
+		buttonPanel.add(leftButton);
+		buttonPanel.add(rightButton);
+		buttonPanel.add(inventoryButton);
+		buttonPanel.add(attackButton);
+		buttonPanel.add(shieldButton);
+		buttonPanel.add(runButton);
 		
-		gamePanel.setVisible(true);
-		gamePanel.setBackground(Color.WHITE);
+		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		mainFrame.add(textPanel, BorderLayout.PAGE_END);
+		mainFrame.add(statPanel, BorderLayout.WEST);
+		mainFrame.add(buttonPanel, BorderLayout.EAST);	  
 		
-		textPanel.setVisible(true);
-		textPanel.setBackground(Color.WHITE);
-		
-		statPanel.setVisible(true);
-		statPanel.setBackground(Color.WHITE);
-		
-		buttonPanel.setVisible(true);
-		buttonPanel.setBackground(Color.WHITE);
-		
-		mainPanel.add(gamePanel, BorderLayout.CENTER);
-		mainPanel.add(textPanel, BorderLayout.PAGE_END);
-		mainPanel.add(statPanel, BorderLayout.LINE_START);
-	 	mainPanel.add(buttonPanel, BorderLayout.LINE_END);	  
-		mainPanel.setVisible(true);
-		  
-		mainFrame.add(mainPanel);
+		mainFrame.pack();
 		mainFrame.setVisible(true);
 		  
 		Partition.main(null);
