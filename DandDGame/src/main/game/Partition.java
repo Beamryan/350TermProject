@@ -407,7 +407,6 @@ public static void main(final String[] args) throws IOException {
 			 }
 		 }
 		 
-		 Runtime.getRuntime().exec("clear");
 		 foo.printPartition(playerX, playerY);
 		 System.out.println("Level " + foo.player.level);
 		 System.out.println("Xp " + foo.player.xp);
