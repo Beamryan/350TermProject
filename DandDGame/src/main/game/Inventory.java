@@ -65,7 +65,7 @@ public class Inventory {
 			inventory[19] = 1;
 			System.out.println("Got quest item: Pool Floaty");
 			System.out.println("You can now travel on water!");
-		} else if (!isInventoryFull()) {
+		} else if (!isInventoryFull() && !isItemInInventory(itemID)) {
 			inventory[getNextEmptyInvntorySlot()] = itemID;
 			return true;
 		}
@@ -119,6 +119,21 @@ public class Inventory {
 		}
 		return false;
 	
+	}
+	
+	/**
+	 * Checks if an item is already in the inventory.
+	 * @param itemID 
+	 * @return true if the itemID is in the inventory, else false.
+	 */
+	private boolean isItemInInventory(final int itemID) {
+		int inventorySize = getNextEmptyInvntorySlot();
+		for(int i = 0; i < inventorySize; i++) {
+			if(itemID == inventory[i]) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
