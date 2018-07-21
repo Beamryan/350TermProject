@@ -7,11 +7,26 @@ import java.util.Scanner;
  */
 public class Partition {
 	
+	/** Player pos x. */
+	int playerX = 5;
+	
+	/** Player pos y. */
+	int playerY = 1;
+	
+	/** Starting partition. */
+	int currentPartition = 0;
+	
 	/** The height of the partition. */
 	int height;
 	
 	/** The width of the partition. */
 	int width;
+	
+	/** The width of the map in partition. */
+	int xDim;
+	
+	/** The height of the map in partition. */
+	int yDim;
 	
 	/** The cells holding map tiles. */
 	Cell[][] tiles = new Cell[height][width];
@@ -29,85 +44,97 @@ public class Partition {
  * @param player the players character
  * @throws IOException exception caught for reading the output file
  */
-public Partition(final int height, final int width, final int partitionNum, final int xDim, final int yDim, final Warrior player) throws IOException {
+public Partition(final int height, final int width, final int currentPartition, final int xDim, final int yDim, final Warrior player, int playerX, int playerY) throws IOException {
     this.height = height;
     this.width = width;
     this.player = player;
+    this.playerX = playerX;
+    this.playerY = playerY;
+    this.xDim = xDim;
+    this.yDim = yDim;
+    this.currentPartition = currentPartition;
     tiles = new Cell[height][width];
-    Scanner in = new Scanner(new File("output.txt"));
     
-    try {
-      int tileCount = 0; // how many tiles have been read into partition
-      int x = 0;	//x coordinate in entire map
-      int y = 0;	//y coordinate in entire map
-      int type;
-      int itemID;
-      int monsterID;
-      int xTile = 0;	// x coordinate in current partition
-      int yTile = 0;	// y coordinate in current partition
-      int xStart = width * (partitionNum % xDim);	// starting positions for valid x values
-      int yStart = height * (partitionNum / yDim); // starting positions for valid y values
+}    
+    
 
-      while (tileCount < (width * height)) {
-        type = in.nextInt();
-        SpaceType spaceType = SpaceType.EmptySpace;
-        switch (type) {
-        case 1:
-    		spaceType = SpaceType.Cleared;
-    		break;
-        case 2:
-        	spaceType = SpaceType.EmptySpace;
-        	break;
-        case 4:
-    		spaceType = SpaceType.Tree;
-    		break;
-    	case 8:
-    		spaceType = SpaceType.Rock;
-    		break;
-    	case 16:
-    		spaceType = SpaceType.Water;
-    		break;
-    	default:
-    		break;
-        }
-        itemID = in.nextInt();
-        monsterID = in.nextInt();
-        in.nextLine();
-        
-        
-        Cell tile = new Cell(spaceType, itemID, monsterID);
-        
-//        the valid ranges on the map for a tile is the start,
-//        and the start + the dimension of the partition
-        if (x >= xStart && x < xStart + width) {
-            if (y >= yStart && y < yStart + height) {
-              tiles[yTile][xTile] = tile;
-              tileCount++;
-              xTile++;
-              // if a full row has been placed, increment row and restart x pos
-              if (xTile == width) {
-              	xTile = 0;
-              	yTile++;
-              }
-            }  		  
-          }
-//          if a row of the map has been read, restart x and increment 
-          x++;
-          if (x == xDim * width) {
-            y++;
-            x = 0;
-          }
-        }
-  } finally {
-    	in.close();
-    } 
-  }
+void updatePartition() throws IOException{
+	
+	Scanner in = new Scanner(new File("output.txt"));
+	try {
+	      int tileCount = 0; // how many tiles have been read into partition
+	      int x = 0;	//x coordinate in entire map
+	      int y = 0;	//y coordinate in entire map
+	      int type;
+	      int itemID;
+	      int monsterID;
+	      int xTile = 0;	// x coordinate in current partition
+	      int yTile = 0;	// y coordinate in current partition
+	      int xStart = width * (currentPartition % xDim);	// starting positions for valid x values
+	      int yStart = height * (currentPartition / yDim); // starting positions for valid y values
+
+	      while (tileCount < (width * height)) {
+	        type = in.nextInt();
+	        SpaceType spaceType = SpaceType.EmptySpace;
+	        switch (type) {
+	        case 1:
+	    		spaceType = SpaceType.Cleared;
+	    		break;
+	        case 2:
+	        	spaceType = SpaceType.EmptySpace;
+	        	break;
+	        case 4:
+	    		spaceType = SpaceType.Tree;
+	    		break;
+	    	case 8:
+	    		spaceType = SpaceType.Rock;
+	    		break;
+	    	case 16:
+	    		spaceType = SpaceType.Water;
+	    		break;
+	    	default:
+	    		break;
+	        }
+	        itemID = in.nextInt();
+	        monsterID = in.nextInt();
+	        in.nextLine();
+	        
+	        
+	        Cell tile = new Cell(spaceType, itemID, monsterID);
+	        
+//	        the valid ranges on the map for a tile is the start,
+//	        and the start + the dimension of the partition
+	        if (x >= xStart && x < xStart + width) {
+	            if (y >= yStart && y < yStart + height) {
+	              tiles[yTile][xTile] = tile;
+	              tileCount++;
+	              xTile++;
+	              // if a full row has been placed, increment row and restart x pos
+	              if (xTile == width) {
+	              	xTile = 0;
+	              	yTile++;
+	              }
+	            }  		  
+	          }
+//	          if a row of the map has been read, restart x and increment 
+	          x++;
+	          if (x == xDim * width) {
+	            y++;
+	            x = 0;
+	          }
+	        }
+	  } 
+	  finally {
+	    	in.close();
+	  } 
+}
+
   
   /**
  * @param playerX the current position x of player
  * @param playerY the current position y of player
  */
-public void printPartition(final int playerX, final int playerY) {
+public void printPartition() {
     int i, j;
     for (i = 0; i < height; i++) {
       for (j = 0; j < width; j++) {
@@ -168,11 +195,15 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells itemID is nonzero, false if the itemID is zero. 
    */
-  public boolean tileHasItem(final int playerLocationY, final int playerLocationX) {	  
-	  if (tiles[playerLocationY][playerLocationX].itemID != 0) {
-		  return true;	  
+  public void doesTileHaveItem() {	  
+	  if (tiles[playerY][playerX].itemID != 0) {
+			 int itemID = getItemID(playerY, playerX);
+			 player.inventory.addItemToInventory(itemID);
+			 System.out.println("Got item: " + player.inventory.getItemName(itemID));
+			 System.out.println("Press e to equip");
+			 // remove item from tile
+			 tiles[playerY][playerX].itemID = 0; 
 	  }
-	  return false;
   }
   
   /**
@@ -181,11 +212,13 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells monsterID is nonzero, false if the monsterID is zero. 
    */
-  public boolean tileHasMonster(final int playerLocationY, final int playerLocationX) {	  
-	  if (tiles[playerLocationY][playerLocationX].monsterID != 0) {
-		  return true;
+  public void doesTileHaveMonster() throws IOException{	  
+	  if (tiles[playerY][playerX].monsterID != 0) {
+		  int monsterID = getMonsterID();
+		  Battle battle = new Battle(player, monsterID);
+		  int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+		  endBattle(xpGain);
 	  }
-	  return false;
   }
   
   /**
@@ -204,8 +237,8 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current player location in the X direction
    * @return Returns the monsterID of the current cell.
    */
-  public int getMonsterID(final int playerLocationY, final int playerLocationX) {
-	  return tiles[playerLocationY][playerLocationX].monsterID;
+  public int getMonsterID() {
+	  return tiles[playerY][playerX].monsterID;
   }
   
   /**
@@ -214,12 +247,16 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current location X
    * @return new playerLocationY if valid, old playerLocationY if not valid.
    */
-  public int moveNorth(final int playerLocationY, final int playerLocationX) { 
-	  if (isValidTile(tiles[playerLocationY - 1][playerLocationX])) { 
-		  tiles[playerLocationY - 1][playerLocationX].type = SpaceType.Cleared;
-		  return playerLocationY - 1;
+  public void moveNorth() throws IOException{ 
+	  if (playerY == 0) {
+		  currentPartition -= xDim;
+		  playerY = height - 1;
+		  updatePartition();
+		 }
+	  else if (isValidTile(tiles[playerY - 1][playerX])) { 
+		  tiles[playerY - 1][playerX].type = SpaceType.Cleared;
+		  playerY -= 1;
 	  }
-	  return playerLocationY;
   }
   
   /**
@@ -229,12 +266,16 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current location X
    * @return new playerLocationX if valid, old playerLocationX if not valid.
    */
-  public int moveEast(final int playerLocationY, final int playerLocationX) { 
-	  if (isValidTile(tiles[playerLocationY][playerLocationX + 1])) { 
-		  tiles[playerLocationY][playerLocationX + 1].type = SpaceType.Cleared;
-		  return playerLocationX + 1;
+  public void moveEast() throws IOException{ 
+	  if (playerX == width - 1) {
+		  currentPartition++;
+		  playerX = 0;
+		  updatePartition();
 	  }
-	  return playerLocationX;
+	  else if (isValidTile(tiles[playerY][playerX + 1])) { 
+		  tiles[playerY][playerX + 1].type = SpaceType.Cleared;
+		  playerX += 1;
+	  }
   }
   
   /**
@@ -243,12 +284,16 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current location X
    * @return new playerLocationY if valid, old playerLocationY if not valid.
    */
-  public int moveSouth(final int playerLocationY, final int playerLocationX) { 
-	  if (isValidTile(tiles[playerLocationY + 1][playerLocationX])) { 
-		  tiles[playerLocationY + 1][playerLocationX].type = SpaceType.Cleared;
-		  return playerLocationY + 1;
-	  }
-	  return playerLocationY;
+  public void moveSouth() throws IOException{ 
+	if (playerY == height - 1) {
+		currentPartition += xDim;
+		playerY = 0;
+		updatePartition();
+	}
+	else if (isValidTile(tiles[playerY + 1][playerX])) { 
+		tiles[playerY + 1][playerX].type = SpaceType.Cleared;
+		playerY += 1;
+	}
   }
   
   /**
@@ -257,12 +302,37 @@ public void printPartition(final int playerX, final int playerY) {
    * @param playerLocationX Current location X
    * @return new playerLocationX if valid, old playerLocationX if not valid.
    */
-  public int moveWest(final int playerLocationY, final int playerLocationX) { 
-	  if (isValidTile(tiles[playerLocationY][playerLocationX - 1])) { 
-		  tiles[playerLocationY][playerLocationX - 1].type = SpaceType.Cleared;
-		  return playerLocationX - 1;
+  public void moveWest() throws IOException{ 
+	  if (playerX == 0) {
+			 currentPartition--;
+			 playerX = width - 1;
+			 updatePartition();
 	  }
-	  return playerLocationX;
+	  else if (isValidTile(tiles[playerY][playerX - 1])) { 		  	 
+			 tiles[playerY][playerX - 1].type = SpaceType.Cleared;	 	
+			 playerX-=1;
+	  }
+  }
+  
+  public void endBattle(int xpGain){
+		 if (xpGain > 0) {
+			 System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
+			 player.xp += xpGain; // award xp
+			 
+			 if (player.xp >= player.xpToNextLevel) {
+				 player.levelUp();
+			 }			 
+			 // Clear monster tile in partition
+			 tiles[playerY][playerX].monsterID = 0;
+		 } else if (xpGain == -1) {
+			 System.out.println("Player ran");
+			 tiles[playerY][playerX].monsterID = 0;
+		 } else {
+			 System.out.println("Player loses! Back to start\n\n");
+			 currentPartition = 0;
+			 playerX = 5;
+			 playerY = 1;	
+		 }
   }
   
   /**
@@ -291,53 +361,30 @@ public static void main(final String[] args) throws IOException {
 	 int length = 10;
 	 Warrior player = new Warrior();
 	 
-	 Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player);
+	 Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player, playerX, playerY);
+	 foo.updatePartition();
 	 
 	 
 	 // test basic movement in ascii
 	 Scanner dir = new Scanner(System.in);
 	 char choice = 0;
 	 foo.welcomeMessage();
-	 foo.printPartition(playerX, playerY);
+	 foo.printPartition();
 	 while (choice != -1) {
 		 dir = new Scanner(System.in);
 		 choice = dir.next().charAt(0);
 		 
 		 if (choice == 'w') {
-			 //Following block is for if player goes to a new partition
-			 if (playerY == 0) {
-				 currentPartition -= xDim;
-				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
-				 playerY = length - 1;
-			 }
-			 playerY = foo.moveNorth(playerY, playerX);	 
+			 foo.moveNorth();	 
 		 }
 		 if (choice == 'a') {
-			 if (playerX == 0) {
-				 currentPartition--;
-				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
-				 playerX = width - 1;
-			 } else {
-				 playerX = foo.moveWest(playerY, playerX);	 
-			 }
+			 foo.moveWest();	 		 
 		 }
 		 if (choice == 's') {
-			 if (playerY == length - 1) {
-				 currentPartition += xDim;
-				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
-				 playerY = 0;
-			 } else {
-				 playerY = foo.moveSouth(playerY, playerX);	 
-			 }
+			 foo.moveSouth();	 
 		 }
 		 if (choice == 'd') {
-			 if (playerX == width - 1) {
-				 currentPartition++;
-				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
-				 playerX = 0;
-			 } else {
-				 playerX = foo.moveEast(playerY, playerX);	 
-			 }
+			 foo.moveEast();	 
 		 }
 		 
 		 // item directions and management
@@ -370,44 +417,11 @@ public static void main(final String[] args) throws IOException {
 		 int itemID, monsterID;
 		 
 		 //If tile has item...
-		 if (foo.tileHasItem(playerY, playerX)) {
-			 itemID = foo.getItemID(playerY, playerX);
-			 foo.player.inventory.addItemToInventory(itemID);
-			System.out.println("Got item: " + foo.player.inventory.getItemName(itemID));
-			System.out.println("Press e to equip");
-			 // remove item from tile
-			 foo.tiles[playerY][playerX].itemID = 0;
-		 }
+		 foo.doesTileHaveItem();
 		 
-		 if (foo.tileHasMonster(playerY, playerX)) {	
-			 monsterID = foo.getMonsterID(playerY, playerX);
-			 Battle battle = new Battle(foo.player, monsterID);
-			 int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
-			 
-			 // win
-			 if (xpGain > 0) {
-				 System.out.println("Player wins! Gain " + xpGain + " xp\n\n");
-				 foo.player.xp += xpGain; // award xp
-				 
-				 if (foo.player.xp >= foo.player.xpToNextLevel) {
-					 foo.player.levelUp();
-				 }
-				 
-				 // Clear monster tile in partition
-				 foo.tiles[playerY][playerX].monsterID = 0;
-			 } else if (xpGain == -1) {
-				 System.out.println("Player ran");
-				 foo.tiles[playerY][playerX].monsterID = 0;
-			 } else {
-				 System.out.println("Player loses! Back to start\n\n");
-				 currentPartition = 0;
-				 playerX = 5;
-				 playerY = 1;	
-				 foo = new Partition(width, length, currentPartition, xDim, yDim, player);
-			 }
-		 }
+		 foo.doesTileHaveMonster();
 		 
-		 foo.printPartition(playerX, playerY);
+		 foo.printPartition();
 		 System.out.println("Level " + foo.player.level);
 		 System.out.println("Xp " + foo.player.xp);
 	 }
