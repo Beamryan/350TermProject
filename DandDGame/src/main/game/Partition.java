@@ -160,6 +160,36 @@ public void printPartition() {
       System.out.println();
     }
   }
+
+public String returnPrintPartition() {
+	String arr = "";
+    int i, j;
+    for (i = 0; i < height; i++) {
+      for (j = 0; j < width; j++) {   	
+    	if (i == playerY && j == playerX) {
+    		arr += ("👶🏼");
+    	} else {
+    		if (tiles[i][j].type == SpaceType.Cleared) {
+    			arr += ("🏻");
+    		} else if (tiles[i][j].type == SpaceType.EmptySpace) {
+    			arr += ("🏻‍");
+    		} else if (tiles[i][j].type == SpaceType.Tree) {
+    			arr += ("🌲");
+    		} else if (tiles[i][j].type == SpaceType.Rock) {
+    			arr += ("⛰️");
+    		} else if (tiles[i][j].type == SpaceType.Water) {
+    			arr += ("🌊");
+    		} else {
+    			System.out.print(tiles[i][j].type);
+    		}
+    	
+    	}
+      }
+      arr += "\n";
+      System.out.println();
+    }
+    return arr;
+  }
   
   /**
    * Checks if the SpaceType is a moveable type.
