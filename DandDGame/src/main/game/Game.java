@@ -38,7 +38,6 @@ public class Game {
 	public Game(final int height, final int width) throws IOException { 
 		defaultHeight = height;
 		defaultWidth = width;
-		GameWindow.main(null);
 	}
 	
 	/**
