@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JFrame;
 
 public final class GameWindow {
@@ -29,6 +28,17 @@ public final class GameWindow {
 	 * @throws IOException 
 	 */
 	public static void main (final String[] args) throws IOException {
+		
+		int currentPartition = 0;
+		int playerX = 5;
+		int playerY = 1;
+		int xDim = 5;
+		int yDim = 5;
+		int width = 10;
+		int length = 10;
+		Warrior player = new Warrior();
+
+		Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player, playerX, playerY);
 		
 		JFrame mainFrame = new JFrame();
 		mainFrame.setPreferredSize(new Dimension(2000, 1200));
@@ -57,7 +67,11 @@ public final class GameWindow {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
-		    // Call the move up method
+			  try {
+				  foo.moveNorth(); 
+			  } catch(Exception ex) {
+				  ex.printStackTrace();
+			  }
 		  }
 		});
 		
@@ -68,7 +82,11 @@ public final class GameWindow {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
-		    // Call the move down method
+			  try {
+				  foo.moveSouth(); 
+			  } catch(Exception ex) {
+				  ex.printStackTrace();
+			  }		 
 		  }
 		});
 		
@@ -79,7 +97,11 @@ public final class GameWindow {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
-		    // Call the move left method
+			  try {
+				  foo.moveEast(); 
+			  } catch(Exception ex) {
+				  ex.printStackTrace();
+			  }		 
 		  }
 		});
 		
@@ -90,7 +112,11 @@ public final class GameWindow {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
-		    // Call the move right method
+			  try {
+				  foo.moveWest(); 
+			  } catch(Exception ex) {
+				  ex.printStackTrace();
+			  }
 		  }
 		});
 		
@@ -160,14 +186,14 @@ public final class GameWindow {
 		buttonPanel.add(fleeButton);
 		
 		buttonPanel.setBackground(Color.GRAY);
-		textPanel.setBackground(Color.GRAY);
+		textPanel.setBackground(Color.WHITE);
 		statPanel.setBackground(Color.GRAY);
 		gamePanel.setBackground(Color.BLACK);
 		
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		mainFrame.add(textPanel, BorderLayout.PAGE_END);
-		mainFrame.add(statPanel, BorderLayout.WEST);
-		mainFrame.add(buttonPanel, BorderLayout.EAST);	  
+		mainFrame.add(statPanel, BorderLayout.LINE_START);
+		mainFrame.add(buttonPanel, BorderLayout.LINE_END);	  
 		
 		mainFrame.setResizable(false);
 		mainFrame.pack();
