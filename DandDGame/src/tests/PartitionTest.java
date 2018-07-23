@@ -23,7 +23,7 @@ public class PartitionTest {
 		int length = 10;
 		Warrior player = new Warrior();
 		 
-		partition = new Partition(width,length,currentPartition,xDim,yDim,player);
+//		partition = new Partition(width,length,currentPartition,xDim,yDim,player);
 	}
 	
 	@Test
@@ -31,7 +31,7 @@ public class PartitionTest {
 		try {
 			Initialize();
 			int initialPlayerY = playerY;
-			playerY = partition.moveNorth(playerY, playerX);
+//			playerY = partition.moveNorth(playerY, playerX);
 			assertTrue(playerY + 1 == initialPlayerY);
 
 		} catch (IOException e) {
@@ -46,7 +46,7 @@ public class PartitionTest {
 		try {
 			Initialize();
 			int initialPlayerX = playerX;
-			playerX = partition.moveEast(playerY, playerX);
+//			playerX = partition.moveEast(playerY, playerX);
 			assertTrue(playerX - 1 == initialPlayerX);
 
 		} catch (IOException e) {
@@ -61,7 +61,7 @@ public class PartitionTest {
 		try {
 			Initialize();
 			int initialPlayerY = playerY;
-			playerY = partition.moveSouth(playerY, playerX);
+//			playerY = partition.moveSouth(playerY, playerX);
 			assertTrue(playerY - 1 == initialPlayerY);
 
 		} catch (IOException e) {
@@ -76,7 +76,7 @@ public class PartitionTest {
 		try {
 			Initialize();
 			int initialPlayerX = playerX;
-			playerX = partition.moveWest(playerY, playerX);
+//			playerX = partition.moveWest(playerY, playerX);
 			assertTrue(playerX + 1 == initialPlayerX);
 
 		} catch (IOException e) {
