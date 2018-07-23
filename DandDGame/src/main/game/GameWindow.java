@@ -50,10 +50,10 @@ public final class GameWindow {
 		textPanel.setPreferredSize(new Dimension(1000, 200));
 		  
 		JPanel statPanel = new JPanel();
-		statPanel.setPreferredSize(new Dimension(250, 500));
+		statPanel.setPreferredSize(new Dimension(125, 500));
 		  
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setPreferredSize(new Dimension(250, 500));
+		buttonPanel.setPreferredSize(new Dimension(125, 500));
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setSize(new Dimension(1500, 300));
