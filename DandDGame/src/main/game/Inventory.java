@@ -15,6 +15,14 @@ public class Inventory {
 	/** inventory of the player. */
 	public int[] inventory;
 	
+	/** current armor inventory of the player. 
+	 *  index 0 -> helmet
+	 *  index 1 -> body
+	 *  index 2 -> legs
+	 *  index 3 -> feets
+	 */
+	public int[] armorInventory;
+	
 	/** current item scaling. */
 	double currentScaling;
 	
@@ -24,6 +32,7 @@ public class Inventory {
 	 */
 	public Inventory() {
 		inventory = new int[inventorySize];
+		armorInventory = new int[4];
 	}
 	
 	/**
@@ -40,7 +49,21 @@ public class Inventory {
 		int inventorySize = getNextEmptyInvntorySlot();
 		//Added -2 so that quest item isnt shown
 		for (int i = 0; i < inventorySize; i++) {
-			System.out.println("Inventory Slot " + i + ": " + getItemName(inventory[i]));
+			if(inventory[i] < 19) {
+				System.out.println("Inventory Slot " + i + ": Item: " + getItemName(inventory[i]));
+			}
+			else if(inventory[i] > 19) {
+				System.out.println("Inventory Slot " + i + ": Armor: " + getItemName(inventory[i]));
+			}
+		}
+	}
+	
+	/**
+	 * Shows the armor inventory of the character
+	 */
+	public void showArmorInventory() {
+		for(int i = 0; i < 4; i++) {
+			System.out.println("Armor Slot " + i + ": " + armorInventory[i]);
 		}
 	}
 	
@@ -48,11 +71,28 @@ public class Inventory {
 	 * @param itemIndex the current item index
 	 */
 	public void setItemToCurrent(final int itemIndex) {
-		int oldCurrentItem = inventory[0];
-		inventory[0] = inventory[itemIndex];
-		inventory[itemIndex] = 0;
+		if(inventory[itemIndex] < 19) {		
+			int oldCurrentItem = inventory[0];
+			inventory[0] = inventory[itemIndex];
+			inventory[itemIndex] = 0;
 		
-		addItemToInventory(oldCurrentItem);
+			addItemToInventory(oldCurrentItem);
+		}
+	}
+	
+	/**
+	 * Armor items should be above index 20 and also x0 -> helmets, x1 -> body, x2 -> legs, x3 -> feets.
+	 * @param armorIndex
+	 */
+	public void setArmorItemToCurrent(final int armorIndexID) {
+		if(armorInventory[armorIndexID] > 19) {
+			int itemType = getArmorItemType(armorIndexID);
+			int oldCurrentItem = armorInventory[itemType];
+			armorInventory[itemType] = armorInventory[armorIndexID];
+			inventory[armorIndexID] = 0; //clears the inventory space to eliminate duplicate items
+		
+			addItemToInventory(oldCurrentItem);
+		}
 	}
 	
 	/**
@@ -144,6 +184,7 @@ public class Inventory {
 	}
 	
 	/**
+	 * 0-18 will be weapons, 19 quest item, 20+ will be armor
 	 * @param itemID the item id
 	 * @return String the item name
 	 */
@@ -204,10 +245,52 @@ public class Inventory {
 			case 17:
 				itemName = "Wooden-Ruler";
 				break;
+			case 20:
+				itemName = "Bucket Helmet";
+				break;
+			case 21:
+				itemName = "Chain-Link Vest";
+				break;
+			case 22:
+				itemName = "Leather Pants";
+				break;
+			case 23:
+				itemName = "Leather Boots";
+				break;
+			case 30:
+				itemName = "Iron Helmet";
+				break;
+			case 31:
+				itemName = "Iron Chest Piece";
+				break;
+			case 32:
+				itemName = "Iron Pants";
+				break;
+			case 33:
+				itemName = "Iron Boots";
+				break;
+				
 			default:
 				itemName = "";
 				break;
 		}
 		return itemName;
+	}
+	
+	private int getArmorItemType(final int armorIndexID) {
+		int itemType = 0;
+		if(armorIndexID >= 20 && armorIndexID < 30) {
+			itemType = armorIndexID - 20;
+		}
+		if(armorIndexID >= 30 && armorIndexID < 40) {
+			itemType = armorIndexID - 20;
+		}
+		if(armorIndexID >= 40 && armorIndexID < 50) {
+			itemType = armorIndexID - 20;
+		}
+		if(armorIndexID >= 50 && armorIndexID < 60) {
+			itemType = armorIndexID - 20;
+		}
+		return itemType;
 	}
 }
