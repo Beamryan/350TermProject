@@ -1,6 +1,7 @@
 package main.game;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -137,6 +138,36 @@ public class Inventory {
 	}
 	
 	/**
+	 * Gets the armor scaling values.
+	 * @return double[] array of scaling values corresponding to item type slot position..
+	 * @throws IOException
+	 */
+	public double[] getArmorScaling() throws IOException {
+		double[] armorScalingValues = new double[4];
+		Scanner itemSC = new Scanner(new File("ItemInfo.txt"));
+		double scaling = 0;
+		String name;
+		
+		try {
+			for(int i = 0; i < 4; i++) {
+				//Cycle through item info until the right itemID is found
+				while (itemSC.nextInt() != armorInventory[i]) { // cycle thru lines til enemy id is seen
+					itemSC.nextLine();
+				}
+				name = itemSC.next();
+				scaling = itemSC.nextDouble();
+				
+				armorScalingValues[i] = scaling;
+				System.out.println(name + " scaling is " + scaling);
+			}
+			
+		} finally {
+			itemSC.close();			
+		}
+		return armorScalingValues;
+	}
+	
+	/**
 	 * @return integer the next open slot
 	 */
 	private int getNextEmptyInvntorySlot() {
@@ -249,7 +280,7 @@ public class Inventory {
 				itemName = "Bucket Helmet";
 				break;
 			case 21:
-				itemName = "Chain-Link Vest";
+				itemName = "Leather Vest";
 				break;
 			case 22:
 				itemName = "Leather Pants";
@@ -283,13 +314,13 @@ public class Inventory {
 			itemType = armorIndexID - 20;
 		}
 		if(armorIndexID >= 30 && armorIndexID < 40) {
-			itemType = armorIndexID - 20;
+			itemType = armorIndexID - 30;
 		}
 		if(armorIndexID >= 40 && armorIndexID < 50) {
-			itemType = armorIndexID - 20;
+			itemType = armorIndexID - 40;
 		}
 		if(armorIndexID >= 50 && armorIndexID < 60) {
-			itemType = armorIndexID - 20;
+			itemType = armorIndexID - 50;
 		}
 		return itemType;
 	}

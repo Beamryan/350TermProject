@@ -15,3 +15,11 @@
 15 Ultra-GreatSword 5.1 
 16 Master-GreatSword 6.5
 17 Wooden-Ruler 7
+20 Bucket Helmet 1.0
+21 Leather Vest 1.0
+22 Leather Pants 1.0
+23 Leather Boots 1.0
+30 Iron Helmet 3.0
+31 Iron Chest Piece 3.0
+32 Iron Pants 3.0
+33 Iron Boots 3.0
