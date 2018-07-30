@@ -1,17 +1,24 @@
 package main.game;
 
+import java.io.File;
 import java.io.IOException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public final class GameWindow {
 
@@ -20,6 +27,45 @@ public final class GameWindow {
 	 */
 	private GameWindow() {
 
+	}
+	
+	/**
+	 * Prints the map to the GUI.
+	 * @param gamePanel
+	 * @param partition
+	 */
+	private static void PrintMap(JPanel gamePanel, Partition partition) {
+		GridLayout mapGrid = new GridLayout(10, 10);
+		gamePanel.setLayout(mapGrid);
+		for(int i = 0; i<10; i++) {
+			for(int j = 0; j < 10; j++) {
+				System.out.println("item ID: " + partition.tiles[i][j].itemID);
+				JLabel picture = null;
+				BufferedImage image = null;
+				try {
+					if(partition.tiles[i][j].type == SpaceType.Tree) {
+						image = ImageIO.read(new File("Tree.png"));
+					}
+					else if(partition.tiles[i][j].type == SpaceType.EmptySpace) {
+						image = ImageIO.read(new File("Road.png"));
+					}
+					else if(partition.tiles[i][j].type == SpaceType.Rock) {
+						image = ImageIO.read(new File("Rock.png"));
+					}
+					else if(partition.tiles[i][j].type == SpaceType.Water) {
+						image = ImageIO.read(new File("Water.png"));
+					}
+					else if(partition.tiles[i][j].type == SpaceType.Cleared) {
+						image = ImageIO.read(new File("Road.png"));
+					}
+					picture = new JLabel(new ImageIcon(image));
+					picture.setSize(new Dimension(50, 50));
+					gamePanel.add(picture);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}		
+			}
+		}
 	}
 
 	/**
@@ -39,6 +85,7 @@ public final class GameWindow {
 		Warrior player = new Warrior();
 
 		Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player, playerX, playerY);
+		foo.updatePartition();
 		foo.welcomeMessage();
 
 		JFrame mainFrame = new JFrame();
@@ -199,6 +246,7 @@ public final class GameWindow {
 				// Call the move flee method
 			}
 		});
+//		PrintMap(gamePanel, null);
 
 		buttonPanel.add(upButton);
 		buttonPanel.add(downButton);
@@ -223,6 +271,8 @@ public final class GameWindow {
 		mainFrame.setResizable(false);
 		mainFrame.pack();
 		mainFrame.setVisible(true);	  
+		PrintMap(gamePanel, foo);
+		SwingUtilities.updateComponentTreeUI(mainFrame);
 	}
 
 }
