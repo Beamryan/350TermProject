@@ -39,7 +39,6 @@ public final class GameWindow {
 		gamePanel.setLayout(mapGrid);
 		for(int i = 0; i<10; i++) {
 			for(int j = 0; j < 10; j++) {
-				System.out.println("item ID: " + partition.tiles[i][j].itemID);
 				JLabel picture = null;
 				BufferedImage image = null;
 				try {
