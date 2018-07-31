@@ -235,6 +235,7 @@ public class Battle{
 		finalString += "\nPlayer health: " + playerHealth + "\n";
 		finalString += enemyName + " health: " + enemyHealth + "\n";
 		finalString += "What would you like to do?" + "\n";
+		finalString += "A to attack, S to shield, D to rest, or F to flee\n";
 		
 		return finalString;
 	}
