@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Class to handle battles between player and monsters.
  */
-public class Battle{
+public class Battle implements Observer{
 	
 	/** player stats. */
 	private int playerStrength, playerSpeed, playerHealth;
@@ -25,18 +25,8 @@ public class Battle{
 	/** player scaling value. */
 	double playerScale;
 	
-//	BattleChoices battleChoice;
-//	boolean choiceHasChanged = false;
-	
-	
-	double xp = (double) enemyID;
-	boolean playerWins;
-	double playerDamage, enemyDamage;
-	int playerStrengthFloor = playerStrength / 2;
-	int enemyStrengthFloor = enemyStrength / 2;
-	
-	// test weapon scaling...
-	double enemyScale = 1;
+	BattleChoices battleChoice;
+	boolean choiceHasChanged = false;
 
 	
 	/**
@@ -75,12 +65,19 @@ public class Battle{
 	 * @return integer
 	 */
 	int startBattle() {		
-
+		int xp = this.enemyID;
+		boolean playerWins = true;
+		char choice = 0;
+		double playerDamage, enemyDamage;
+		int playerStrengthFloor = playerStrength / 2;
+		int enemyStrengthFloor = enemyStrength / 2;
+		
+		// test weapon scaling...
+		double enemyScale = 1.5;
 		
 		Scanner choiceSC = new Scanner(System.in);
 		Random rand = new Random();
 		int runFlag = 0;
-		char choice = 0;
 		
 		System.out.println("\n\n" + enemyName + " encountered!\n");
 		
@@ -93,7 +90,11 @@ public class Battle{
 //			strength goes down by a tenth each attack
 //			TODO focus for regen?			
 		while (playerHealth > 0 && enemyHealth > 0 && runFlag == 0) {
-
+			System.out.println("\nPlayer health: " + playerHealth);
+			System.out.println(enemyName + " health: " + enemyHealth);
+			System.out.println("What would you like to do?");
+			System.out.println("A to attack, S to shield, D to rest, or F to flee\n");
+			
 			choice = choiceSC.next().charAt(0);			
 			//int enemyChoice = (int)Math.round( Math.random() );
 			int enemyChoice = (rand.nextInt(3));
@@ -111,34 +112,56 @@ public class Battle{
 				}
 			}
 			
-			System.out.println(turnHeader());
-			
-			if (choice == 'a') {			
-				System.out.println(playerAttack());
+
+			if (choice == 'a') {
+				playerDamage = (double) playerStrength * playerScale;
+				double degradation = (double) playerStrength * .15;
+				
+				if (playerStrength > playerStrengthFloor) {
+					playerStrength -= (int) degradation;
+				}
+				System.out.println("Player chose attack");
 			}
 			
 			//enemy chooses to attack
-			if (enemyChoice == 0) {			
-				System.out.println(enemyName + " " + enemyAttack());
+			if (enemyChoice == 0) {
+				enemyDamage = (double) enemyStrength * enemyScale;
+				double degradation = (double) enemyStrength * .15;
+				
+				if (enemyStrength > enemyStrengthFloor) {
+					enemyStrength -= (int) degradation;
+				}
+				
+				System.out.println(enemyName + " chose attack");
 			}
 			
 			//player chooses to shield, decreases incoming damage
-			if (choice == 's') {				
-				System.out.println(playerShield());
+			if (choice == 's') {
+				enemyDamage *= .3;
+				playerSpeed *= 1.15;
+				System.out.println("Player chose shield");
 			}
 						
 			//enemy chooses to shield, decreases incoming damage
 			if (enemyChoice == 1) {
-				System.out.println(enemyName + " " + enemyShield());
+				playerDamage *= .3;
+				enemySpeed *= 1.15;
+				System.out.println(enemyName + " chose shield");
 			}
 			
-			if (choice == 'd') {			
-				System.out.println(playerRest());
+			if (choice == 'd') {
+				enemyDamage *= .6;
+				playerStrength *= 1.2;
+				playerHealth *= 1.02;
+				System.out.println("Player chose rest");
 			}
 			
 			//enemy chooses to rest, decreases incoming damage
 			if (enemyChoice == 2) {
-				System.out.println(enemyName + " " + enemyRest());
+				playerDamage *= .6;
+				enemyStrength *= 1.2;
+				enemyHealth *= 1.02;
+				System.out.println(enemyName + " chose rest");
 			}
 			
 			if (playerDodgeSeed >= enemyDodgeSeed) {
@@ -165,52 +188,19 @@ public class Battle{
 		}
 		
 		if (runFlag == 1) {
+//			choiceSC.close();
 			return -1;
 		}
 			
 		if (playerWins) {
-			double xpGain =  Math.pow(xp+1, .7);
-			return (int) (xpGain * 3);
-		} 
-		else {
+			double xpGain =  Math.pow((double) xp, .7);
+//			choiceSC.close();
+			return (int) xpGain * 3;
+		} else {
+//			choiceSC.close();
 			return 0;
-		}		
-	}
-	
-	public String playerAttack(){
-		playerDamage = (double) playerStrength * playerScale;
-		double degradation = (double) playerStrength * .15;
-		
-		if (playerStrength > playerStrengthFloor) {
-			playerStrength -= (int) degradation;
 		}
-		
-		return "Player chose attack";
-	}
-	
-	public String playerShield(){
-		enemyDamage *= .3;
-		playerSpeed *= 1.15;
-		
-		return "Player chose shield";
-	}
-	
-	public String playerRest(){
-		enemyDamage *= .6;
-		playerStrength *= 1.2;
-		playerHealth *= 1.02;
-		
-		return "Player chose rest";
-	}
-	
-	
-	public String enemyAttack(){
-		enemyDamage = (double) enemyStrength * enemyScale;
-		double degradation = (double) enemyStrength * .15;
-		
-		if (enemyStrength > enemyStrengthFloor) {
-			enemyStrength -= (int) degradation;
-		}
+<<<<<<< HEAD
 		
 		return "chose attack";
 	}
@@ -238,6 +228,8 @@ public class Battle{
 		finalString += "A to attack, S to shield, D to rest, or F to flee\n";
 		
 		return finalString;
+=======
+>>>>>>> parent of 7dcbbae... changed battle
 	}
 	
 	/**
@@ -247,7 +239,14 @@ public class Battle{
 	public static void main(final String[] args) throws IOException {
 		Warrior warrior = new Warrior();
 		Battle testBattle = new Battle(warrior, 1);
+		
 	}
 
 
+	@Override
+	public void update(Observable o, Object arg) {
+		BattleMoveSelect battleMove = (BattleMoveSelect)o;
+		this.battleChoice = battleMove.getChoice();
+		choiceHasChanged = true;
+	}	
 }
