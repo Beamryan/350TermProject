@@ -35,6 +35,8 @@ public class Partition {
 	
 	/** The players character. */
 	Warrior player = new Warrior();
+	
+	BattleMoveSelect battleMove = null;
   
 
   /**
@@ -246,8 +248,10 @@ public String returnPrintPartition() {
    */
   public void doesTileHaveMonster() throws IOException{	  
 	  if (tiles[playerY][playerX].monsterID != 0) {
+		  battleMove = new BattleMoveSelect();
 		  int monsterID = getMonsterID();
 		  Battle battle = new Battle(player, monsterID);
+		  battleMove.addObserver(battle);
 		  int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 		  endBattle(xpGain);
 	  }

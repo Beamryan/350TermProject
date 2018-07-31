@@ -43,7 +43,6 @@ public final class GameWindow {
 				JLabel picture = null;
 				BufferedImage image = null;
 				if(partition.playerX == j && partition.playerY == i) {
-					System.out.println("Here at player location");
 					try {
 						image = ImageIO.read(new File("Water.png")); //TODO: get warrior picture.
 					} catch (IOException e) {
@@ -248,7 +247,7 @@ public final class GameWindow {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// Call the move attack method
+				foo.battleMove.setChoice(BattleChoices.attack);
 			}
 		});
 
@@ -259,7 +258,7 @@ public final class GameWindow {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// Call the move shield method
+				foo.battleMove.setChoice(BattleChoices.sheild);
 			}
 		});
 
@@ -270,7 +269,7 @@ public final class GameWindow {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// Call the move run method
+				foo.battleMove.setChoice(BattleChoices.rest);
 			}
 		});
 
@@ -281,7 +280,7 @@ public final class GameWindow {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// Call the move flee method
+				foo.battleMove.setChoice(BattleChoices.flee);
 			}
 		});
 

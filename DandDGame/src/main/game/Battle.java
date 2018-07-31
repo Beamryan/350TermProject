@@ -1,12 +1,14 @@
 package main.game;
 import java.io.*;
 import java.util.Scanner;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
 /**
  * Class to handle battles between player and monsters.
  */
-public class Battle {
+public class Battle implements Observer{
 	
 	/** player stats. */
 	private int playerStrength, playerSpeed, playerHealth;
@@ -22,6 +24,9 @@ public class Battle {
 	
 	/** player scaling value. */
 	double playerScale;
+	
+	BattleChoices battleChoice;
+	boolean choiceHasChanged = false;
 
 	
 	/**
@@ -205,5 +210,13 @@ public class Battle {
 		Warrior warrior = new Warrior();
 		Battle testBattle = new Battle(warrior, 1);
 		
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		BattleMoveSelect battleMove = (BattleMoveSelect)o;
+		this.battleChoice = battleMove.getChoice();
+		choiceHasChanged = true;
 	}	
 }
