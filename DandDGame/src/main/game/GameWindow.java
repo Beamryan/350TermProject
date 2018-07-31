@@ -150,7 +150,6 @@ public final class GameWindow {
 					foo.doesTileHaveItem();
 					foo.doesTileHaveMonster();
 
-					foo.printPartition();
 					textArea.setText(null);
 					textArea.setText("Level: "+ foo.player.level + "\nXp: " + foo.player.xp);
 					SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -173,7 +172,6 @@ public final class GameWindow {
 					foo.doesTileHaveItem();
 					foo.doesTileHaveMonster();
 
-					foo.printPartition();
 					textArea.setText(null);
 					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
 					SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -196,7 +194,6 @@ public final class GameWindow {
 					foo.doesTileHaveItem();
 					foo.doesTileHaveMonster();
 
-					foo.printPartition();
 					textArea.setText(null);
 					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
 					SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -219,7 +216,6 @@ public final class GameWindow {
 					foo.doesTileHaveItem();
 					foo.doesTileHaveMonster();
 
-					foo.printPartition();
 					textArea.setText(null);
 					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
 					SwingUtilities.updateComponentTreeUI(mainFrame);

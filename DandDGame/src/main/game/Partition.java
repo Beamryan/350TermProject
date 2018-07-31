@@ -420,7 +420,6 @@ public static void main(final String[] args) throws IOException {
 	 Scanner dir = new Scanner(System.in);
 	 char choice = 0;
 	 foo.welcomeMessage();
-	 foo.printPartition();
 	 while (choice != -1) {
 		 dir = new Scanner(System.in);
 		 choice = dir.next().charAt(0);
