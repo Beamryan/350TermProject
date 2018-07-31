@@ -2,6 +2,8 @@ package main.game;
 import java.io.*;
 import java.util.Scanner;
 
+import javax.swing.JTextArea;
+
 /**
  * Class used to hold the portion of the map visible to the player.
  */
@@ -376,6 +378,22 @@ public void welcomeMessage() {
 	  System.out.println("Press e for item management, and r for battle rules");
 	  System.out.println("Start exploring!\n\n");
   }  
+
+public void ManageInventory(JTextArea textArea, Warrior player) {
+	player.inventory.showInventory(textArea);
+	textArea.append("If you would like to select an item to hold, enter the slot number \nor else hit any button to close inventory.");
+//	textArea.setText();
+}
+public void SwapHoldingItem(int itemPosition) {
+	if (itemPosition >= 0 && itemPosition <= player.inventory.getInventorySize()) {
+		player.inventory.setItemToCurrent(itemPosition);
+		try {
+			player.scaling = player.inventory.getScaling();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
   
   /**
  * @param args none

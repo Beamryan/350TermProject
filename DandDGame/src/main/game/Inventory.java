@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JTextArea;
+
 /**
  * Class to hold inventory of the player.
  */
@@ -58,6 +60,22 @@ public class Inventory {
 			}
 		}
 	}
+	public void showInventory(JTextArea textArea) {
+		String inventoryString = "";
+		int inventorySize = getNextEmptyInvntorySlot();
+		//Added -2 so that quest item isnt shown
+		for (int i = 0; i < inventorySize; i++) {
+			if(inventory[i] < 19) {
+				inventoryString = inventoryString + "Inventory Slot " + i + ": Item: " + getItemName(inventory[i]) + "\n";
+//				System.out.println("Inventory Slot " + i + ": Item: " + getItemName(inventory[i]));
+			}
+			else if(inventory[i] > 19) {
+				inventoryString = inventoryString + "Inventory Slot " + i + ": Item: " + getItemName(inventory[i]) + "\n";
+//				System.out.println("Inventory Slot " + i + ": Armor: " + getItemName(inventory[i]));
+			}
+		}
+		textArea.setText(inventoryString);
+	}
 	
 	/**
 	 * Shows the armor inventory of the character
@@ -66,6 +84,18 @@ public class Inventory {
 		for(int i = 0; i < 4; i++) {
 			System.out.println("Armor Slot " + i + ": " + armorInventory[i]);
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void showArmorInventory(JTextArea textArea) {
+		String inventoryString = "";
+		for(int i = 0; i < 4; i++) {
+			inventoryString = inventoryString + "Armor Slot " + i + ": " + armorInventory[i] + "\n";
+//			System.out.println("Armor Slot " + i + ": " + armorInventory[i]);
+		}
+		textArea.setText(inventoryString);
 	}
 	
 	/**
@@ -170,7 +200,7 @@ public class Inventory {
 	/**
 	 * @return integer the next open slot
 	 */
-	private int getNextEmptyInvntorySlot() {
+	public int getNextEmptyInvntorySlot() {
 		for (int i = 0; i < inventorySize; i++) {
 			if (inventory[i] == 0) {
 				return i;
