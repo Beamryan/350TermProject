@@ -177,16 +177,21 @@ public final class GameWindow {
 		storyTextArea.setFont(storyTextArea.getFont().deriveFont(24f));
 		storyTextArea.setEditable(false);
 		textPanel.add(storyTextArea);
-
-		JButton inventoryButton1 = new JButton("1");
-		JButton inventoryButton2 = new JButton("2");
-		JButton inventoryButton3 = new JButton("3");
-		JButton inventoryButton4 = new JButton("4");
-		JButton inventoryButton5 = new JButton("5");
-		JButton inventoryButton6 = new JButton("6");
-		JButton inventoryButton7 = new JButton("7");
-		JButton inventoryButton8 = new JButton("8");
-		JButton inventoryButton9 = new JButton("9");
+		
+ 		for(int i = 0; i < foo.player.inventory.inventorySize; i++) {
+ 			final int itemPosition = i;
+ 			JButton inventoryButton = new JButton("" + i);
+ 			inventoryButton.setPreferredSize(new Dimension(50, 50));
+ 			inventoryButton.setFont(new Font("Arial", Font.PLAIN, 12));
+ 			inventoryButton.addActionListener(new ActionListener()
+ 			{
+ 				public void actionPerformed(ActionEvent e)
+ 				{
+ 					foo.SwapHoldingItem(itemPosition);
+ 				}
+ 			});
+ 			inventoryButtonPanel.add(inventoryButton);
+ 		}
 		
 		JButton upButton = new JButton("Up");
 		upButton.setPreferredSize(new Dimension(150, 85));
@@ -412,88 +417,7 @@ public final class GameWindow {
 //		});
 
 
-		inventoryButton1.setPreferredSize(new Dimension(80, 45));
-		inventoryButton1.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton1.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(1);
-			}
-		});
-		inventoryButton2.setPreferredSize(new Dimension(80, 45));
-		inventoryButton2.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton2.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(2);
-			}
-		});
-		inventoryButton3.setPreferredSize(new Dimension(80, 45));
-		inventoryButton3.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton3.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(3);
-			}
-		});
-		inventoryButton4.setPreferredSize(new Dimension(80, 45));
-		inventoryButton4.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton4.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(4);
-			}
-		});
-		inventoryButton5.setPreferredSize(new Dimension(80, 45));
-		inventoryButton5.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton5.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(5);
-			}
-		});
-		inventoryButton6.setPreferredSize(new Dimension(80, 45));
-		inventoryButton6.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton6.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(6);
-			}
-		});
-		inventoryButton7.setPreferredSize(new Dimension(80, 45));
-		inventoryButton7.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton7.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(7);
-			}
-		});
-		inventoryButton8.setPreferredSize(new Dimension(80, 45));
-		inventoryButton8.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton8.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(8);
-			}
-		});
-		inventoryButton9.setPreferredSize(new Dimension(80, 45));
-		inventoryButton9.setFont(new Font("Arial", Font.PLAIN, 12));
-		inventoryButton9.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.SwapHoldingItem(9);
-			}
-		});
-		
+	
 		
 		buttonPanel.add(upButton);
 		buttonPanel.add(downButton);
@@ -504,16 +428,6 @@ public final class GameWindow {
 //		buttonPanel.add(shieldButton);
 //		buttonPanel.add(restButton);
 //		buttonPanel.add(fleeButton);
-		
-		inventoryButtonPanel.add(inventoryButton1);
-		inventoryButtonPanel.add(inventoryButton2);
-		inventoryButtonPanel.add(inventoryButton3);
-		inventoryButtonPanel.add(inventoryButton4);
-		inventoryButtonPanel.add(inventoryButton5);
-		inventoryButtonPanel.add(inventoryButton6);
-		inventoryButtonPanel.add(inventoryButton7);
-		inventoryButtonPanel.add(inventoryButton8);
-		inventoryButtonPanel.add(inventoryButton9);
 		
 		buttonPanel.setBackground(Color.WHITE);
 		inventoryButtonPanel.setBackground(Color.WHITE);
