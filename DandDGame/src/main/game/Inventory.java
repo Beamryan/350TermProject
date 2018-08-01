@@ -306,6 +306,9 @@ public class Inventory {
 			case 17:
 				itemName = "Wooden-Ruler";
 				break;
+			case 19:
+				itemName = "Pool-Floaty";
+				break;
 			case 20:
 				itemName = "Bucket Helmet";
 				break;
