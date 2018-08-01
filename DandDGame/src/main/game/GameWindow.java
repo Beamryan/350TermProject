@@ -84,7 +84,14 @@ public final class GameWindow {
 		gamePanel.repaint();
 	}
 	
-	public static String SendWelcomeMessage() {
+	private static String PrintPlayerStats(Partition foo) {
+		String playerStats = "Level: " + foo.player.level + "   Experience: " + foo.player.xp;
+		playerStats += "   Strength: " + foo.player.strength + "   Speed: " + foo.player.speed + "   Health: " + foo.player.health;
+		
+		return playerStats;
+	}
+	
+	private static String SendWelcomeMessage() {
 
 		String welcomeString = "";
 		welcomeString += "Welcome to the strange world of being an engineering student!\n";
@@ -160,17 +167,13 @@ public final class GameWindow {
 		
 		JTextArea statTextArea = new JTextArea();
 		statTextArea.setSize(new Dimension(1000, 50));
-		statTextArea.setFont(statTextArea.getFont().deriveFont(24f));
-		statTextArea.setAlignmentY(25);
-		statTextArea.setAlignmentX(500);
+		statTextArea.setFont(statTextArea.getFont().deriveFont(16f));
 		statTextArea.setEditable(false);
 		statPanel.add(statTextArea);
 
 		JTextArea storyTextArea = new JTextArea();
 		storyTextArea.setSize(new Dimension(1000, 250));
 		storyTextArea.setFont(storyTextArea.getFont().deriveFont(24f));
-		storyTextArea.setAlignmentY(125);
-		storyTextArea.setAlignmentX(500);
 		storyTextArea.setEditable(false);
 		textPanel.add(storyTextArea);
 
@@ -217,7 +220,7 @@ public final class GameWindow {
 					}
 					else{
 						statTextArea.setText(null);
-						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
+						statTextArea.insert(PrintPlayerStats(foo), 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -259,7 +262,7 @@ public final class GameWindow {
 					}
 					else{
 						statTextArea.setText(null);
-						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
+						statTextArea.insert(PrintPlayerStats(foo), 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}	
 				} catch(Exception ex) {
@@ -301,7 +304,7 @@ public final class GameWindow {
 					}
 					else{
 						statTextArea.setText(null);
-						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
+						statTextArea.insert(PrintPlayerStats(foo), 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -343,7 +346,7 @@ public final class GameWindow {
 					}
 					else{
 						statTextArea.setText(null);
-						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
+						statTextArea.insert(PrintPlayerStats(foo), 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -528,7 +531,7 @@ public final class GameWindow {
 		mainFrame.setVisible(true);	  
 		PrintMap(gamePanel, foo);
 		storyTextArea.setText(SendWelcomeMessage());
-		statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
+		statTextArea.insert(PrintPlayerStats(foo), 0);
 		SwingUtilities.updateComponentTreeUI(mainFrame);
 	}
 
