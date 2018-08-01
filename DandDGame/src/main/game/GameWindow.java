@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public final class GameWindow {
 
@@ -215,9 +217,9 @@ public final class GameWindow {
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						storyTextArea.setText(null);
-						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
-						SwingUtilities.updateComponentTreeUI(mainFrame);
+						String monsterWarning="Monster appeared! Battle it using the console!";
+						JOptionPane.showMessageDialog(null, monsterWarning,
+				                "Hey!", JOptionPane.ERROR_MESSAGE);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
@@ -257,9 +259,9 @@ public final class GameWindow {
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						storyTextArea.setText(null);
-						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
-						SwingUtilities.updateComponentTreeUI(mainFrame);
+						String monsterWarning="Monster appeared! Battle it using the console!";
+						JOptionPane.showMessageDialog(null, monsterWarning,
+				                "Hey!", JOptionPane.ERROR_MESSAGE);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
@@ -299,9 +301,9 @@ public final class GameWindow {
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						storyTextArea.setText(null);
-						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
-						SwingUtilities.updateComponentTreeUI(mainFrame);
+						String monsterWarning="Monster appeared! Battle it using the console!";
+						JOptionPane.showMessageDialog(null, monsterWarning,
+				                "Hey!", JOptionPane.ERROR_MESSAGE);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
@@ -341,9 +343,9 @@ public final class GameWindow {
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						storyTextArea.setText(null);
-						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
-						SwingUtilities.updateComponentTreeUI(mainFrame);
+						String monsterWarning="Monster appeared! Battle it using the console!";
+						JOptionPane.showMessageDialog(null, monsterWarning,
+				                "Hey!", JOptionPane.ERROR_MESSAGE);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
