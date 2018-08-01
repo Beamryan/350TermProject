@@ -141,7 +141,7 @@ public final class GameWindow {
 		foo.updatePartition();
 
 		JFrame mainFrame = new JFrame();
-		mainFrame.setPreferredSize(new Dimension(1000, 750));
+		mainFrame.setPreferredSize(new Dimension(1000, 800));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(750, 500));
@@ -151,17 +151,28 @@ public final class GameWindow {
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setPreferredSize(new Dimension(1000, 250));
+		
+		JPanel statPanel = new JPanel();
+		statPanel.setPreferredSize(new Dimension(1000, 50));
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setPreferredSize(new Dimension(150, 500));
+		
+		JTextArea statTextArea = new JTextArea();
+		statTextArea.setSize(new Dimension(1000, 50));
+		statTextArea.setFont(statTextArea.getFont().deriveFont(24f));
+		statTextArea.setAlignmentY(25);
+		statTextArea.setAlignmentX(500);
+		statTextArea.setEditable(false);
+		statPanel.add(statTextArea);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setSize(new Dimension(1000, 250));
-		textArea.setFont(textArea.getFont().deriveFont(24f));
-		textArea.setAlignmentY(150);
-		textArea.setAlignmentX(750);
-		textArea.setEditable(false);
-		textPanel.add(textArea);
+		JTextArea storyTextArea = new JTextArea();
+		storyTextArea.setSize(new Dimension(1000, 250));
+		storyTextArea.setFont(storyTextArea.getFont().deriveFont(24f));
+		storyTextArea.setAlignmentY(125);
+		storyTextArea.setAlignmentX(500);
+		storyTextArea.setEditable(false);
+		textPanel.add(storyTextArea);
 
 		JButton inventoryButton1 = new JButton("1");
 		JButton inventoryButton2 = new JButton("2");
@@ -188,15 +199,15 @@ public final class GameWindow {
 						foo.player.inventory.addItemToInventory(itemID);
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
-						textArea.setText(null);
-						textArea.insert(panelPrompt,0);
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						textArea.setText(null);
-						textArea.insert("Monster appeared! Battle it int th console!", 0);
+						storyTextArea.setText(null);
+						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -205,8 +216,8 @@ public final class GameWindow {
 						PrintMap(gamePanel, foo);
 					}
 					else{
-						textArea.setText(null);
-						textArea.setText("Level: "+ foo.player.level + "\nXp: " + foo.player.xp);
+						statTextArea.setText(null);
+						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -230,15 +241,15 @@ public final class GameWindow {
 						foo.player.inventory.addItemToInventory(itemID);
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
-						textArea.setText(null);
-						textArea.insert(panelPrompt,0);
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						textArea.setText(null);
-						textArea.insert("Monster appeared! Battle it in the console!", 0);
+						storyTextArea.setText(null);
+						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -247,8 +258,8 @@ public final class GameWindow {
 						PrintMap(gamePanel, foo);
 					}
 					else{
-						textArea.setText(null);
-						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);					
+						statTextArea.setText(null);
+						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}	
 				} catch(Exception ex) {
@@ -272,15 +283,15 @@ public final class GameWindow {
 						foo.player.inventory.addItemToInventory(itemID);
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
-						textArea.setText(null);
-						textArea.insert(panelPrompt,0);
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						textArea.setText(null);
-						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						storyTextArea.setText(null);
+						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -289,8 +300,8 @@ public final class GameWindow {
 						PrintMap(gamePanel, foo);
 					}
 					else{
-						textArea.setText(null);
-						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						statTextArea.setText(null);
+						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -314,15 +325,15 @@ public final class GameWindow {
 						foo.player.inventory.addItemToInventory(itemID);
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
-						textArea.setText(null);
-						textArea.insert(panelPrompt,0);
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
 					else if(foo.doesTileHaveMonster()){
-						textArea.setText(null);
-						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						storyTextArea.setText(null);
+						storyTextArea.insert("Monster appeared! Battle it using the console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -331,8 +342,8 @@ public final class GameWindow {
 						PrintMap(gamePanel, foo);
 					}
 					else{
-						textArea.setText(null);
-						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						statTextArea.setText(null);
+						statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -348,7 +359,7 @@ public final class GameWindow {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				foo.ManageInventory(textArea, foo.player);
+				foo.ManageInventory(storyTextArea, foo.player);
 			}
 		});
 
@@ -503,9 +514,11 @@ public final class GameWindow {
 		buttonPanel.setBackground(Color.WHITE);
 		inventoryButtonPanel.setBackground(Color.WHITE);
 		textPanel.setBackground(Color.WHITE);
+		statPanel.setBackground(Color.WHITE);
 		gamePanel.setBackground(Color.BLACK);
 
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
+		mainFrame.add(statPanel, BorderLayout.NORTH);
 		mainFrame.add(textPanel, BorderLayout.PAGE_END);
 		mainFrame.add(buttonPanel, BorderLayout.LINE_END);	
 		mainFrame.add(inventoryButtonPanel, BorderLayout.LINE_START);
@@ -514,7 +527,8 @@ public final class GameWindow {
 		mainFrame.pack();
 		mainFrame.setVisible(true);	  
 		PrintMap(gamePanel, foo);
-		textArea.setText(SendWelcomeMessage());
+		storyTextArea.setText(SendWelcomeMessage());
+		statTextArea.insert("Level: "+ foo.player.level + "   Xp: " + foo.player.xp, 0);
 		SwingUtilities.updateComponentTreeUI(mainFrame);
 	}
 
