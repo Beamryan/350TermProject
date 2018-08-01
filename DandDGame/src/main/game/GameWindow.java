@@ -220,8 +220,15 @@ public final class GameWindow {
 						else {
 							foo.player.inventory.addItemToInventory(itemID);
 						}
-						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
-						panelPrompt += "\nGo to inventory to equip";
+						String panelPrompt = "";
+						if(itemID != 19){
+							panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+							panelPrompt += "\nGo to inventory to equip";
+						}
+						else{
+							panelPrompt = "Got item: Pool floaty!";
+							panelPrompt += "\nYou can now traverse water!";
+						}
 						storyTextArea.setText(null);
 						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -276,8 +283,15 @@ public final class GameWindow {
 						else {
 							foo.player.inventory.addItemToInventory(itemID);
 						}
-						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
-						panelPrompt += "\nGo to inventory to equip";
+						String panelPrompt = "";
+								if(itemID != 19){
+									panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+									panelPrompt += "\nGo to inventory to equip";
+								}
+								else{
+									panelPrompt = "Got item: Pool floaty!";
+									panelPrompt += "\nYou can now traverse water!";
+								}
 						storyTextArea.setText(null);
 						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -332,8 +346,15 @@ public final class GameWindow {
 						else {
 							foo.player.inventory.addItemToInventory(itemID);
 						}
-						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
-						panelPrompt += "\nGo to inventory to equip";
+						String panelPrompt = "";
+						if(itemID != 19){
+							panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+							panelPrompt += "\nGo to inventory to equip";
+						}
+						else{
+							panelPrompt = "Got item: Pool floaty!";
+							panelPrompt += "\nYou can now traverse water!";
+						}
 						storyTextArea.setText(null);
 						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -388,8 +409,15 @@ public final class GameWindow {
 						else {
 							foo.player.inventory.addItemToInventory(itemID);
 						}
-						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
-						panelPrompt += "\nGo to inventory to equip";
+						String panelPrompt = "";
+						if(itemID != 19){
+							panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+							panelPrompt += "\nGo to inventory to equip";
+						}
+						else{
+							panelPrompt = "Got item: Pool floaty!";
+							panelPrompt += "\nYou can now traverse water!";
+						}
 						storyTextArea.setText(null);
 						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
