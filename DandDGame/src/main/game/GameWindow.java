@@ -190,6 +190,11 @@ public final class GameWindow {
  				public void actionPerformed(ActionEvent e)
  				{
  					foo.SwapHoldingItem(itemPosition);
+					String panelPrompt = "Current item: ";
+					panelPrompt += foo.player.inventory.getItemName(foo.player.inventory.getCurrentItem());
+					panelPrompt += "\nCurrent scaling: "+ foo.player.scaling;
+					storyTextArea.setText(null);
+					storyTextArea.insert(panelPrompt,0);
  				}
  			});
  			inventoryButtonPanel.add(inventoryButton);
