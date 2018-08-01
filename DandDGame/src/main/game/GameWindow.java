@@ -231,6 +231,11 @@ public final class GameWindow {
 					else{
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
+						String panelPrompt = "Current item: ";
+						panelPrompt += foo.player.inventory.getItemName(foo.player.inventory.getCurrentItem());
+						panelPrompt += "\nCurrent scaling: "+ foo.player.scaling;
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -275,6 +280,11 @@ public final class GameWindow {
 					else{
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
+						String panelPrompt = "Current item: ";
+						panelPrompt += foo.player.inventory.getItemName(foo.player.inventory.getCurrentItem());
+						panelPrompt += "\nCurrent scaling: "+ foo.player.scaling;
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}	
 				} catch(Exception ex) {
@@ -319,6 +329,11 @@ public final class GameWindow {
 					else{
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
+						String panelPrompt = "Current item: ";
+						panelPrompt += foo.player.inventory.getItemName(foo.player.inventory.getCurrentItem());
+						panelPrompt += "\nCurrent scaling: "+ foo.player.scaling;
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
@@ -363,6 +378,11 @@ public final class GameWindow {
 					else{
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
+						String panelPrompt = "Current item: ";
+						panelPrompt += foo.player.inventory.getItemName(foo.player.inventory.getCurrentItem());
+						panelPrompt += "\nCurrent scaling: "+ foo.player.scaling;
+						storyTextArea.setText(null);
+						storyTextArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 				} catch(Exception ex) {
