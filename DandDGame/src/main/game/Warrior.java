@@ -8,13 +8,13 @@ import java.util.Scanner;
 public class Warrior implements Character {
 
 	/** the character strength. */
-	public int strength = 40;
+	public int strength = 50;
 	
 	/** the character speed. */
-	public int speed = 10;
+	public int speed = 20;
 	
 	/** the character stamina. */
-	public int stamina = 15;
+	public int stamina = 20;
 	
 	/** the character focus. */
 	public int focus = 20;
