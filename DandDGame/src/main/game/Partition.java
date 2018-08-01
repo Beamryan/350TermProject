@@ -251,7 +251,6 @@ public String returnPrintPartition() {
 		  battleMove = new BattleMoveSelect();
 		  int monsterID = getMonsterID();
 		  Battle battle = new Battle(player, monsterID);
-		  battleMove.addObserver(battle);
 		  int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 		  endBattle(xpGain);
 	  }
