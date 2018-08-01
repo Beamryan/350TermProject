@@ -149,13 +149,13 @@ public final class GameWindow {
 		foo.updatePartition();
 
 		JFrame mainFrame = new JFrame();
-		mainFrame.setPreferredSize(new Dimension(1000, 800));
+		mainFrame.setPreferredSize(new Dimension(1050, 800));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(750, 500));
 
 		JPanel inventoryButtonPanel = new JPanel();
-		inventoryButtonPanel.setPreferredSize(new Dimension(100, 500));
+		inventoryButtonPanel.setPreferredSize(new Dimension(150, 500));
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setPreferredSize(new Dimension(1000, 250));
@@ -181,7 +181,7 @@ public final class GameWindow {
  		for(int i = 0; i < foo.player.inventory.inventorySize; i++) {
  			final int itemPosition = i;
  			JButton inventoryButton = new JButton("" + i);
- 			inventoryButton.setPreferredSize(new Dimension(50, 50));
+ 			inventoryButton.setPreferredSize(new Dimension(50, 40));
  			inventoryButton.setFont(new Font("Arial", Font.PLAIN, 12));
  			inventoryButton.addActionListener(new ActionListener()
  			{
