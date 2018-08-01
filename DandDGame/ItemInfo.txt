@@ -15,6 +15,7 @@
 15 Ultra-GreatSword 5.1 
 16 Master-GreatSword 6.5
 17 Wooden-Ruler 7
+19 Pool-Floaty 0
 20 Bucket Helmet 1.0
 21 Leather Vest 1.0
 22 Leather Pants 1.0
