@@ -44,7 +44,7 @@ public final class GameWindow {
 				BufferedImage image = null;
 				if(partition.playerX == j && partition.playerY == i) {
 					try {
-						image = ImageIO.read(new File("Water.png")); //TODO: get warrior picture.
+						image = ImageIO.read(new File("reallyBadSprite.png")); //TODO: get warrior picture.
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
