@@ -2,6 +2,7 @@ package main.game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -82,6 +83,40 @@ public final class GameWindow {
 		gamePanel.revalidate();
 		gamePanel.repaint();
 	}
+	
+	public static String SendWelcomeMessage() {
+
+		String welcomeString = "";
+		welcomeString += "Welcome to the strange world of being an engineering student!\n";
+		welcomeString += "You will struggle to find the proper tools to defend yourself from the\n";
+		welcomeString += "monster hiding, waiting for you to fall into their traps! Collect hidden items by\n";
+		welcomeString += "exploring the building. Items will help you in your quest to defet the monsters.\n";
+		welcomeString += "Press e for item management, and r for battle rules\n";
+		welcomeString += "Start exploring!\n\n";
+
+		return welcomeString;
+	}  
+	
+//	private static void SelectCharacterPrompt(Character player) {
+//		char choice;
+//		do {
+//		Scanner choiceSC = new Scanner(System.in);
+//		System.out.println("Please select a character type:\n");
+//		System.out.println("'W' = Warrior  'R' = Rogue  'M' = Mage \n");
+//		choice = choiceSC.next().charAt(0);
+//		}while((choice != 'W') || (choice != 'R') || (choice != 'M'));
+//		
+//		if(choice == 'W') {
+//			System.out.println("The selected class was Warrior.\n" );
+//			player = (Warrior) player;
+//		} else if(choice == 'R') {
+//			System.out.println("The selected class was Rogue.\n" );
+//			player = (Rogue) player;
+//		} else if(choice == 'M') {
+//			System.out.println("The selected class was Mage.\n" );
+//			player = (Mage) player;
+//		}	
+//	}
 
 
 	/**
@@ -99,10 +134,11 @@ public final class GameWindow {
 		int width = 10;
 		int length = 10;
 		Warrior player = new Warrior();
+		
+		//player = SelectCharacterPrompt(player);
 
 		Partition foo = new Partition(width, length, currentPartition, xDim, yDim, player, playerX, playerY);
 		foo.updatePartition();
-		foo.welcomeMessage();
 
 		JFrame mainFrame = new JFrame();
 		mainFrame.setPreferredSize(new Dimension(1000, 750));
@@ -111,42 +147,35 @@ public final class GameWindow {
 		gamePanel.setPreferredSize(new Dimension(750, 500));
 
 		JPanel inventoryButtonPanel = new JPanel();
-		inventoryButtonPanel.setPreferredSize(new Dimension(100, 50));
+		inventoryButtonPanel.setPreferredSize(new Dimension(100, 500));
 		
 		JPanel textPanel = new JPanel();
-		textPanel.setPreferredSize(new Dimension(900, 200));
-
-//		JPanel statPanel = new JPanel();
-//		statPanel.setPreferredSize(new Dimension(125, 500));
+		textPanel.setPreferredSize(new Dimension(1000, 250));
 
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setPreferredSize(new Dimension(125, 500));
+		buttonPanel.setPreferredSize(new Dimension(150, 500));
 
 		JTextArea textArea = new JTextArea();
-		textArea.setSize(new Dimension(1500, 300));
-		textArea.setFont(textArea.getFont().deriveFont(14f));
+		textArea.setSize(new Dimension(1000, 250));
+		textArea.setFont(textArea.getFont().deriveFont(24f));
+		textArea.setAlignmentY(150);
+		textArea.setAlignmentX(750);
+		textArea.setEditable(false);
 		textPanel.add(textArea);
 
-		JButton[] inventoryButtons = new JButton[foo.player.inventory.inventorySize];
-		for(int i = 0; i < foo.player.inventory.inventorySize; i++) {
-			final int itemPosition = i;
-			JButton inventoryButton = new JButton("" + i);
-			inventoryButton.setPreferredSize(new Dimension(50, 50));
-			inventoryButton.setFont(new Font("Arial", Font.PLAIN, 12));
-			inventoryButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					foo.SwapHoldingItem(itemPosition);
-				}
-			});
-			inventoryButtonPanel.add(inventoryButton);
-			inventoryButtons[i] = inventoryButton;
-		}
+		JButton inventoryButton1 = new JButton("1");
+		JButton inventoryButton2 = new JButton("2");
+		JButton inventoryButton3 = new JButton("3");
+		JButton inventoryButton4 = new JButton("4");
+		JButton inventoryButton5 = new JButton("5");
+		JButton inventoryButton6 = new JButton("6");
+		JButton inventoryButton7 = new JButton("7");
+		JButton inventoryButton8 = new JButton("8");
+		JButton inventoryButton9 = new JButton("9");
 		
 		JButton upButton = new JButton("Up");
-		upButton.setPreferredSize(new Dimension(250, 40));
-		upButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		upButton.setPreferredSize(new Dimension(150, 85));
+		upButton.setFont(new Font("Arial", Font.PLAIN, 24));
 		upButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -186,8 +215,8 @@ public final class GameWindow {
 		});
 
 		JButton downButton = new JButton("Down");
-		downButton.setPreferredSize(new Dimension(250, 40));
-		downButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		downButton.setPreferredSize(new Dimension(150, 85));
+		downButton.setFont(new Font("Arial", Font.PLAIN, 24));
 		downButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -227,8 +256,8 @@ public final class GameWindow {
 		});
 
 		JButton leftButton = new JButton("Left");
-		leftButton.setPreferredSize(new Dimension(250, 40));
-		leftButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		leftButton.setPreferredSize(new Dimension(150, 85));
+		leftButton.setFont(new Font("Arial", Font.PLAIN, 24));
 		leftButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -268,8 +297,8 @@ public final class GameWindow {
 		});
 
 		JButton rightButton = new JButton("Right");
-		rightButton.setPreferredSize(new Dimension(250, 40));
-		rightButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		rightButton.setPreferredSize(new Dimension(150, 85));
+		rightButton.setFont(new Font("Arial", Font.PLAIN, 24));
 		rightButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -309,8 +338,8 @@ public final class GameWindow {
 		});
 
 		JButton inventoryButton = new JButton("Inventory");
-		inventoryButton.setPreferredSize(new Dimension(250, 40));
-		inventoryButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		inventoryButton.setPreferredSize(new Dimension(150, 85));
+		inventoryButton.setFont(new Font("Arial", Font.PLAIN, 24));
 		inventoryButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -319,71 +348,161 @@ public final class GameWindow {
 			}
 		});
 
-		JButton attackButton = new JButton("Attack");
-		attackButton.setPreferredSize(new Dimension(250, 40));
-		attackButton.setFont(new Font("Arial", Font.PLAIN, 30));
-		attackButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.battleMove.setChoice(BattleChoices.attack);
-			}
-		});
+//		JButton attackButton = new JButton("Attack");
+//		attackButton.setPreferredSize(new Dimension(250, 40));
+//		attackButton.setFont(new Font("Arial", Font.PLAIN, 30));
+//		attackButton.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				foo.battleMove.setChoice(BattleChoices.attack);
+//			}
+//		});
+//
+//		JButton shieldButton = new JButton("Shield");
+//		shieldButton.setPreferredSize(new Dimension(250, 40));
+//		shieldButton.setFont(new Font("Arial", Font.PLAIN, 30));
+//		shieldButton.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				foo.battleMove.setChoice(BattleChoices.sheild);
+//			}
+//		});
+//
+//		JButton restButton = new JButton("Rest");
+//		restButton.setPreferredSize(new Dimension(250, 40));
+//		restButton.setFont(new Font("Arial", Font.PLAIN, 30));
+//		restButton.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				foo.battleMove.setChoice(BattleChoices.rest);
+//			}
+//		});
+//
+//		JButton fleeButton = new JButton("Flee");
+//		fleeButton.setPreferredSize(new Dimension(250, 40));
+//		fleeButton.setFont(new Font("Arial", Font.PLAIN, 30));
+//		fleeButton.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				foo.battleMove.setChoice(BattleChoices.flee);
+//			}
+//		});
 
-		JButton shieldButton = new JButton("Shield");
-		shieldButton.setPreferredSize(new Dimension(250, 40));
-		shieldButton.setFont(new Font("Arial", Font.PLAIN, 30));
-		shieldButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				foo.battleMove.setChoice(BattleChoices.sheild);
-			}
-		});
 
-		JButton restButton = new JButton("Rest");
-		restButton.setPreferredSize(new Dimension(250, 40));
-		restButton.setFont(new Font("Arial", Font.PLAIN, 30));
-		restButton.addActionListener(new ActionListener()
+		inventoryButton1.setPreferredSize(new Dimension(80, 45));
+		inventoryButton1.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton1.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				foo.battleMove.setChoice(BattleChoices.rest);
+				foo.SwapHoldingItem(1);
 			}
 		});
-
-		JButton fleeButton = new JButton("Flee");
-		fleeButton.setPreferredSize(new Dimension(250, 40));
-		fleeButton.setFont(new Font("Arial", Font.PLAIN, 30));
-		fleeButton.addActionListener(new ActionListener()
+		inventoryButton2.setPreferredSize(new Dimension(80, 45));
+		inventoryButton2.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton2.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				foo.battleMove.setChoice(BattleChoices.flee);
+				foo.SwapHoldingItem(2);
 			}
 		});
-				
+		inventoryButton3.setPreferredSize(new Dimension(80, 45));
+		inventoryButton3.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton3.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(3);
+			}
+		});
+		inventoryButton4.setPreferredSize(new Dimension(80, 45));
+		inventoryButton4.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton4.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(4);
+			}
+		});
+		inventoryButton5.setPreferredSize(new Dimension(80, 45));
+		inventoryButton5.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton5.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(5);
+			}
+		});
+		inventoryButton6.setPreferredSize(new Dimension(80, 45));
+		inventoryButton6.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton6.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(6);
+			}
+		});
+		inventoryButton7.setPreferredSize(new Dimension(80, 45));
+		inventoryButton7.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton7.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(7);
+			}
+		});
+		inventoryButton8.setPreferredSize(new Dimension(80, 45));
+		inventoryButton8.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton8.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(8);
+			}
+		});
+		inventoryButton9.setPreferredSize(new Dimension(80, 45));
+		inventoryButton9.setFont(new Font("Arial", Font.PLAIN, 12));
+		inventoryButton9.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				foo.SwapHoldingItem(9);
+			}
+		});
+		
+		
 		buttonPanel.add(upButton);
 		buttonPanel.add(downButton);
 		buttonPanel.add(leftButton);
 		buttonPanel.add(rightButton);
 		buttonPanel.add(inventoryButton);
-		buttonPanel.add(attackButton);
-		buttonPanel.add(shieldButton);
-		buttonPanel.add(restButton);
-		buttonPanel.add(fleeButton);
+//		buttonPanel.add(attackButton);
+//		buttonPanel.add(shieldButton);
+//		buttonPanel.add(restButton);
+//		buttonPanel.add(fleeButton);
 		
-		inventoryButtonPanel.setLayout(new GridLayout(8, 1));
+		inventoryButtonPanel.add(inventoryButton1);
+		inventoryButtonPanel.add(inventoryButton2);
+		inventoryButtonPanel.add(inventoryButton3);
+		inventoryButtonPanel.add(inventoryButton4);
+		inventoryButtonPanel.add(inventoryButton5);
+		inventoryButtonPanel.add(inventoryButton6);
+		inventoryButtonPanel.add(inventoryButton7);
+		inventoryButtonPanel.add(inventoryButton8);
+		inventoryButtonPanel.add(inventoryButton9);
 		
-		buttonPanel.setBackground(Color.GRAY);
+		buttonPanel.setBackground(Color.WHITE);
 		inventoryButtonPanel.setBackground(Color.WHITE);
 		textPanel.setBackground(Color.WHITE);
-//		statPanel.setBackground(Color.GRAY);
 		gamePanel.setBackground(Color.BLACK);
 
 		mainFrame.add(gamePanel, BorderLayout.CENTER);
 		mainFrame.add(textPanel, BorderLayout.PAGE_END);
-//		mainFrame.add(statPanel, BorderLayout.LINE_START);
 		mainFrame.add(buttonPanel, BorderLayout.LINE_END);	
 		mainFrame.add(inventoryButtonPanel, BorderLayout.LINE_START);
 
@@ -391,6 +510,7 @@ public final class GameWindow {
 		mainFrame.pack();
 		mainFrame.setVisible(true);	  
 		PrintMap(gamePanel, foo);
+		textArea.setText(SendWelcomeMessage());
 		SwingUtilities.updateComponentTreeUI(mainFrame);
 	}
 

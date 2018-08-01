@@ -364,18 +364,6 @@ public String returnPrintPartition() {
 			 playerY = 1;	
 		 }
   }
-  
-  /**
- * The welcome message for starting the game.
- */
-public void welcomeMessage() {
-	  System.out.println("Welcome to the strange world of being an engineering student!");
-	  System.out.println("You will struggle to find the proper tools to defend yourself from the ");
-	  System.out.println("monster hiding, waiting for you to fall into their traps! Collect hidden items by ");
-	  System.out.println("exploring the building. Items will help you in your quest to defet the monsters.");
-	  System.out.println("Press e for item management, and r for battle rules");
-	  System.out.println("Start exploring!\n\n");
-  }  
 
 public void ManageInventory(JTextArea textArea, Warrior player) {
 	player.inventory.showInventory(textArea);
@@ -414,7 +402,6 @@ public static void main(final String[] args) throws IOException {
 	 // test basic movement in ascii
 	 Scanner dir = new Scanner(System.in);
 	 char choice = 0;
-	 foo.welcomeMessage();
 	 while (choice != -1) {
 		 dir = new Scanner(System.in);
 		 choice = dir.next().charAt(0);

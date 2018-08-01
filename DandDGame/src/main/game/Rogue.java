@@ -5,22 +5,22 @@ import java.util.Scanner;
 /**
  * Class used to hold the warrior character.
  */
-public class Warrior implements Character {
+public class Rogue implements Character {
 
 	/** the character strength. */
-	public int strength = 150;
+	public int strength = 100;
 	
 	/** the character speed. */
-	public int speed = 10;
+	public int speed = 25;
 	
 	/** the character stamina. */
-	public int stamina = 15;
+	public int stamina = 20;
 	
 	/** the character focus. */
-	public int focus = 20;
+	public int focus = 15;
 	
 	/** the character health. */
-	public int health = 150;
+	public int health = 100;
 	
 	/** the character scaling. */
 	public double scaling = 0;
