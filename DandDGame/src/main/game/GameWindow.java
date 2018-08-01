@@ -101,7 +101,6 @@ public final class GameWindow {
 		welcomeString += "You will struggle to find the proper tools to defend yourself from the\n";
 		welcomeString += "monster hiding, waiting for you to fall into their traps! Collect hidden items by\n";
 		welcomeString += "exploring the building. Items will help you in your quest to defet the monsters.\n";
-		welcomeString += "Press e for item management, and r for battle rules\n";
 		welcomeString += "Start exploring!\n\n";
 
 		return welcomeString;
@@ -152,7 +151,7 @@ public final class GameWindow {
 		foo.updatePartition();
 
 		JFrame mainFrame = new JFrame();
-		mainFrame.setPreferredSize(new Dimension(1050, 750));
+		mainFrame.setPreferredSize(new Dimension(1050, 700));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(750, 500));
@@ -161,7 +160,7 @@ public final class GameWindow {
 		inventoryButtonPanel.setPreferredSize(new Dimension(150, 500));
 		
 		JPanel textPanel = new JPanel();
-		textPanel.setPreferredSize(new Dimension(1000, 200));
+		textPanel.setPreferredSize(new Dimension(1000, 150));
 		
 		JPanel statPanel = new JPanel();
 		statPanel.setPreferredSize(new Dimension(1000, 50));
@@ -176,8 +175,8 @@ public final class GameWindow {
 		statPanel.add(statTextArea);
 
 		JTextArea storyTextArea = new JTextArea();
-		storyTextArea.setSize(new Dimension(1000, 200));
-		storyTextArea.setFont(storyTextArea.getFont().deriveFont(20f));
+		storyTextArea.setSize(new Dimension(1000, 150));
+		storyTextArea.setFont(storyTextArea.getFont().deriveFont(16f));
 		storyTextArea.setEditable(false);
 		textPanel.add(storyTextArea);
 		
