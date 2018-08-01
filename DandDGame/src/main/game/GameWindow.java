@@ -160,7 +160,7 @@ public final class GameWindow {
 					}
 					else if(foo.doesTileHaveMonster()){
 						textArea.setText(null);
-						textArea.insert("Monster appeared!", 0);
+						textArea.insert("Monster appeared! Battle it int th console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -242,7 +242,7 @@ public final class GameWindow {
 					}
 					else if(foo.doesTileHaveMonster()){
 						textArea.setText(null);
-						textArea.insert("Monster appeared!", 0);
+						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
@@ -283,7 +283,7 @@ public final class GameWindow {
 					}
 					else if(foo.doesTileHaveMonster()){
 						textArea.setText(null);
-						textArea.insert("Monster appeared!", 0);
+						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
