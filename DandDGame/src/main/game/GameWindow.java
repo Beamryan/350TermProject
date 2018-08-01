@@ -143,6 +143,7 @@ public final class GameWindow {
 		int yDim = 5;
 		int width = 10;
 		int length = 10;
+		boolean firstItem = true;
 		Warrior player = new Warrior();
 		
 		//player = SelectCharacterPrompt(player);
@@ -212,7 +213,13 @@ public final class GameWindow {
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
 						int itemID = foo.getItemID(foo.playerY, foo.playerX);
-						foo.player.inventory.addItemToInventory(itemID);
+						if(foo.player.inventory.getNextEmptyInvntorySlot() == 0) {
+							foo.player.inventory.addItemToInventory(itemID);
+							foo.player.scaling = foo.player.inventory.getScaling();
+						}
+						else {
+							foo.player.inventory.addItemToInventory(itemID);
+						}
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
 						storyTextArea.setText(null);
@@ -262,7 +269,13 @@ public final class GameWindow {
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
 						int itemID = foo.getItemID(foo.playerY, foo.playerX);
-						foo.player.inventory.addItemToInventory(itemID);
+						if(foo.player.inventory.getNextEmptyInvntorySlot() == 0) {
+							foo.player.inventory.addItemToInventory(itemID);
+							foo.player.scaling = foo.player.inventory.getScaling();
+						}
+						else {
+							foo.player.inventory.addItemToInventory(itemID);
+						}
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
 						storyTextArea.setText(null);
@@ -312,7 +325,13 @@ public final class GameWindow {
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
 						int itemID = foo.getItemID(foo.playerY, foo.playerX);
-						foo.player.inventory.addItemToInventory(itemID);
+						if(foo.player.inventory.getNextEmptyInvntorySlot() == 0) {
+							foo.player.inventory.addItemToInventory(itemID);
+							foo.player.scaling = foo.player.inventory.getScaling();
+						}
+						else {
+							foo.player.inventory.addItemToInventory(itemID);
+						}
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
 						storyTextArea.setText(null);
@@ -362,7 +381,13 @@ public final class GameWindow {
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
 						int itemID = foo.getItemID(foo.playerY, foo.playerX);
-						foo.player.inventory.addItemToInventory(itemID);
+						if(foo.player.inventory.getNextEmptyInvntorySlot() == 0) {
+							foo.player.inventory.addItemToInventory(itemID);
+							foo.player.scaling = foo.player.inventory.getScaling();
+						}
+						else {
+							foo.player.inventory.addItemToInventory(itemID);
+						}
 						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
 						panelPrompt += "\nGo to inventory to equip";
 						storyTextArea.setText(null);
