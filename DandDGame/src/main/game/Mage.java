@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Class used to hold the warrior character.
  */
-public class Mage implements Character{
+public class Mage {
 
 	/** the character strength. */
 	public int strength = 200;

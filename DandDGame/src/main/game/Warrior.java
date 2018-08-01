@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Class used to hold the warrior character.
  */
-public class Warrior implements Character {
+public class Warrior {
 
 	/** the character strength. */
 	public int strength = 50;
@@ -74,8 +74,6 @@ public class Warrior implements Character {
 		
 		xpToNextLevel += level * 3;
 		
-		System.out.println("New stats: " + strength + " " + speed + " " + health);
-
-					
+		System.out.println("New stats: " + strength + " " + speed + " " + health);				
 	}	
 }

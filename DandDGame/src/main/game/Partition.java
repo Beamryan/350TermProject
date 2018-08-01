@@ -363,6 +363,8 @@ public class Partition {
 			playerX = 5;
 			playerY = 1;	
 		}
+		
+		System.out.println("Please continue playing on the game GUI");
 	}
 
 	public void ManageInventory(JTextArea textArea, Warrior player) {
