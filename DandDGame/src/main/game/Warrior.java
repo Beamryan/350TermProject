@@ -42,6 +42,7 @@ public class Warrior {
 	 */
 	public void levelUp() {
 		Scanner choiceSC = new Scanner(System.in);
+		boolean valid = false;
 		char choice;
 		double increment;
 		
@@ -49,13 +50,15 @@ public class Warrior {
 		System.out.println("1 for strength, 2 for speed, 3 for health");
 		System.out.println("Current stats: " + strength + " " + speed + " " + health);
 		
+		do {
 		choice = choiceSC.next().charAt(0);
 		
 		if (choice == '1') {
 			increment = (double) level * 1.05 + 1;
-			strength += increment;
+			strength += increment; 
 			xp -= xpToNextLevel; // these should be in here in case user enters invalid option
 			level++;
+			valid = true;
 		}
 		
 		if (choice == '2') {
@@ -63,6 +66,7 @@ public class Warrior {
 			speed += increment;
 			xp -= xpToNextLevel;
 			level++;
+			valid = true;
 		}
 		
 		if (choice == '3') {
@@ -70,7 +74,9 @@ public class Warrior {
 			health += increment;
 			xp -= xpToNextLevel;
 			level++;
+			valid = true;
 		}
+		}while((!valid));
 		
 		xpToNextLevel += level * 3;
 		
