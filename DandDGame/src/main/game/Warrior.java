@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Warrior implements Character {
 
 	/** the character strength. */
-	public int strength = 150;
+	public int strength = 40;
 	
 	/** the character speed. */
 	public int speed = 10;

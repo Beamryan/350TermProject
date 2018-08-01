@@ -202,6 +202,7 @@ public final class GameWindow {
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
+						PrintMap(gamePanel, foo);
 					}
 					else{
 						textArea.setText(null);
@@ -243,6 +244,7 @@ public final class GameWindow {
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
+						PrintMap(gamePanel, foo);
 					}
 					else{
 						textArea.setText(null);
@@ -284,6 +286,7 @@ public final class GameWindow {
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
+						PrintMap(gamePanel, foo);
 					}
 					else{
 						textArea.setText(null);
@@ -325,6 +328,7 @@ public final class GameWindow {
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
+						PrintMap(gamePanel, foo);
 					}
 					else{
 						textArea.setText(null);
