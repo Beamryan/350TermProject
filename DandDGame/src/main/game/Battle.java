@@ -94,6 +94,8 @@ public class Battle{
 //			TODO focus for regen?			
 		while (playerHealth > 0 && enemyHealth > 0 && runFlag == 0) {
 
+			System.out.println(turnHeader());
+			
 			choice = choiceSC.next().charAt(0);			
 			//int enemyChoice = (int)Math.round( Math.random() );
 			int enemyChoice = (rand.nextInt(3));
@@ -102,8 +104,6 @@ public class Battle{
 			
 			int playerDodgeSeed = rand.nextInt(playerSpeed) + 0;
 			int enemyDodgeSeed = rand.nextInt(enemySpeed) + 0;
-			
-			System.out.println(turnHeader());
 						
 			
 			//player chooses to run
@@ -112,8 +112,6 @@ public class Battle{
 					runFlag = 1;
 				}
 			}
-			
-			System.out.println(turnHeader());
 			
 			if (choice == 'a') {			
 				System.out.println(playerAttack());
