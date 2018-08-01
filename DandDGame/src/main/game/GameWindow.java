@@ -85,8 +85,9 @@ public final class GameWindow {
 	}
 	
 	private static String PrintPlayerStats(Partition foo) {
-		String playerStats = "Level: " + foo.player.level + "   Experience: " + foo.player.xp;
-		playerStats += "   Strength: " + foo.player.strength + "   Speed: " + foo.player.speed + "   Health: " + foo.player.health;
+		String playerStats = "Level: " + foo.player.level + "     Experience: " + foo.player.xp + "     Exp To Next Lvl: " + foo.player.xpToNextLevel;
+		playerStats += "     Health: " + foo.player.health + "     Strength: " + foo.player.strength + "     Speed: " + foo.player.speed;
+		playerStats += "     Stamina: " + foo.player.stamina + "     Focus: " + foo.player.focus;
 		
 		return playerStats;
 	}
