@@ -232,6 +232,7 @@ public final class GameWindow {
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
 						PrintMap(gamePanel, foo);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 					else{
 						statTextArea.setText(null);
@@ -281,6 +282,7 @@ public final class GameWindow {
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
 						PrintMap(gamePanel, foo);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 					else{
 						statTextArea.setText(null);
@@ -330,6 +332,7 @@ public final class GameWindow {
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
 						PrintMap(gamePanel, foo);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 					else{
 						statTextArea.setText(null);
@@ -379,6 +382,7 @@ public final class GameWindow {
 						statTextArea.setText(null);
 						statTextArea.insert(PrintPlayerStats(foo), 0);
 						PrintMap(gamePanel, foo);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
 					}
 					else{
 						statTextArea.setText(null);
