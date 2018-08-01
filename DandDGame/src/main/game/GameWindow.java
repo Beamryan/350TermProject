@@ -151,7 +151,7 @@ public final class GameWindow {
 		foo.updatePartition();
 
 		JFrame mainFrame = new JFrame();
-		mainFrame.setPreferredSize(new Dimension(1050, 800));
+		mainFrame.setPreferredSize(new Dimension(1050, 750));
 
 		JPanel gamePanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(750, 500));
@@ -160,7 +160,7 @@ public final class GameWindow {
 		inventoryButtonPanel.setPreferredSize(new Dimension(150, 500));
 		
 		JPanel textPanel = new JPanel();
-		textPanel.setPreferredSize(new Dimension(1000, 250));
+		textPanel.setPreferredSize(new Dimension(1000, 200));
 		
 		JPanel statPanel = new JPanel();
 		statPanel.setPreferredSize(new Dimension(1000, 50));
@@ -175,8 +175,8 @@ public final class GameWindow {
 		statPanel.add(statTextArea);
 
 		JTextArea storyTextArea = new JTextArea();
-		storyTextArea.setSize(new Dimension(1000, 250));
-		storyTextArea.setFont(storyTextArea.getFont().deriveFont(24f));
+		storyTextArea.setSize(new Dimension(1000, 200));
+		storyTextArea.setFont(storyTextArea.getFont().deriveFont(20f));
 		storyTextArea.setEditable(false);
 		textPanel.add(storyTextArea);
 		
