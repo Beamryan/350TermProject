@@ -148,16 +148,17 @@ public final class GameWindow {
 					foo.moveNorth(); 
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
-						int itemID = foo.getItemID(playerY, playerX);
+						int itemID = foo.getItemID(foo.playerY, foo.playerX);
 						foo.player.inventory.addItemToInventory(itemID);
+						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+						panelPrompt += "\nGo to inventory to equip";
 						textArea.setText(null);
-						textArea.insert("Got item: " + player.inventory.getItemName(itemID),0);
-						textArea.insert("Press e to equip",1);
+						textArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
 					}
-					if(foo.doesTileHaveMonster()){
+					else if(foo.doesTileHaveMonster()){
 						textArea.setText(null);
 						textArea.insert("Monster appeared!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -166,10 +167,11 @@ public final class GameWindow {
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
 					}
-
-					textArea.setText(null);
-					textArea.setText("Level: "+ foo.player.level + "\nXp: " + foo.player.xp);
-					SwingUtilities.updateComponentTreeUI(mainFrame);
+					else{
+						textArea.setText(null);
+						textArea.setText("Level: "+ foo.player.level + "\nXp: " + foo.player.xp);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+					}
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
@@ -186,19 +188,31 @@ public final class GameWindow {
 				try {
 					foo.moveSouth(); 
 					PrintMap(gamePanel, foo);
-					foo.doesTileHaveItem();
-					if(foo.doesTileHaveMonster()){
+					if(foo.doesTileHaveItem()){
+						int itemID = foo.getItemID(foo.playerY, foo.playerX);
+						foo.player.inventory.addItemToInventory(itemID);
+						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+						panelPrompt += "\nGo to inventory to equip";
 						textArea.setText(null);
-						textArea.insert("Monster appeared!", 0);
+						textArea.insert(panelPrompt,0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						 // remove item from tile
+						foo.tiles[playerY][playerX].itemID = 0; 
+					}
+					else if(foo.doesTileHaveMonster()){
+						textArea.setText(null);
+						textArea.insert("Monster appeared! Battle it in the console!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						int monsterID = foo.getMonsterID();
 						Battle battle = new Battle(foo.player, monsterID);
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
 					}
-					textArea.setText(null);
-					textArea.insert("Monster appeared! Battle it in the console!", 0);					
-					SwingUtilities.updateComponentTreeUI(mainFrame);
+					else{
+						textArea.setText(null);
+						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);					
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+					}	
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}		 
@@ -216,10 +230,12 @@ public final class GameWindow {
 					foo.moveWest(); 
 					PrintMap(gamePanel, foo);
 					if(foo.doesTileHaveItem()){
-						int itemID = foo.getItemID(playerY, playerX);
-						foo.player.inventory.addItemToInventory(itemID+1);
+						int itemID = foo.getItemID(foo.playerY, foo.playerX);
+						foo.player.inventory.addItemToInventory(itemID);
+						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+						panelPrompt += "\nGo to inventory to equip";
 						textArea.setText(null);
-						textArea.insert("Got item: " + foo.player.inventory.getItemName(itemID),0);
+						textArea.insert(panelPrompt,0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
 						 // remove item from tile
 						foo.tiles[playerY][playerX].itemID = 0; 
@@ -254,8 +270,18 @@ public final class GameWindow {
 				try {
 					foo.moveEast(); 
 					PrintMap(gamePanel, foo);
-					foo.doesTileHaveItem();
-					if(foo.doesTileHaveMonster()){
+					if(foo.doesTileHaveItem()){
+						int itemID = foo.getItemID(foo.playerY, foo.playerX);
+						foo.player.inventory.addItemToInventory(itemID);
+						String panelPrompt = "Got item: "+foo.player.inventory.getItemName(itemID);
+						panelPrompt += "\nGo to inventory to equip";
+						textArea.setText(null);
+						textArea.insert(panelPrompt,0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						 // remove item from tile
+						foo.tiles[playerY][playerX].itemID = 0; 
+					}
+					else if(foo.doesTileHaveMonster()){
 						textArea.setText(null);
 						textArea.insert("Monster appeared!", 0);
 						SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -264,10 +290,11 @@ public final class GameWindow {
 						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
 						foo.endBattle(xpGain);
 					}
-
-					textArea.setText(null);
-					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
-					SwingUtilities.updateComponentTreeUI(mainFrame);
+					else{
+						textArea.setText(null);
+						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+					}
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
