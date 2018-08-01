@@ -102,6 +102,8 @@ public class Battle{
 			
 			int playerDodgeSeed = rand.nextInt(playerSpeed) + 0;
 			int enemyDodgeSeed = rand.nextInt(enemySpeed) + 0;
+			
+			System.out.println(turnHeader());
 						
 			
 			//player chooses to run

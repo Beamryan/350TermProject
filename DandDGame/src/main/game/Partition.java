@@ -229,15 +229,12 @@ public String returnPrintPartition() {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells itemID is nonzero, false if the itemID is zero. 
    */
-  public void doesTileHaveItem() {	  
+  public boolean doesTileHaveItem() {	  
+	  boolean item = false;
 	  if (tiles[playerY][playerX].itemID != 0) {
-			 int itemID = getItemID(playerY, playerX);
-			 player.inventory.addItemToInventory(itemID);
-			 System.out.println("Got item: " + player.inventory.getItemName(itemID));
-			 System.out.println("Press e to equip");
-			 // remove item from tile
-			 tiles[playerY][playerX].itemID = 0; 
+		  	item = true;			 
 	  }
+	  return item;
   }
   
   /**
@@ -246,14 +243,12 @@ public String returnPrintPartition() {
    * @param playerLocationX Current player location in the X direction
    * @return Returns true if the cells monsterID is nonzero, false if the monsterID is zero. 
    */
-  public void doesTileHaveMonster() throws IOException{	  
+  public boolean doesTileHaveMonster() throws IOException{	
+	  boolean monster=false;
 	  if (tiles[playerY][playerX].monsterID != 0) {
-		  battleMove = new BattleMoveSelect();
-		  int monsterID = getMonsterID();
-		  Battle battle = new Battle(player, monsterID);
-		  int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
-		  endBattle(xpGain);
+		  monster=true;
 	  }
+	  return monster;
   }
   
   /**

@@ -147,8 +147,25 @@ public final class GameWindow {
 				try {
 					foo.moveNorth(); 
 					PrintMap(gamePanel, foo);
-					foo.doesTileHaveItem();
-					foo.doesTileHaveMonster();
+					if(foo.doesTileHaveItem()){
+						int itemID = foo.getItemID(playerY, playerX);
+						foo.player.inventory.addItemToInventory(itemID);
+						textArea.setText(null);
+						textArea.insert("Got item: " + player.inventory.getItemName(itemID),0);
+						textArea.insert("Press e to equip",1);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						 // remove item from tile
+						foo.tiles[playerY][playerX].itemID = 0; 
+					}
+					if(foo.doesTileHaveMonster()){
+						textArea.setText(null);
+						textArea.insert("Monster appeared!", 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						int monsterID = foo.getMonsterID();
+						Battle battle = new Battle(foo.player, monsterID);
+						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+						foo.endBattle(xpGain);
+					}
 
 					textArea.setText(null);
 					textArea.setText("Level: "+ foo.player.level + "\nXp: " + foo.player.xp);
@@ -170,10 +187,17 @@ public final class GameWindow {
 					foo.moveSouth(); 
 					PrintMap(gamePanel, foo);
 					foo.doesTileHaveItem();
-					foo.doesTileHaveMonster();
-
+					if(foo.doesTileHaveMonster()){
+						textArea.setText(null);
+						textArea.insert("Monster appeared!", 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						int monsterID = foo.getMonsterID();
+						Battle battle = new Battle(foo.player, monsterID);
+						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+						foo.endBattle(xpGain);
+					}
 					textArea.setText(null);
-					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+					textArea.insert("Monster appeared! Battle it in the console!", 0);					
 					SwingUtilities.updateComponentTreeUI(mainFrame);
 				} catch(Exception ex) {
 					ex.printStackTrace();
@@ -191,12 +215,29 @@ public final class GameWindow {
 				try {
 					foo.moveWest(); 
 					PrintMap(gamePanel, foo);
-					foo.doesTileHaveItem();
-					foo.doesTileHaveMonster();
-
-					textArea.setText(null);
-					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
-					SwingUtilities.updateComponentTreeUI(mainFrame);
+					if(foo.doesTileHaveItem()){
+						int itemID = foo.getItemID(playerY, playerX);
+						foo.player.inventory.addItemToInventory(itemID+1);
+						textArea.setText(null);
+						textArea.insert("Got item: " + foo.player.inventory.getItemName(itemID),0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						 // remove item from tile
+						foo.tiles[playerY][playerX].itemID = 0; 
+					}
+					else if(foo.doesTileHaveMonster()){
+						textArea.setText(null);
+						textArea.insert("Monster appeared!", 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						int monsterID = foo.getMonsterID();
+						Battle battle = new Battle(foo.player, monsterID);
+						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+						foo.endBattle(xpGain);
+					}
+					else{
+						textArea.setText(null);
+						textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+					}
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}		 
@@ -214,7 +255,15 @@ public final class GameWindow {
 					foo.moveEast(); 
 					PrintMap(gamePanel, foo);
 					foo.doesTileHaveItem();
-					foo.doesTileHaveMonster();
+					if(foo.doesTileHaveMonster()){
+						textArea.setText(null);
+						textArea.insert("Monster appeared!", 0);
+						SwingUtilities.updateComponentTreeUI(mainFrame);
+						int monsterID = foo.getMonsterID();
+						Battle battle = new Battle(foo.player, monsterID);
+						int xpGain = battle.startBattle(); // returns 0 if loss, xp bonus if win, -1 if flee
+						foo.endBattle(xpGain);
+					}
 
 					textArea.setText(null);
 					textArea.insert("Level: "+ foo.player.level + "\nXp: " + foo.player.xp, 0);
