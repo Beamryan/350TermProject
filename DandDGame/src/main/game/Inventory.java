@@ -18,10 +18,10 @@ public class Inventory {
 	public int[] inventory;
 	
 	/** current armor inventory of the player. 
-	 *  index 0 -> helmet
-	 *  index 1 -> body
-	 *  index 2 -> legs
-	 *  index 3 -> feets
+	 *  index 0 helmet
+	 *  index 1 body
+	 *  index 2 legs
+	 *  index 3 feets
 	 */
 	public int[] armorInventory;
 	
@@ -106,7 +106,7 @@ public class Inventory {
 	}
 	
 	/**
-	 * Armor items should be above index 20 and also x0 -> helmets, x1 -> body, x2 -> legs, x3 -> feets.
+	 * Armor items should be above index 20 and also x0 helmets, x1 body, x2 legs, x3 feets.
 	 * @param armorIndexID the armor items index Id
 	 */
 	public void setArmorItemToCurrent(final int armorIndexID) {

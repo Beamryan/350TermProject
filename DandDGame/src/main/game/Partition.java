@@ -156,7 +156,7 @@ public class Partition {
 					if (tiles[i][j].type == SpaceType.Cleared) {
 						System.out.print("X");
 					} else if (tiles[i][j].type == SpaceType.EmptySpace) {
-						System.out.print("O");
+						System.out.print("E");
 					} else if (tiles[i][j].type == SpaceType.Tree) {
 						System.out.print("T");
 					} else if (tiles[i][j].type == SpaceType.Rock) {
@@ -188,7 +188,7 @@ public class Partition {
 					if (tiles[i][j].type == SpaceType.Cleared) {
 						arr += ("X");
 					} else if (tiles[i][j].type == SpaceType.EmptySpace) {
-						arr += ("O‍");
+						arr += ("E");
 					} else if (tiles[i][j].type == SpaceType.Tree) {
 						arr += ("T");
 					} else if (tiles[i][j].type == SpaceType.Rock) {
