@@ -151,18 +151,18 @@ public class Partition {
 		for (i = 0; i < height; i++) {
 			for (j = 0; j < width; j++) {
 				if (i == playerY && j == playerX) {
-					System.out.print("👶🏼");
+					System.out.print("P");
 				} else {
 					if (tiles[i][j].type == SpaceType.Cleared) {
-						System.out.print("🏻");
+						System.out.print("X");
 					} else if (tiles[i][j].type == SpaceType.EmptySpace) {
-						System.out.print("🏻‍");
+						System.out.print("O");
 					} else if (tiles[i][j].type == SpaceType.Tree) {
-						System.out.print("🌲");
+						System.out.print("T");
 					} else if (tiles[i][j].type == SpaceType.Rock) {
-						System.out.print("⛰️");
+						System.out.print("R");
 					} else if (tiles[i][j].type == SpaceType.Water) {
-						System.out.print("🌊");
+						System.out.print("W");
 					} else {
 						System.out.print(tiles[i][j].type);
 					}
@@ -183,18 +183,18 @@ public class Partition {
 		for (i = 0; i < height; i++) {
 			for (j = 0; j < width; j++) {   	
 				if (i == playerY && j == playerX) {
-					arr += ("👶🏼");
+					arr += ("P");
 				} else {
 					if (tiles[i][j].type == SpaceType.Cleared) {
-						arr += ("🏻");
+						arr += ("X");
 					} else if (tiles[i][j].type == SpaceType.EmptySpace) {
-						arr += ("🏻‍");
+						arr += ("O‍");
 					} else if (tiles[i][j].type == SpaceType.Tree) {
-						arr += ("🌲");
+						arr += ("T");
 					} else if (tiles[i][j].type == SpaceType.Rock) {
-						arr += ("⛰️");
+						arr += ("R");
 					} else if (tiles[i][j].type == SpaceType.Water) {
-						arr += ("🌊");
+						arr += ("W");
 					} else {
 						System.out.print(tiles[i][j].type);
 					}
