@@ -1,7 +1,6 @@
 package main.game;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -52,24 +51,27 @@ public class Inventory {
 		int inventorySize = getNextEmptyInvntorySlot();
 		//Added -2 so that quest item isnt shown
 		for (int i = 0; i < inventorySize; i++) {
-			if(inventory[i] < 19) {
+			if (inventory[i] < 19) {
 				System.out.println("Inventory Slot " + i + ": Item: " + getItemName(inventory[i]));
-			}
-			else if(inventory[i] > 19) {
+			} else if (inventory[i] > 19) {
 				System.out.println("Inventory Slot " + i + ": Armor: " + getItemName(inventory[i]));
 			}
 		}
 	}
-	public void showInventory(JTextArea textArea) {
+	
+	/**
+	 * Shows the player inventory.
+	 * @param textArea the text area to show inventory information
+	 */
+	public void showInventory(final JTextArea textArea) {
 		String inventoryString = "";
 		int inventorySize = getNextEmptyInvntorySlot();
 		//Added -2 so that quest item isnt shown
 		for (int i = 0; i < inventorySize; i++) {
-			if(inventory[i] < 19) {
+			if (inventory[i] < 19) {
 				inventoryString = inventoryString + "Inventory Slot " + i + ": Item: " + getItemName(inventory[i]) + "\n";
 //				System.out.println("Inventory Slot " + i + ": Item: " + getItemName(inventory[i]));
-			}
-			else if(inventory[i] > 19) {
+			} else if (inventory[i] > 19) {
 				inventoryString = inventoryString + "Inventory Slot " + i + ": Item: " + getItemName(inventory[i]) + "\n";
 //				System.out.println("Inventory Slot " + i + ": Armor: " + getItemName(inventory[i]));
 			}
@@ -78,31 +80,23 @@ public class Inventory {
 	}
 	
 	/**
-	 * Shows the armor inventory of the character
+	 * Shows the armor inventory.
+	 * @param textArea the text area to show armor information
 	 */
-	public void showArmorInventory() {
-		for(int i = 0; i < 4; i++) {
-			System.out.println("Armor Slot " + i + ": " + armorInventory[i]);
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	public void showArmorInventory(JTextArea textArea) {
+	public void showArmorInventory(final JTextArea textArea) {
 		String inventoryString = "";
-		for(int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			inventoryString = inventoryString + "Armor Slot " + i + ": " + armorInventory[i] + "\n";
-//			System.out.println("Armor Slot " + i + ": " + armorInventory[i]);
 		}
 		textArea.setText(inventoryString);
 	}
 	
 	/**
+	 * Sets the current item.
 	 * @param itemIndex the current item index
 	 */
 	public void setItemToCurrent(final int itemIndex) {
-		if(inventory[itemIndex] < 19) {		
+		if (inventory[itemIndex] < 19) {		
 			int oldCurrentItem = inventory[0];
 			inventory[0] = inventory[itemIndex];
 			inventory[itemIndex] = 0;
@@ -113,10 +107,10 @@ public class Inventory {
 	
 	/**
 	 * Armor items should be above index 20 and also x0 -> helmets, x1 -> body, x2 -> legs, x3 -> feets.
-	 * @param armorIndex
+	 * @param armorIndexID the armor items index Id
 	 */
 	public void setArmorItemToCurrent(final int armorIndexID) {
-		if(armorInventory[armorIndexID] > 19) {
+		if (armorInventory[armorIndexID] > 19) {
 			int itemType = getArmorItemType(armorIndexID);
 			int oldCurrentItem = armorInventory[itemType];
 			armorInventory[itemType] = armorInventory[armorIndexID];
@@ -127,6 +121,7 @@ public class Inventory {
 	}
 	
 	/**
+	 * Adds the item to inventory.
 	 * @param itemID the added item id
 	 * @return boolean
 	 */
@@ -144,6 +139,7 @@ public class Inventory {
 	}
 	
 	/**
+	 * Gets the item scaling.
 	 * @return double the scaling value
 	 * @throws IOException throws exception for reading item index
 	 */
@@ -170,7 +166,7 @@ public class Inventory {
 	/**
 	 * Gets the armor scaling values.
 	 * @return double[] array of scaling values corresponding to item type slot position..
-	 * @throws IOException
+	 * @throws IOException scaling value exception
 	 */
 	public double[] getArmorScaling() throws IOException {
 		double[] armorScalingValues = new double[4];
@@ -179,7 +175,7 @@ public class Inventory {
 		String name;
 		
 		try {
-			for(int i = 0; i < 4; i++) {
+			for (int i = 0; i < 4; i++) {
 				//Cycle through item info until the right itemID is found
 				while (itemSC.nextInt() != armorInventory[i]) { // cycle thru lines til enemy id is seen
 					itemSC.nextLine();
@@ -198,6 +194,7 @@ public class Inventory {
 	}
 	
 	/**
+	 * Gets the next empty inventory slot.
 	 * @return integer the next open slot
 	 */
 	public int getNextEmptyInvntorySlot() {
@@ -211,6 +208,7 @@ public class Inventory {
 	
 	
 	/**
+	 * Checks if inventory is full.
 	 * @return boolean is the inventory full
 	 */
 	private boolean isInventoryFull() {
@@ -224,13 +222,13 @@ public class Inventory {
 	
 	/**
 	 * Checks if an item is already in the inventory.
-	 * @param itemID 
+	 * @param itemID selected item from inventories Id
 	 * @return true if the itemID is in the inventory, else false.
 	 */
 	private boolean isItemInInventory(final int itemID) {
 		int inventorySize = getNextEmptyInvntorySlot();
-		for(int i = 0; i < inventorySize; i++) {
-			if(itemID == inventory[i]) {
+		for (int i = 0; i < inventorySize; i++) {
+			if (itemID == inventory[i]) {
 				return true;
 			}
 		}
@@ -238,6 +236,7 @@ public class Inventory {
 	}
 	
 	/**
+	 * Gets the inventory size.
 	 * @return integer the inventory size
 	 */
 	public int getInventorySize() {
@@ -245,7 +244,7 @@ public class Inventory {
 	}
 	
 	/**
-	 * 0-18 will be weapons, 19 quest item, 20+ will be armor
+	 * 0-18 will be weapons, 19 quest item, 20+ will be armor.
 	 * @param itemID the item id
 	 * @return String the item name
 	 */
@@ -341,18 +340,23 @@ public class Inventory {
 		return itemName;
 	}
 	
+	/**
+	 * Gets the armor item type.
+	 * @param armorIndexID the selected armors Id
+	 * @return integer the armor Id
+	 */
 	private int getArmorItemType(final int armorIndexID) {
 		int itemType = 0;
-		if(armorIndexID >= 20 && armorIndexID < 30) {
+		if (armorIndexID >= 20 && armorIndexID < 30) {
 			itemType = armorIndexID - 20;
 		}
-		if(armorIndexID >= 30 && armorIndexID < 40) {
+		if (armorIndexID >= 30 && armorIndexID < 40) {
 			itemType = armorIndexID - 30;
 		}
-		if(armorIndexID >= 40 && armorIndexID < 50) {
+		if (armorIndexID >= 40 && armorIndexID < 50) {
 			itemType = armorIndexID - 40;
 		}
-		if(armorIndexID >= 50 && armorIndexID < 60) {
+		if (armorIndexID >= 50 && armorIndexID < 60) {
 			itemType = armorIndexID - 50;
 		}
 		return itemType;

@@ -1,41 +1,47 @@
 package main.game;
 import java.io.*;
 import java.util.Scanner;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Random;
 
 /**
  * Class to handle battles between player and monsters.
  */
-public class Battle{
+public class Battle {
 	
 	/** player stats. */
-	private int playerStrength, playerSpeed, playerHealth;
+	private int playerStrength = 10, playerSpeed = 10, playerHealth = 100;
 	
 	/** enemy monster stats. */
-	private int enemyStrength, enemySpeed, enemyHealth;
+	private int enemyStrength = 10, enemySpeed = 10, enemyHealth = 100;
 	
 	/** enemy monster id. */
-	int enemyID;
+	int enemyID = 0;
 	
 	/** enemy monster name. */
-	String enemyName;
+	String enemyName = "";
 	
 	/** player scaling value. */
-	double playerScale;
+	double playerScale = 0.0;
 	
 //	BattleChoices battleChoice;
 //	boolean choiceHasChanged = false;
 	
-	
+	/** xp from enemy value. */
 	double xp = (double) enemyID;
+	
+	/** player wins value. */
 	boolean playerWins;
+	
+	/** player and enemy damage values. */
 	double playerDamage, enemyDamage;
+	
+	/** Player strength floor. */
 	int playerStrengthFloor = playerStrength / 2;
+	
+	/** Enemy strength floor. */
 	int enemyStrengthFloor = enemyStrength / 2;
 	
-	// test weapon scaling...
+	/** Enemy scaling. */
 	double enemyScale = 1;
 
 	
@@ -169,15 +175,18 @@ public class Battle{
 		}
 			
 		if (playerWins) {
-			double xpGain =  Math.pow(xp+1, .7);
+			double xpGain =  Math.pow(xp + 1, .7);
 			return (int) (xpGain * 3);
-		} 
-		else {
+		} else {
 			return 0;
 		}		
 	}
 	
-	public String playerAttack(){
+	/**
+	 * Player chose attack.
+	 * @return string for player choice
+	 */
+	public String playerAttack() {
 		playerDamage = (double) playerStrength * playerScale;
 		double degradation = (double) playerStrength * .15;
 		
@@ -188,14 +197,22 @@ public class Battle{
 		return "Player chose attack";
 	}
 	
-	public String playerShield(){
+	/**
+	 * Player chose shield.
+	 * @return string for player choice
+	 */
+	public String playerShield() {
 		enemyDamage *= .3;
 		playerSpeed *= 1.15;
 		
 		return "Player chose shield";
 	}
 	
-	public String playerRest(){
+	/**
+	 * Player chose rest.
+	 * @return string for player choice
+	 */
+	public String playerRest() {
 		enemyDamage *= .6;
 		playerStrength *= 1.2;
 		playerHealth *= 1.02;
@@ -204,7 +221,11 @@ public class Battle{
 	}
 	
 	
-	public String enemyAttack(){
+	/**
+	 * Enemy chose attack.
+	 * @return string for enemy choice
+	 */
+	public String enemyAttack() {
 		enemyDamage = (double) enemyStrength * enemyScale;
 		double degradation = (double) enemyStrength * .15;
 		
@@ -215,14 +236,22 @@ public class Battle{
 		return "chose attack";
 	}
 	
-	public String enemyShield(){
+	/**
+	 * Enemy chose shield.
+	 * @return string for enemy choice
+	 */
+	public String enemyShield() {
 		playerDamage *= .3;
 		enemySpeed *= 1.15;
 		
 		return "chose shield";
 	}
 	
-	public String enemyRest(){
+	/**
+	 * Enemy chose rest.
+	 * @return string for enemy choice
+	 */
+	public String enemyRest() {
 		playerDamage *= .6;
 		enemyStrength *= 1.2;
 		enemyHealth *= 1.02;
@@ -230,7 +259,11 @@ public class Battle{
 		return "chose rest";
 	}
 	
-	public String turnHeader(){
+	/**
+	 * Reprints the battle turn information.
+	 * @return information for battle turn
+	 */
+	public String turnHeader() {
 		String finalString = "";
 		finalString += "\nPlayer health: " + playerHealth + "\n";
 		finalString += enemyName + " health: " + enemyHealth + "\n";
@@ -245,9 +278,5 @@ public class Battle{
 	 * @throws IOException exception thrown during battle environment
 	 */
 	public static void main(final String[] args) throws IOException {
-		Warrior warrior = new Warrior();
-		Battle testBattle = new Battle(warrior, 1);
 	}
-
-
 }
