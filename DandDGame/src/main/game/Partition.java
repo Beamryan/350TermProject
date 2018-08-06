@@ -67,12 +67,27 @@ public class Partition {
 
 	}    
 
+	/**
+	 * Gets the private variable playerX
+	 * @return playerX value
+	 */
+	public int getPlayerX() {
+		return this.playerX;
+	}
+	
+	/**
+	 * Gets the private variable playerY
+	 * @return playerY value
+	 */
+	public int getPlayerY() {
+		return this.playerY;
+	}
 
 	/**
 	 * Updates the partition.
 	 * @throws IOException partition exception
 	 */
-	void updatePartition() throws IOException {
+	public void updatePartition() throws IOException {
 
 		Scanner in = new Scanner(new File("output.txt"));
 		try {

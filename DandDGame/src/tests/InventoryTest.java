@@ -10,7 +10,7 @@ import org.junit.Test;
 import main.game.*;
 
 /**
- * Test class for inventory managment.
+ * Test class for inventory management.
  */
 public class InventoryTest {
 
@@ -61,6 +61,19 @@ public class InventoryTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * Tests the swaping of items in inventory. Item slot 0 is the users current item. 
+	 */
+	@Test 
+	public void testSwapItems() {
+		initialize();
+		inventory.addItemToInventory(1); //potato
+		inventory.addItemToInventory(2); //stone shovel
+		assertTrue(inventory.inventory[0] == 1); //slot 0 is the current item
+		inventory.setItemToCurrent(1); //sets stone shovel to current. 
+		assertTrue(inventory.inventory[0] == 2); //slot 0 is the current item
 	}
 	
 	/**

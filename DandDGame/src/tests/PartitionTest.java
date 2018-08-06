@@ -28,9 +28,11 @@ public class PartitionTest {
 	 */
 	private void initialize() throws IOException {
 		Warrior player = new Warrior();
-		partition = new Partition(10, 10, 0, 5, 5, player, 5, 1);
-		playerX = 6;
-		playerY = 5;
+		playerX = 5;
+		playerY = 4;
+		partition = new Partition(10, 10, 0, 5, 5, player, playerX, playerY);
+
+		partition.updatePartition();
 	}
 	
 	/**
@@ -40,9 +42,9 @@ public class PartitionTest {
 	public void testMoveNorth() {
 		try {
 			initialize();
-			int initialPlayerY = playerY;
-//			playerY = partition.moveNorth(playerY, playerX);
-			assertTrue(playerY + 1 == initialPlayerY);
+			int initialPlayerY = partition.getPlayerY();
+			partition.moveNorth();
+			assertTrue((partition.getPlayerY() + 1) == initialPlayerY);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,9 +59,9 @@ public class PartitionTest {
 	public void testMoveEast() {
 		try {
 			initialize();
-			int initialPlayerX = playerX;
-//			playerX = partition.moveEast(playerY, playerX);
-			assertTrue(playerX - 1 == initialPlayerX);
+			int initialPlayerX = partition.getPlayerX();
+			partition.moveEast();
+			assertTrue(partition.getPlayerX() - 1 == initialPlayerX);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -74,9 +76,9 @@ public class PartitionTest {
 	public void testMoveSouth() {
 		try {
 			initialize();
-			int initialPlayerY = playerY;
-//			playerY = partition.moveSouth(playerY, playerX);
-			assertTrue(playerY - 1 == initialPlayerY);
+			int initialPlayerY = partition.getPlayerY();
+			partition.moveSouth();
+			assertTrue(partition.getPlayerY() - 1 == initialPlayerY);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -91,9 +93,9 @@ public class PartitionTest {
 	public void testMoveWest() {
 		try {
 			initialize();
-			int initialPlayerX = playerX;
-//			playerX = partition.moveWest(playerY, playerX);
-			assertTrue(playerX + 1 == initialPlayerX);
+			int initialPlayerX = partition.getPlayerX();
+			partition.moveWest();
+			assertTrue(partition.getPlayerX() + 1 == initialPlayerX);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -116,6 +118,7 @@ public class PartitionTest {
 		}
 	}
 	
+	
 	/**
 	 * Test method for getting monster Id.
 	 */
@@ -123,7 +126,7 @@ public class PartitionTest {
 	public void testGetMonsterID() {
 		try {
 			initialize();
-			int monsterID = partition.getItemID(playerY, playerX);
+			int monsterID = partition.getMonsterID();
 			assertTrue(monsterID == 0);
 
 		} catch (IOException e) {
