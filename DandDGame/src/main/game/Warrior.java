@@ -31,7 +31,7 @@ public class Warrior {
 	/** the current character level. */
 	public int level = 1;
 	
-	/** the current experience to next character level. */
+	/** the current experience to next character level. */ 
 	public int xpToNextLevel = 15;
 		
 	/** the player character inventory. */

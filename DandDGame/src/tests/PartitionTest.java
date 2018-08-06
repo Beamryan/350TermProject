@@ -6,115 +6,135 @@ import java.io.IOException;
 import org.junit.Test;
 import main.game.*;
 
+/**
+ * Partition test class.
+ */
 public class PartitionTest {
 
-	private Partition partition;
+
+	
+	/** Players x location. */
 	int playerX;
+	
+	/** Players y location. */
 	int playerY;
 	
-	private void Initialize() throws IOException
-	{
-		int currentPartition = 0;
+	/** Test partition */
+	Partition partition;
+	
+	/**
+	 * Initializes the test variables.
+	 * @throws IOException throws test exception
+	 */
+	private void initialize() throws IOException {
+		Warrior player = new Warrior();
+		partition = new Partition(10, 10, 0, 5, 5, player, 5, 1);
 		playerX = 6;
 		playerY = 5;
-		int xDim = 5;
-		int yDim = 5;
-		int width = 10;
-		int length = 10;
-		Warrior player = new Warrior();
-		 
-//		partition = new Partition(width,length,currentPartition,xDim,yDim,player);
 	}
 	
+	/**
+	 * Test method for moving north.
+	 */
 	@Test
-	public void TestMoveNorth(){
+	public void testMoveNorth() {
 		try {
-			Initialize();
+			initialize();
 			int initialPlayerY = playerY;
 //			playerY = partition.moveNorth(playerY, playerX);
 			assertTrue(playerY + 1 == initialPlayerY);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * Test method for moving east.
+	 */
 	@Test
-	public void TestMoveEast(){
+	public void testMoveEast() {
 		try {
-			Initialize();
+			initialize();
 			int initialPlayerX = playerX;
 //			playerX = partition.moveEast(playerY, playerX);
 			assertTrue(playerX - 1 == initialPlayerX);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * Test method for moving south.
+	 */
 	@Test
-	public void TestMoveSouth(){
+	public void testMoveSouth() {
 		try {
-			Initialize();
+			initialize();
 			int initialPlayerY = playerY;
 //			playerY = partition.moveSouth(playerY, playerX);
 			assertTrue(playerY - 1 == initialPlayerY);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * Test method for moving west.
+	 */
 	@Test
-	public void TestMoveWest(){
+	public void testMoveWest() {
 		try {
-			Initialize();
+			initialize();
 			int initialPlayerX = playerX;
 //			playerX = partition.moveWest(playerY, playerX);
 			assertTrue(playerX + 1 == initialPlayerX);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * Test method for getting item Id.
+	 */
 	@Test
-	public void TestGetItemID(){
+	public void testGetItemID() {
 		try {
-			Initialize();
+			initialize();
 			int itemID = partition.getItemID(playerY, playerX);
 			assertTrue(itemID == 0);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Test method for getting monster Id.
+	 */
 	@Test
-	public void TestGetMonsterID(){
+	public void testGetMonsterID() {
 		try {
-			Initialize();
+			initialize();
 			int monsterID = partition.getItemID(playerY, playerX);
 			assertTrue(monsterID == 0);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void main(String[] args) {
-		PartitionTest test = new PartitionTest();
-		
+	/**
+	 * Main method to run partition test.
+	 * @param args none
+	 */
+	public static void main(final String[] args) {
 	}
-
 }

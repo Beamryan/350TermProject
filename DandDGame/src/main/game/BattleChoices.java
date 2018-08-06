@@ -1,5 +1,19 @@
-package main.game;
+ package main.game;
 
+/**
+ * The choices for actions in battle.
+ */
 public enum BattleChoices {
-	attack, sheild, rest, flee;
+	
+	/** attack choice. */
+	attack,
+	
+	/** shield choice. */
+	sheild,
+	
+	/** rest choice. */
+	rest, 
+	
+	/** flee choice. */
+	flee;
 }
